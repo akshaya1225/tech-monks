@@ -11,16 +11,56 @@
             box-sizing: border-box;
         }
 
+        /* Theme Variables - Light/Dark Mode */
+        :root {
+            /* Light Theme (Default) */
+            --bg-primary: #f4f7fc;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --bg-tab: #f8f9fa;
+            --bg-testimonial: #f4f7fc;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --border-color: #e0e0e0;
+            --shadow: 0 2px 10px rgba(0,0,0,0.1);
+            --shadow-hover: 0 5px 25px rgba(0,0,0,0.15);
+            --nav-bg: #ffffff;
+            --footer-bg: #1e3c72;
+            --footer-text: #ffffff;
+            --hero-gradient: linear-gradient(135deg, #1e3c72, #2a5298);
+            --slider-overlay: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 100%);
+        }
+
+        [data-theme="dark"] {
+            /* Dark Theme */
+            --bg-primary: #1a1a2e;
+            --bg-secondary: #16213e;
+            --bg-card: #0f0f1a;
+            --bg-tab: #1e1e2a;
+            --bg-testimonial: #0f0f1a;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --border-color: #2a2a3a;
+            --shadow: 0 2px 10px rgba(0,0,0,0.3);
+            --shadow-hover: 0 5px 25px rgba(0,0,0,0.4);
+            --nav-bg: #0a0a1a;
+            --footer-bg: #0a0a1a;
+            --footer-text: #e0e0e0;
+            --hero-gradient: linear-gradient(135deg, #0a0a1a, #1a1a2e);
+            --slider-overlay: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.7) 100%);
+        }
+
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f4f7fc;
-            color: #333;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background 0.3s ease, color 0.3s ease;
         }
 
         /* Navigation */
         .navbar {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            background: var(--nav-bg);
+            box-shadow: var(--shadow);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -35,13 +75,6 @@
             align-items: center;
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #1e3c72;
-            text-decoration: none;
-        }
-
         .nav-menu {
             display: flex;
             list-style: none;
@@ -50,7 +83,7 @@
 
         .nav-menu a {
             text-decoration: none;
-            color: #333;
+            color: var(--text-primary);
             font-weight: 500;
             transition: color 0.3s;
         }
@@ -63,6 +96,7 @@
             display: none;
             font-size: 1.5rem;
             cursor: pointer;
+            color: var(--text-primary);
         }
 
         /* Hero Slider Section */
@@ -90,7 +124,6 @@
             opacity: 1;
         }
 
-        /* Dark overlay for text readability */
         .slide::before {
             content: '';
             position: absolute;
@@ -98,7 +131,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 100%);
+            background: var(--slider-overlay);
         }
 
         .hero-content {
@@ -199,7 +232,6 @@
             border-radius: 10px;
         }
 
-        /* Slider Navigation Arrows */
         .slider-arrow {
             position: absolute;
             top: 50%;
@@ -231,7 +263,6 @@
             right: 20px;
         }
 
-        /* Container */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -245,26 +276,30 @@
             color: #1e3c72;
         }
 
+        [data-theme="dark"] .section-title {
+            color: #4a90e2;
+        }
+
         .section-subtitle {
             text-align: center;
-            color: #666;
+            color: var(--text-secondary);
             margin-bottom: 3rem;
             font-size: 1.1rem;
         }
 
         /* Tabs Styles */
         .tabs-container {
-            background: white;
+            background: var(--bg-secondary);
             border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow);
             overflow: hidden;
             margin: 2rem 0;
         }
 
         .tabs-header {
             display: flex;
-            background: #f8f9fa;
-            border-bottom: 2px solid #e0e0e0;
+            background: var(--bg-tab);
+            border-bottom: 2px solid var(--border-color);
         }
 
         .tab-btn {
@@ -276,7 +311,7 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
-            color: #666;
+            color: var(--text-secondary);
             position: relative;
         }
 
@@ -285,9 +320,14 @@
             color: #1e3c72;
         }
 
+        [data-theme="dark"] .tab-btn:hover {
+            background: #2a2a3a;
+            color: #4a90e2;
+        }
+
         .tab-btn.active {
-            color: #1e3c72;
-            background: white;
+            color: var(--text-primary);
+            background: var(--bg-secondary);
         }
 
         .tab-btn.active::after {
@@ -321,7 +361,6 @@
             }
         }
 
-        /* Tab Content Cards */
         .tab-cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -330,16 +369,17 @@
         }
 
         .tab-card {
-            background: #f8f9fa;
+            background: var(--bg-card);
             padding: 1.5rem;
             border-radius: 10px;
             transition: all 0.3s;
             text-align: center;
+            box-shadow: var(--shadow);
         }
 
         .tab-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-hover);
         }
 
         .tab-card-icon {
@@ -352,8 +392,12 @@
             margin-bottom: 0.5rem;
         }
 
+        [data-theme="dark"] .tab-card h3 {
+            color: #4a90e2;
+        }
+
         .tab-card p {
-            color: #666;
+            color: var(--text-secondary);
             line-height: 1.6;
         }
 
@@ -364,10 +408,11 @@
 
         .stat-list li {
             padding: 0.5rem 0;
-            border-bottom: 1px solid #e0e0e0;
+            border-bottom: 1px solid var(--border-color);
             display: flex;
             align-items: center;
             gap: 0.5rem;
+            color: var(--text-primary);
         }
 
         .stat-list li:last-child {
@@ -380,7 +425,121 @@
             font-size: 1.1rem;
         }
 
-        /* Cards Grid for About and Highlights */
+        /* Technical News Section */
+        .tech-news-section {
+            background: var(--bg-secondary);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            margin: 4rem 0;
+        }
+
+        .news-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+
+        .image-collage {
+            background: var(--hero-gradient);
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .collage-item {
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s;
+        }
+
+        .collage-item:hover {
+            transform: scale(1.05);
+        }
+
+        .collage-item img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+
+        .collage-item.large {
+            grid-column: span 2;
+        }
+
+        .collage-item.large img {
+            height: 220px;
+        }
+
+        .news-content {
+            padding: 2.5rem;
+            background: var(--bg-secondary);
+        }
+
+        .news-content h3 {
+            font-size: 1.8rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .news-content h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: #4a90e2;
+        }
+
+        .news-description {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin: 1.5rem 0;
+            font-size: 1rem;
+        }
+
+        .news-highlights {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        .news-highlights li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            color: var(--text-primary);
+        }
+
+        .news-highlights li::before {
+            content: "📰";
+            font-size: 1.1rem;
+        }
+
+        .explore-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #4a90e2;
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+            margin-top: 1rem;
+        }
+
+        .explore-btn:hover {
+            background: #1e3c72;
+            transform: translateX(5px);
+        }
+
+        /* Cards Grid */
         .cards-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -388,17 +547,30 @@
         }
 
         .card {
-            background: white;
+            background: var(--bg-card);
             padding: 2rem;
             border-radius: 10px;
             text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow);
             transition: all 0.3s;
         }
 
         .card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .card h3 {
+            color: #1e3c72;
+            margin-bottom: 0.5rem;
+        }
+
+        [data-theme="dark"] .card h3 {
+            color: #4a90e2;
+        }
+
+        .card p {
+            color: var(--text-secondary);
         }
 
         .icon {
@@ -408,7 +580,7 @@
 
         /* Testimonials */
         .testimonials {
-            background: white;
+            background: var(--bg-secondary);
         }
 
         .testimonial-grid {
@@ -418,10 +590,20 @@
         }
 
         .testimonial-card {
-            background: #f4f7fc;
+            background: var(--bg-testimonial);
             padding: 2rem;
             border-radius: 10px;
             text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .testimonial-card p {
+            color: var(--text-secondary);
+        }
+
+        .testimonial-card h4 {
+            color: var(--text-primary);
+            margin-top: 1rem;
         }
 
         .stars {
@@ -431,8 +613,8 @@
 
         /* Footer */
         footer {
-            background: #1e3c72;
-            color: white;
+            background: var(--footer-bg);
+            color: var(--footer-text);
             padding: 3rem 0 1rem;
             margin-top: 2rem;
         }
@@ -459,7 +641,7 @@
         }
 
         .footer-section a {
-            color: white;
+            color: var(--footer-text);
             text-decoration: none;
         }
 
@@ -480,6 +662,33 @@
             border-top: 1px solid rgba(255,255,255,0.1);
         }
 
+        /* Theme Toggle Button */
+        .theme-toggle-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .theme-toggle-btn:hover {
+            transform: scale(1.1);
+            background: #4a90e2;
+            color: white;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
             .menu-toggle {
@@ -492,12 +701,12 @@
                 top: 100%;
                 left: 0;
                 right: 0;
-                background: white;
+                background: var(--nav-bg);
                 flex-direction: column;
                 padding: 1rem;
                 text-align: center;
                 gap: 1rem;
-                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                box-shadow: var(--shadow);
             }
             
             .nav-menu.active {
@@ -537,6 +746,26 @@
                 height: 30px;
                 font-size: 0.9rem;
             }
+            
+            .news-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .image-collage {
+                order: 2;
+            }
+            
+            .collage-item img {
+                height: 150px;
+            }
+
+            .theme-toggle-btn {
+                bottom: 20px;
+                right: 20px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
@@ -544,7 +773,6 @@
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="nav-container">
-            
             <div class="menu-toggle" onclick="toggleMenu()">☰</div>
             <ul class="nav-menu" id="navMenu">
                 <li><a href="index.html">Home</a></li>
@@ -561,7 +789,6 @@
 
     <!-- Hero Slider Section -->
     <div class="hero-slider" id="heroSlider">
-        <!-- Slides will be added dynamically -->
         <div class="hero-content">
             <h1>Bangalore Institute of Technology</h1>
             <div class="tagline">Shaping Future Leaders Through Excellence in Education</div>
@@ -570,11 +797,8 @@
             <button class="cta-button" onclick="alert('Welcome to Bangalore Institute of Technology! 🎓')">Explore More</button>
         </div>
         
-        <!-- Slider Navigation Arrows -->
         <div class="slider-arrow prev" onclick="changeSlide(-1)">‹</div>
         <div class="slider-arrow next" onclick="changeSlide(1)">›</div>
-        
-        <!-- Slider Indicators -->
         <div class="slider-indicators" id="sliderIndicators"></div>
     </div>
 
@@ -618,7 +842,6 @@
                 </button>
             </div>
             
-            <!-- Campus Life Tab -->
             <div id="campus" class="tab-content active">
                 <div class="tab-cards-grid">
                     <div class="tab-card">
@@ -664,7 +887,6 @@
                 </div>
             </div>
             
-            <!-- Research Tab -->
             <div id="research" class="tab-content">
                 <div class="tab-cards-grid">
                     <div class="tab-card">
@@ -710,7 +932,6 @@
                 </div>
             </div>
             
-            <!-- Innovation Tab -->
             <div id="innovation" class="tab-content">
                 <div class="tab-cards-grid">
                     <div class="tab-card">
@@ -753,6 +974,45 @@
                             <li>💼 <span class="stat-number">1000+</span> Internships</li>
                         </ul>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Technical News Section with Image Collage -->
+    <div class="container">
+        <div class="tech-news-section">
+            <div class="news-container">
+                <div class="image-collage">
+                    <div class="collage-item large">
+                        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&h=400&fit=crop" alt="Tech Event">
+                    </div>
+                    <div class="collage-item">
+                        <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=400&h=300&fit=crop" alt="Robotics Lab">
+                    </div>
+                    <div class="collage-item">
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=300&fit=crop" alt="AI Research">
+                    </div>
+                    <div class="collage-item">
+                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=300&fit=crop" alt="Student Innovation">
+                    </div>
+                    <div class="collage-item">
+                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=300&fit=crop" alt="Tech Conference">
+                    </div>
+                </div>
+                
+                <div class="news-content">
+                    <h3>📡 Technical News</h3>
+                    <div class="news-description">
+                        Stay updated with the latest breakthroughs in technology, research innovations, and industry trends. Our students and faculty are at the forefront of cutting-edge developments in AI, Robotics, Sustainable Energy, and more.
+                    </div>
+                    <ul class="news-highlights">
+                        <li>BIT students win National Robotics Championship 2024</li>
+                        <li>New AI Research Lab inaugurated with NVIDIA partnership</li>
+                        <li>5 patents filed for sustainable energy solutions</li>
+                        <li>Collaboration with ISRO for space technology research</li>
+                    </ul>
+                    <a href="technical-news.html" class="explore-btn">Explore More News →</a>
                 </div>
             </div>
         </div>
@@ -802,6 +1062,7 @@
                 <h3>Quick Links</h3>
                 <ul>
                     <li><a href="index.html">Home</a></li>
+                    <li><a href="academics.html">Academics</a></li>
                     <li><a href="programs.html">Programs</a></li>
                     <li><a href="gallery.html">Gallery</a></li>
                     <li><a href="placements.html">Placements</a></li>
@@ -822,38 +1083,86 @@
         </div>
     </footer>
 
+    <!-- Dark/Light Theme Toggle Button -->
+    <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle dark/light mode">🌙</button>
+
     <script>
-        // Image slides data
+        // Theme Toggle Functionality
+        function initTheme() {
+            const themeToggle = document.getElementById('themeToggle');
+            
+            // Check for saved theme preference
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                if (themeToggle) themeToggle.textContent = '☀️';
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+                if (themeToggle) themeToggle.textContent = '🌙';
+            }
+            
+            // Toggle theme on button click
+            if (themeToggle) {
+                themeToggle.addEventListener('click', () => {
+                    const currentTheme = document.documentElement.getAttribute('data-theme');
+                    if (currentTheme === 'dark') {
+                        document.documentElement.setAttribute('data-theme', 'light');
+                        localStorage.setItem('theme', 'light');
+                        themeToggle.textContent = '🌙';
+                    } else {
+                        document.documentElement.setAttribute('data-theme', 'dark');
+                        localStorage.setItem('theme', 'dark');
+                        themeToggle.textContent = '☀️';
+                    }
+                });
+            }
+        }
+
+        // Image slides data - ALL WORKING IMAGES
         const slides = [
             {
-                url: "https://www.iesonline.co.in/colleges-image/bangalore-institute-of-technology.jpg",
-                alt: "Bangalore Institute of Technology Main Campus"
+                url: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1920&h=1080&fit=crop",
+                alt: "Campus Event"
             },
             {
-                url: "https://bit-bangalore.edu.in/assets/images/departments/eie/about-1.jpg",
-                alt: "BIT Bangalore Academic Block"
+                url: "https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=1920&h=1080&fit=crop",
+                alt: "Robotics Lab"
             },
             {
-                url: "https://i.pinimg.com/736x/86/c1/bc/86c1bc1a0dc5699a2bf431d756345792.jpg",
-                alt: "BIT Campus View"
+                url: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1920&h=1080&fit=crop",
+                alt: "AI Research"
             },
             {
-                url: "https://i.pinimg.com/736x/54/db/1c/54db1c475bf9a18173816b50290b8808.jpg",
-                alt: "BIT Library"
+                url: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1920&h=1080&fit=crop",
+                alt: "Student Innovation"
             },
-            
+            {
+                url: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&h=1080&fit=crop",
+                alt: "Tech Conference"
+            }
         ];
 
         let currentSlide = 0;
         let slideInterval;
+        let isInitialized = false;
 
-        // Create slides dynamically
         function createSlides() {
+            if (isInitialized) return;
+            
             const heroSlider = document.getElementById('heroSlider');
             const indicatorsContainer = document.getElementById('sliderIndicators');
             
+            if (!heroSlider || !indicatorsContainer) return;
+            
+            // Clear any existing slides
+            const existingSlides = heroSlider.querySelectorAll('.slide');
+            existingSlides.forEach(slide => slide.remove());
+            
+            const existingIndicators = indicatorsContainer.querySelectorAll('.indicator');
+            existingIndicators.forEach(indicator => indicator.remove());
+            
+            // Create new slides
             slides.forEach((slide, index) => {
-                // Create slide div
                 const slideDiv = document.createElement('div');
                 slideDiv.className = `slide ${index === 0 ? 'active' : ''}`;
                 slideDiv.style.backgroundImage = `url('${slide.url}')`;
@@ -861,18 +1170,20 @@
                 slideDiv.style.backgroundPosition = 'center';
                 heroSlider.appendChild(slideDiv);
                 
-                // Create indicator
                 const indicator = document.createElement('div');
                 indicator.className = `indicator ${index === 0 ? 'active' : ''}`;
                 indicator.onclick = () => goToSlide(index);
                 indicatorsContainer.appendChild(indicator);
             });
+            
+            isInitialized = true;
         }
 
-        // Change slide function
         function changeSlide(direction) {
             const slidesElements = document.querySelectorAll('.slide');
             const indicators = document.querySelectorAll('.indicator');
+            
+            if (slidesElements.length === 0) return;
             
             slidesElements[currentSlide].classList.remove('active');
             indicators[currentSlide].classList.remove('active');
@@ -885,10 +1196,11 @@
             resetInterval();
         }
 
-        // Go to specific slide
         function goToSlide(index) {
             const slidesElements = document.querySelectorAll('.slide');
             const indicators = document.querySelectorAll('.indicator');
+            
+            if (slidesElements.length === 0) return;
             
             slidesElements[currentSlide].classList.remove('active');
             indicators[currentSlide].classList.remove('active');
@@ -901,8 +1213,8 @@
             resetInterval();
         }
 
-        // Auto slide every 2 seconds
         function startAutoSlide() {
+            if (slideInterval) clearInterval(slideInterval);
             slideInterval = setInterval(() => {
                 changeSlide(1);
             }, 5000);
@@ -938,13 +1250,11 @@
             }
         }
         
-        // Mobile menu toggle
         function toggleMenu() {
             const menu = document.getElementById('navMenu');
-            menu.classList.toggle('active');
+            if (menu) menu.classList.toggle('active');
         }
         
-        // Close menu when clicking outside
         document.addEventListener('click', function(event) {
             const menu = document.getElementById('navMenu');
             const toggle = document.querySelector('.menu-toggle');
@@ -953,11 +1263,15 @@
             }
         });
         
-        // Smooth scroll animation for cards
-        window.addEventListener('load', () => {
+        // Initialize everything when page loads
+        window.addEventListener('DOMContentLoaded', () => {
             createSlides();
             startAutoSlide();
-            
+            initTheme();
+        });
+        
+        // Animation for cards
+        window.addEventListener('load', () => {
             const cards = document.querySelectorAll('.card, .testimonial-card, .tab-card');
             cards.forEach((card, index) => {
                 card.style.opacity = '0';
