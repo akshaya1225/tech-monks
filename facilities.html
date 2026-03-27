@@ -122,6 +122,7 @@
             50% { transform: translate(30px, 20px) scale(1.1); }
         }
 
+        /* Navigation - Exactly same as homepage */
         .navbar {
             background: var(--card-bg);
             backdrop-filter: blur(20px);
@@ -169,11 +170,19 @@
             transition: width 0.3s;
         }
 
-        .nav-menu a:hover, .nav-menu a.active {
+        .nav-menu a:hover {
             color: var(--neon);
         }
 
-        .nav-menu a:hover::after, .nav-menu a.active::after {
+        .nav-menu a:hover::after {
+            width: 100%;
+        }
+
+        .nav-menu a.active {
+            color: var(--neon);
+        }
+
+        .nav-menu a.active::after {
             width: 100%;
         }
 
@@ -716,15 +725,18 @@
 <div class="orb orb2"></div>
 <div class="orb orb3"></div>
 
+<!-- Navigation Bar - Exactly same as homepage -->
 <nav class="navbar">
     <div class="nav-container">
         <div class="menu-toggle" onclick="toggleMenu()">☰</div>
         <ul class="nav-menu" id="navMenu">
             <li><a href="index.html">Home</a></li>
-            <li><a href="programs.html">Programs</a></li>
+            <li><a href="programs.html">Programs</a></li> 
             <li><a href="gallery.html">Gallery</a></li>
             <li><a href="placements.html">Placements</a></li>
             <li><a href="facilities.html" class="active">Facilities</a></li>
+            <li><a href="login-student.html">Student Login</a></li>
+            <li><a href="login-teacher.html">Teacher Login</a></li>
         </ul>
     </div>
 </nav>
@@ -901,6 +913,8 @@
                 <li><a href="gallery.html">Gallery</a></li>
                 <li><a href="placements.html">Placements</a></li>
                 <li><a href="facilities.html">Facilities</a></li>
+                <li><a href="login-student.html">Student Login</a></li>
+                <li><a href="login-teacher.html">Teacher Login</a></li>
             </ul>
         </div>
         <div class="footer-section">
@@ -918,6 +932,48 @@
 <button class="theme-toggle-btn" id="themeToggle">🌙</button>
 
 <script>
+    // Theme Toggle (same as homepage)
+    function initTheme() {
+        const themeToggle = document.getElementById('themeToggle');
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            if (themeToggle) themeToggle.textContent = '☀️';
+        } else {
+            document.documentElement.setAttribute('data-theme', 'light');
+            if (themeToggle) themeToggle.textContent = '🌙';
+        }
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                if (currentTheme === 'dark') {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                    localStorage.setItem('theme', 'light');
+                    themeToggle.textContent = '🌙';
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                    themeToggle.textContent = '☀️';
+                }
+            });
+        }
+    }
+
+    // Menu Toggle (same as homepage)
+    function toggleMenu() {
+        const menu = document.getElementById('navMenu');
+        if (menu) menu.classList.toggle('active');
+    }
+    
+    document.addEventListener('click', function(event) {
+        const menu = document.getElementById('navMenu');
+        const toggle = document.querySelector('.menu-toggle');
+        if (menu && toggle && !menu.contains(event.target) && !toggle.contains(event.target)) {
+            menu.classList.remove('active');
+        }
+    });
+
+    // Facility Data
     const FACILITIES = {
         library: {
             label: '// 01 — Knowledge Hub',
@@ -946,4 +1002,237 @@
             title: 'Advanced Research Labs',
             tint: 'rgba(90,45,140,0.25)',
             bg: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=1920&h=1080&fit=crop',
-           
+            desc: 'Our advanced research laboratories are equipped with cutting-edge technology, enabling students and faculty to push the boundaries of science and engineering. From AI research to biotechnology, every lab is designed for innovation.',
+            stats: [
+                { n: '50+', l: 'Specialized Labs' },
+                { n: '₹50Cr+', l: 'Equipment Value' },
+                { n: '24/7', l: 'Research Access' },
+                { n: '200+', l: 'Research Projects' }
+            ],
+            details: [
+                { i: '🤖', t: 'Robotics & Automation Lab with industrial-grade robots' },
+                { i: '🧬', t: 'Biotechnology & Genetic Engineering Lab' },
+                { i: '💻', t: 'AI/ML Computing Cluster with 500+ GPUs' },
+                { i: '🔬', t: 'Nanotechnology Research Center' },
+                { i: '📡', t: 'VLSI Design & Embedded Systems Lab' },
+                { i: '⚡', t: 'Renewable Energy & Power Systems Lab' }
+            ],
+            cta: 'Explore Research Opportunities'
+        },
+        hostel: {
+            label: '// 03 — Home Away from Home',
+            title: 'Hostel Facilities',
+            tint: 'rgba(204,42,107,0.2)',
+            bg: 'https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=1920&h=1080&fit=crop',
+            desc: 'Modern, secure, and comfortable residential facilities that foster community and academic focus. Separate hostels for boys and girls with round-the-clock security and all essential amenities.',
+            stats: [
+                { n: '5', l: 'Residential Halls' },
+                { n: '2,500+', l: 'Student Capacity' },
+                { n: '24/7', l: 'Security & Wi-Fi' },
+                { n: '3', l: 'Dining Halls' }
+            ],
+            details: [
+                { i: '🏠', t: 'Single, double, and triple occupancy rooms with modern furniture' },
+                { i: '🍽️', t: 'Multi-cuisine mess with North Indian, South Indian, and continental options' },
+                { i: '🎮', t: 'Recreation rooms with indoor games, TV, and lounge areas' },
+                { i: '🧺', t: 'Laundry services and housekeeping included' },
+                { i: '📚', t: '24/7 study lounges on each floor' },
+                { i: '🚑', t: 'In-campus medical assistance and ambulance service' }
+            ],
+            cta: 'Apply for Hostel'
+        },
+        sports: {
+            label: '// 04 — Peak Performance',
+            title: 'Sports Complex',
+            tint: 'rgba(0,245,255,0.15)',
+            bg: 'https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=1920&h=1080&fit=crop',
+            desc: 'A world-class sports infrastructure designed to nurture athletic talent and promote holistic well-being. Professional coaches, modern equipment, and facilities for both indoor and outdoor sports.',
+            stats: [
+                { n: '2', l: 'Stadiums' },
+                { n: '10+', l: 'Sports Clubs' },
+                { n: '1', l: 'Olympic Pool' },
+                { n: '5', l: 'Professional Coaches' }
+            ],
+            details: [
+                { i: '⚽', t: 'FIFA-standard football ground with floodlights' },
+                { i: '🏀', t: 'Basketball, volleyball, and tennis courts' },
+                { i: '🏊', t: 'Competition-grade swimming pool' },
+                { i: '🏋️', t: 'Fully equipped gymnasium with certified trainers' },
+                { i: '🏸', t: 'Indoor badminton and table tennis facilities' },
+                { i: '🏃', t: '400m athletic track and fitness center' }
+            ],
+            cta: 'Join Sports Club'
+        },
+        food: {
+            label: '// 05 — Culinary Delights',
+            title: 'Food Court & Cafeterias',
+            tint: 'rgba(212,175,55,0.2)',
+            bg: 'https://images.unsplash.com/photo-1567521464027-f127ff144326?w=1920&h=1080&fit=crop',
+            desc: 'Multiple dining options across campus serving hygienic, delicious, and nutritious meals. From quick bites to full-course meals, our food courts cater to every taste.',
+            stats: [
+                { n: '8', l: 'Food Outlets' },
+                { n: '1,500+', l: 'Daily Meals Served' },
+                { n: '24/7', l: 'Coffee Shop' },
+                { n: '100%', l: 'FSSAI Certified' }
+            ],
+            details: [
+                { i: '🍛', t: 'Multi-cuisine main cafeteria (North Indian, South Indian, Chinese)' },
+                { i: '☕', t: '24/7 coffee shop with fresh bakery items' },
+                { i: '🥗', t: 'Health-conscious salad bar and juice center' },
+                { i: '🍕', t: 'Pizza and fast-food counter' },
+                { i: '🍦', t: 'Ice cream parlor' },
+                { i: '🌱', t: 'Dedicated vegan and gluten-free options' }
+            ],
+            cta: 'View Menu'
+        },
+        transport: {
+            label: '// 06 — Seamless Commute',
+            title: 'Transportation Services',
+            tint: 'rgba(0,102,204,0.2)',
+            bg: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=1920&h=1080&fit=crop',
+            desc: 'Extensive transportation network covering all major areas of Bangalore. Safe, punctual, and comfortable bus services for students and staff.',
+            stats: [
+                { n: '40+', l: 'Fleet of Buses' },
+                { n: '100+', l: 'Routes Covered' },
+                { n: '5,000+', l: 'Daily Commuters' },
+                { n: 'GPS', l: 'Real-time Tracking' }
+            ],
+            details: [
+                { i: '🚍', t: 'AC and non-AC buses with comfortable seating' },
+                { i: '📍', t: 'Pick-up and drop-off points across all major localities' },
+                { i: '👮', t: 'Female attendants on all buses for safety' },
+                { i: '📱', t: 'Mobile app for bus tracking and schedule' },
+                { i: '🔒', t: 'CCTV surveillance on all vehicles' },
+                { i: '⚡', t: 'Electric bus fleet expansion by 2025' }
+            ],
+            cta: 'Check Bus Routes'
+        },
+        health: {
+            label: '// 07 — Wellness First',
+            title: 'Healthcare Center',
+            tint: 'rgba(255,45,120,0.15)',
+            bg: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=1920&h=1080&fit=crop',
+            desc: 'Comprehensive healthcare facility with qualified medical professionals available 24/7. Regular health check-ups, counseling services, and emergency care.',
+            stats: [
+                { n: '24/7', l: 'Medical Services' },
+                { n: '5', l: 'Qualified Doctors' },
+                { n: '10', l: 'Nursing Staff' },
+                { n: '1', l: 'Ambulance on Standby' }
+            ],
+            details: [
+                { i: '🩺', t: 'Consultation with general physicians daily' },
+                { i: '💊', t: 'In-house pharmacy with essential medicines' },
+                { i: '🧠', t: 'Mental health counseling and wellness programs' },
+                { i: '🦷', t: 'Dental care facility' },
+                { i: '🏥', t: 'Tie-up with nearby multi-specialty hospitals' },
+                { i: '📊', t: 'Annual health check-up camps for all students' }
+            ],
+            cta: 'Book Appointment'
+        },
+        wifi: {
+            label: '// 08 — Always Connected',
+            title: 'Wi-Fi Campus',
+            tint: 'rgba(123,47,255,0.2)',
+            bg: 'https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=1920&h=1080&fit=crop',
+            desc: 'High-speed, secure, and seamless internet connectivity across the entire campus. Dedicated bandwidth for academic activities, research, and entertainment.',
+            stats: [
+                { n: '1 Gbps', l: 'Fiber Backbone' },
+                { n: '100%', l: 'Campus Coverage' },
+                { n: '10,000+', l: 'Concurrent Users' },
+                { n: '24/7', l: 'Network Support' }
+            ],
+            details: [
+                { i: '📶', t: 'High-speed Wi-Fi in all academic buildings, hostels, and common areas' },
+                { i: '🔐', t: 'Secure VPN access for off-campus learning' },
+                { i: '📚', t: 'Access to online journals, e-books, and research databases' },
+                { i: '💻', t: 'Dedicated internet labs with 500+ workstations' },
+                { i: '📱', t: 'Campus mobile app with network status updates' },
+                { i: '⚡', t: '24/7 IT helpdesk for technical assistance' }
+            ],
+            cta: 'IT Support Portal'
+        }
+    };
+
+    function openFacility(id) {
+        const data = FACILITIES[id];
+        if (!data) return;
+        
+        const overlay = document.getElementById('immersiveOverlay');
+        const overlayBg = document.getElementById('overlayBg');
+        const overlayTint = document.getElementById('overlayTint');
+        const label = document.getElementById('overlayLabel');
+        const title = document.getElementById('overlayTitle');
+        const desc = document.getElementById('overlayDesc');
+        const statsContainer = document.getElementById('overlayStats');
+        const detailsContainer = document.getElementById('overlayDetails');
+        const ctaText = document.getElementById('overlayCtaText');
+        
+        overlayBg.style.backgroundImage = `url('${data.bg}')`;
+        overlayBg.style.backgroundSize = 'cover';
+        overlayBg.style.backgroundPosition = 'center';
+        overlayTint.style.backgroundColor = data.tint;
+        label.textContent = data.label;
+        title.textContent = data.title;
+        desc.textContent = data.desc;
+        
+        statsContainer.innerHTML = '';
+        data.stats.forEach(stat => {
+            statsContainer.innerHTML += `
+                <div>
+                    <span class="pstat-n">${stat.n}</span>
+                    <span class="pstat-l">${stat.l}</span>
+                </div>
+            `;
+        });
+        
+        detailsContainer.innerHTML = '';
+        data.details.forEach(detail => {
+            detailsContainer.innerHTML += `
+                <li>
+                    <span class="di">${detail.i}</span>
+                    <span>${detail.t}</span>
+                </li>
+            `;
+        });
+        
+        ctaText.textContent = data.cta;
+        document.getElementById('overlayCta').href = '#';
+        
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+    }
+    
+    function closeOverlay() {
+        const overlay = document.getElementById('immersiveOverlay');
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+    
+    // Reveal animations
+    function handleReveal() {
+        const reveals = document.querySelectorAll('.reveal');
+        reveals.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < window.innerHeight - 100) {
+                el.classList.add('visible');
+            }
+        });
+    }
+    
+    window.addEventListener('DOMContentLoaded', () => {
+        initTheme();
+        handleReveal();
+    });
+    
+    window.addEventListener('load', handleReveal);
+    window.addEventListener('scroll', handleReveal);
+    
+    // Close overlay on ESC key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeOverlay();
+        }
+    });
+</script>
+</body>
+</html>
