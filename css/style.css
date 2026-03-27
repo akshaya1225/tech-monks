@@ -504,34 +504,3 @@ footer {
     border-radius: 10px;
 }
 
-/* ========== FACILITIES STYLES ========== */
-.facility-card {
-    text-align: center;
-    padding: 2rem;
-    background: var(--white);
-    border-radius: 10px;
-    transition: var(--transition);
-}
-
-.facility-card i {
-    font-size: 3rem;
-    color: var(--accent-color);
-    margin-bottom: 1rem;
-}
-
-.card {
-    transition: transform 0.3s;
-}
-
-.card:hover {
-    transform: translateY(-10px);
-}
-
-.dark-mode {
-    background-color: #121212;
-    color: white;
-}
-
-.dark-mode .card {
-    background-color: #1e1e1e;
-}
