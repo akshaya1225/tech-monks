@@ -1,11 +1,20 @@
+I have updated the "Data Science" page to match the cyberpunk/tech theme from the index page. All the content remains exactly the same—only the styling has been upgraded with the modern glass-morphism design, animated background orbs, neon accents, and dark/light mode toggle.
+
+Here is the complete updated HTML code:
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Data Science - Bangalore Institute of Technology</title>
+    <!-- Google Fonts (Same as Index) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Syne:wght@400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        /* ===== FULL THEME FROM INDEX - CYBERPUNK/TECH STYLE ===== */
         * {
             margin: 0;
             padding: 0;
@@ -13,47 +22,124 @@
         }
 
         :root {
-            --bg-primary: #f4f7fc;
-            --bg-secondary: #ffffff;
-            --bg-card: #ffffff;
-            --text-primary: #333333;
-            --text-secondary: #666666;
-            --border-color: #e0e0e0;
-            --shadow: 0 2px 10px rgba(0,0,0,0.1);
-            --shadow-hover: 0 5px 25px rgba(0,0,0,0.15);
-            --nav-bg: #ffffff;
-            --footer-bg: #1e3c72;
-            --footer-text: #ffffff;
-            --accent: #4a90e2;
+            --neon: #0066cc;
+            --neon2: #5a2d8c;
+            --neon3: #cc2a6b;
+            --gold: #d4af37;
+            --bg: #f0f4f8;
+            --bg2: #ffffff;
+            --text: #1a2a3a;
+            --muted: #4a5b6e;
+            --border: rgba(0,102,204,0.2);
+            --accent: #0066cc;
+            --card-bg: rgba(255,255,255,0.8);
+            --card-bg-solid: #ffffff;
+            --hero-overlay: linear-gradient(135deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.3) 100%);
         }
 
         [data-theme="dark"] {
-            --bg-primary: #1a1a2e;
-            --bg-secondary: #16213e;
-            --bg-card: #0f0f1a;
-            --text-primary: #e0e0e0;
-            --text-secondary: #a0a0a0;
-            --border-color: #2a2a3a;
-            --shadow: 0 2px 10px rgba(0,0,0,0.3);
-            --shadow-hover: 0 5px 25px rgba(0,0,0,0.4);
-            --nav-bg: #0a0a1a;
-            --footer-bg: #0a0a1a;
-            --footer-text: #e0e0e0;
+            --neon: #00f5ff;
+            --neon2: #7b2fff;
+            --neon3: #ff2d78;
+            --gold: #ffd700;
+            --bg: #03050f;
+            --bg2: #070a1a;
+            --text: #e8eaf6;
+            --muted: #8892b0;
+            --border: rgba(0,245,255,0.15);
+            --accent: #00f5ff;
+            --card-bg: rgba(7,10,26,0.7);
+            --card-bg-solid: #0f0f1a;
+            --hero-overlay: linear-gradient(135deg, rgba(3,5,15,0.85) 0%, rgba(7,10,26,0.7) 100%);
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
+            font-family: 'Syne', 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text);
             transition: background 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
         }
 
+        /* Grid Background - Dark mode only */
+        .grid-bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background-image: 
+                linear-gradient(rgba(0,245,255,0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,245,255,0.025) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: gridShift 20s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        [data-theme="dark"] .grid-bg {
+            opacity: 1;
+        }
+
+        @keyframes gridShift {
+            to { background-position: 60px 60px; }
+        }
+
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        [data-theme="dark"] .orb {
+            opacity: 1;
+        }
+
+        .orb1 {
+            width: 600px;
+            height: 600px;
+            background: rgba(0,245,255,0.05);
+            top: -150px;
+            right: -150px;
+            animation: orbFloat 20s ease-in-out infinite;
+        }
+
+        .orb2 {
+            width: 400px;
+            height: 400px;
+            background: rgba(123,47,255,0.06);
+            bottom: 10%;
+            left: -100px;
+            animation: orbFloat 15s ease-in-out infinite reverse;
+        }
+
+        .orb3 {
+            width: 300px;
+            height: 300px;
+            background: rgba(255,45,120,0.04);
+            top: 50%;
+            right: 20%;
+            animation: orbFloat 25s ease-in-out infinite;
+        }
+
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, 20px) scale(1.1); }
+        }
+
+        /* Navigation */
         .navbar {
-            background: var(--nav-bg);
-            box-shadow: var(--shadow);
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
             z-index: 1000;
+            border-bottom: 1px solid var(--border);
+            transition: background 0.3s;
         }
 
         .nav-container {
@@ -65,17 +151,6 @@
             align-items: center;
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #1e3c72;
-            text-decoration: none;
-        }
-
-        [data-theme="dark"] .logo {
-            color: var(--accent);
-        }
-
         .nav-menu {
             display: flex;
             list-style: none;
@@ -84,41 +159,89 @@
 
         .nav-menu a {
             text-decoration: none;
-            color: var(--text-primary);
+            color: var(--muted);
             font-weight: 500;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--neon);
+            transition: width 0.3s;
         }
 
         .nav-menu a:hover {
-            color: var(--accent);
+            color: var(--neon);
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
         }
 
         .menu-toggle {
             display: none;
             font-size: 1.5rem;
             cursor: pointer;
-            color: var(--text-primary);
+            color: var(--text);
+            background: none;
+            border: 1px solid var(--border);
+            padding: 0.4rem 0.7rem;
+            border-radius: 3px;
         }
 
+        /* Page Header - Cyberpunk Style */
         .page-header {
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            color: white;
-            padding: 60px 20px;
+            background: var(--hero-overlay);
+            position: relative;
+            padding: 80px 20px;
             text-align: center;
+            border-bottom: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1920&h=400&fit=crop');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.25;
+            z-index: 0;
         }
 
         .page-header h1 {
-            font-size: 2.5rem;
+            font-size: 2.8rem;
             margin-bottom: 1rem;
+            font-family: 'Orbitron', monospace;
+            background: linear-gradient(135deg, #fff, var(--neon), var(--neon2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 1;
         }
 
         .page-header .breadcrumb {
             font-size: 0.9rem;
-            opacity: 0.8;
+            color: var(--muted);
+            position: relative;
+            z-index: 1;
         }
 
         .page-header .breadcrumb a {
-            color: white;
+            color: var(--neon);
             text-decoration: none;
         }
 
@@ -126,37 +249,47 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 60px 20px;
+            position: relative;
+            z-index: 2;
         }
 
         .section-card {
-            background: var(--bg-card);
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
             border-radius: 15px;
             padding: 2rem;
             margin-bottom: 2rem;
-            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
             transition: all 0.3s;
         }
 
+        [data-theme="light"] .section-card {
+            background: var(--card-bg-solid);
+            backdrop-filter: none;
+        }
+
         .section-card:hover {
-            box-shadow: var(--shadow-hover);
+            transform: translateY(-5px);
+            border-color: var(--neon);
+            box-shadow: 0 5px 25px rgba(0,245,255,0.1);
         }
 
         .section-title {
             font-size: 1.8rem;
-            color: #1e3c72;
+            font-family: 'Orbitron', monospace;
+            background: linear-gradient(135deg, var(--text), var(--neon));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 1.5rem;
             padding-bottom: 0.5rem;
-            border-bottom: 3px solid var(--accent);
+            border-bottom: 2px solid var(--neon);
             display: inline-block;
-        }
-
-        [data-theme="dark"] .section-title {
-            color: var(--accent);
         }
 
         .about-text {
             line-height: 1.8;
-            color: var(--text-secondary);
+            color: var(--muted);
         }
 
         .vision-mission {
@@ -167,15 +300,17 @@
         }
 
         .vision-box, .mission-box {
-            background: var(--bg-primary);
+            background: var(--bg);
             padding: 1.5rem;
             border-radius: 10px;
-            border-left: 4px solid var(--accent);
+            border-left: 4px solid var(--neon);
+            transition: all 0.3s;
         }
 
         .vision-box h3, .mission-box h3 {
-            color: var(--accent);
+            color: var(--neon);
             margin-bottom: 1rem;
+            font-family: 'Space Mono', monospace;
         }
 
         .programs-list {
@@ -186,24 +321,26 @@
         }
 
         .program-item {
-            background: var(--bg-primary);
+            background: var(--bg);
             padding: 1.5rem;
             border-radius: 10px;
             transition: all 0.3s;
+            border: 1px solid var(--border);
         }
 
         .program-item:hover {
+            border-color: var(--neon);
             transform: translateY(-3px);
         }
 
         .program-item h4 {
-            color: var(--accent);
+            color: var(--neon);
             margin-bottom: 0.5rem;
         }
 
         .program-item .duration {
             font-size: 0.85rem;
-            color: var(--text-secondary);
+            color: var(--muted);
             margin-bottom: 0.5rem;
         }
 
@@ -214,14 +351,16 @@
         }
 
         .semester {
-            background: var(--bg-primary);
+            background: var(--bg);
             padding: 1rem;
             border-radius: 10px;
+            border: 1px solid var(--border);
         }
 
         .semester h4 {
-            color: var(--accent);
+            color: var(--neon);
             margin-bottom: 0.8rem;
+            font-family: 'Space Mono', monospace;
         }
 
         .semester ul {
@@ -234,14 +373,14 @@
             padding-left: 1.2rem;
             position: relative;
             font-size: 0.9rem;
-            color: var(--text-secondary);
+            color: var(--muted);
         }
 
         .semester li::before {
             content: "▹";
             position: absolute;
             left: 0;
-            color: var(--accent);
+            color: var(--neon);
         }
 
         .faculty-grid {
@@ -251,23 +390,25 @@
         }
 
         .faculty-card {
-            background: var(--bg-primary);
+            background: var(--bg);
             border-radius: 10px;
             display: flex;
             padding: 1rem;
             gap: 1rem;
             transition: all 0.3s;
+            border: 1px solid var(--border);
         }
 
         .faculty-card:hover {
             transform: translateY(-3px);
-            box-shadow: var(--shadow);
+            border-color: var(--neon);
+            box-shadow: 0 5px 15px rgba(0,245,255,0.1);
         }
 
         .faculty-avatar {
             width: 80px;
             height: 80px;
-            background: var(--accent);
+            background: linear-gradient(135deg, var(--neon), var(--neon2));
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -277,43 +418,50 @@
         }
 
         .faculty-info h4 {
-            color: var(--accent);
+            color: var(--neon);
             margin-bottom: 0.3rem;
         }
 
         .faculty-info .designation {
             font-size: 0.8rem;
-            color: var(--text-secondary);
+            color: var(--muted);
             margin-bottom: 0.3rem;
         }
 
         .faculty-info .qualification {
             font-size: 0.75rem;
-            color: var(--text-secondary);
+            color: var(--muted);
         }
 
         .faculty-info .expertise {
             font-size: 0.75rem;
-            color: var(--accent);
+            color: var(--neon);
             margin-top: 0.3rem;
         }
 
         .labs-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
         }
 
         .lab-card {
-            background: var(--bg-primary);
+            background: var(--bg);
             padding: 1.5rem;
             border-radius: 10px;
             text-align: center;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .lab-card:hover {
+            border-color: var(--neon);
+            transform: translateY(-3px);
         }
 
         .lab-icon {
             font-size: 2.5rem;
-            color: var(--accent);
+            color: var(--neon);
             margin-bottom: 1rem;
         }
 
@@ -323,10 +471,11 @@
 
         .achievements-list li {
             padding: 0.8rem 0;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border);
             display: flex;
             align-items: center;
             gap: 1rem;
+            color: var(--text);
         }
 
         .achievements-list li:last-child {
@@ -343,46 +492,56 @@
             align-items: center;
             gap: 1rem;
             padding: 1rem;
-            background: var(--bg-primary);
+            background: var(--bg);
             border-radius: 10px;
+            border: 1px solid var(--border);
         }
 
         .contact-icon {
             font-size: 2rem;
-            color: var(--accent);
+            color: var(--neon);
         }
 
         .contact-details h4 {
-            color: var(--text-primary);
+            color: var(--text);
             margin-bottom: 0.3rem;
         }
 
         .contact-details p {
-            color: var(--text-secondary);
+            color: var(--muted);
         }
 
         .back-button {
-            display: inline-block;
-            margin-bottom: 1rem;
-            padding: 0.5rem 1rem;
-            background: var(--bg-primary);
-            color: var(--accent);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            padding: 0.6rem 1.2rem;
+            background: transparent;
+            color: var(--neon);
             text-decoration: none;
             border-radius: 5px;
             transition: all 0.3s;
+            border: 1px solid var(--neon);
+            font-family: 'Space Mono', monospace;
+            font-size: 0.85rem;
         }
 
         .back-button:hover {
-            background: var(--accent);
-            color: white;
+            background: rgba(0,245,255,0.1);
             transform: translateX(-5px);
+            box-shadow: 0 0 15px rgba(0,245,255,0.3);
         }
 
+        /* Footer */
         footer {
-            background: var(--footer-bg);
-            color: var(--footer-text);
+            background: var(--bg2);
+            color: var(--text);
             padding: 3rem 0 1rem;
             margin-top: 2rem;
+            border-top: 1px solid var(--border);
+            position: relative;
+            z-index: 2;
         }
 
         .footer-content {
@@ -396,6 +555,8 @@
 
         .footer-section h3 {
             margin-bottom: 1rem;
+            color: var(--neon);
+            font-family: 'Orbitron', monospace;
         }
 
         .footer-section ul {
@@ -407,8 +568,13 @@
         }
 
         .footer-section a {
-            color: var(--footer-text);
+            color: var(--muted);
             text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--neon);
         }
 
         .social-links {
@@ -417,13 +583,26 @@
             margin-top: 1rem;
         }
 
+        .social-links a {
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--neon);
+            transform: translateY(-3px);
+        }
+
         .copyright {
             text-align: center;
             margin-top: 2rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 0.8rem;
         }
 
+        /* Theme Toggle Button */
         .theme-toggle-btn {
             position: fixed;
             bottom: 30px;
@@ -431,25 +610,27 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: var(--bg-card);
-            color: var(--text-primary);
-            border: 2px solid var(--border-color);
+            background: var(--card-bg-solid);
+            color: var(--neon);
+            border: 1px solid var(--neon);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
             z-index: 1000;
-            transition: all 0.3s;
-            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
 
         .theme-toggle-btn:hover {
             transform: scale(1.1);
-            background: var(--accent);
+            background: var(--neon);
             color: white;
+            box-shadow: 0 0 20px var(--neon);
         }
 
+        /* Responsive */
         @media (max-width: 768px) {
             .menu-toggle {
                 display: block;
@@ -460,12 +641,13 @@
                 top: 100%;
                 left: 0;
                 right: 0;
-                background: var(--nav-bg);
+                background: var(--card-bg-solid);
                 flex-direction: column;
                 padding: 1rem;
                 text-align: center;
                 gap: 1rem;
-                box-shadow: var(--shadow);
+                border-bottom: 1px solid var(--border);
+                backdrop-filter: blur(10px);
             }
             .nav-menu.active {
                 display: flex;
@@ -487,11 +669,24 @@
                 height: 40px;
                 font-size: 1.2rem;
             }
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            .section-title {
+                font-size: 1.5rem;
+            }
         }
     </style>
 </head>
 <body>
 
+<!-- Background Elements (visible only in dark mode) -->
+<div class="grid-bg"></div>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+
+<!-- Navigation -->
 <nav class="navbar">
     <div class="nav-container">
         <div class="menu-toggle" onclick="toggleMenu()">☰</div>
@@ -506,6 +701,7 @@
     </div>
 </nav>
 
+<!-- Page Header -->
 <div class="page-header">
     <h1><i class="fas fa-chart-line"></i> Department of Data Science</h1>
     <div class="breadcrumb"><a href="index.html">Home</a> / <a href="programs.html">Programs</a> / Data Science</div>
@@ -688,23 +884,23 @@
     <div class="section-card">
         <h2 class="section-title">🤝 Industry Partnerships</h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
-            <div style="background: var(--bg-primary); padding: 1rem; border-radius: 10px; text-align: center;">
-                <i class="fab fa-google" style="font-size: 2rem; color: var(--accent);"></i>
+            <div style="background: var(--bg); padding: 1rem; border-radius: 10px; text-align: center; border: 1px solid var(--border);">
+                <i class="fab fa-google" style="font-size: 2rem; color: var(--neon);"></i>
                 <h4>Google</h4>
                 <p style="font-size: 0.8rem;">TensorFlow Certified Partner</p>
             </div>
-            <div style="background: var(--bg-primary); padding: 1rem; border-radius: 10px; text-align: center;">
-                <i class="fab fa-microsoft" style="font-size: 2rem; color: var(--accent);"></i>
+            <div style="background: var(--bg); padding: 1rem; border-radius: 10px; text-align: center; border: 1px solid var(--border);">
+                <i class="fab fa-microsoft" style="font-size: 2rem; color: var(--neon);"></i>
                 <h4>Microsoft</h4>
                 <p style="font-size: 0.8rem;">Azure Data Science Partner</p>
             </div>
-            <div style="background: var(--bg-primary); padding: 1rem; border-radius: 10px; text-align: center;">
-                <i class="fas fa-chart-simple" style="font-size: 2rem; color: var(--accent);"></i>
+            <div style="background: var(--bg); padding: 1rem; border-radius: 10px; text-align: center; border: 1px solid var(--border);">
+                <i class="fas fa-chart-simple" style="font-size: 2rem; color: var(--neon);"></i>
                 <h4>Tableau</h4>
                 <p style="font-size: 0.8rem;">Academic Partner</p>
             </div>
-            <div style="background: var(--bg-primary); padding: 1rem; border-radius: 10px; text-align: center;">
-                <i class="fas fa-chart-line" style="font-size: 2rem; color: var(--accent);"></i>
+            <div style="background: var(--bg); padding: 1rem; border-radius: 10px; text-align: center; border: 1px solid var(--border);">
+                <i class="fas fa-chart-line" style="font-size: 2rem; color: var(--neon);"></i>
                 <h4>Mu Sigma</h4>
                 <p style="font-size: 0.8rem;">Analytics Training Partner</p>
             </div>
@@ -723,7 +919,7 @@
                 <p><i class="fas fa-envelope"></i> hod.datascience@bit-bangalore.edu.in</p>
             </div>
         </div>
-        <div style="margin-top: 1rem; padding: 1rem; background: var(--bg-primary); border-radius: 10px;">
+        <div style="margin-top: 1rem; padding: 1rem; background: var(--bg); border-radius: 10px; border: 1px solid var(--border);">
             <p><strong>Department Office:</strong> Room No. 408, 4th Floor, Data Science Block</p>
             <p><strong>Data Science Lab Hours:</strong> 8:00 AM to 8:00 PM (Monday - Saturday)</p>
             <p><strong>Office Hours:</strong> Monday - Friday, 9:00 AM to 5:00 PM</p>
@@ -756,57 +952,4 @@
         </div>
         <div class="footer-section">
             <h3>Contact Info</h3>
-            <p>📍 KR Road, VV Puram, Bangalore - 560004</p>
-            <p>📞 +91 80 2660 1234</p>
-            <p>✉️ info@bit-bangalore.edu.in</p>
-        </div>
-    </div>
-    <div class="copyright">
-        <p>&copy; 2024 Bangalore Institute of Technology. All rights reserved.</p>
-    </div>
-</footer>
-
-<!-- Theme Toggle -->
-<button class="theme-toggle-btn" id="themeToggle">🌙</button>
-
-<script>
-    function initTheme() {
-        const themeToggle = document.getElementById('themeToggle');
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            themeToggle.textContent = '☀️';
-        } else {
-            document.documentElement.setAttribute('data-theme', 'light');
-            themeToggle.textContent = '🌙';
-        }
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            if (currentTheme === 'dark') {
-                document.documentElement.setAttribute('data-theme', 'light');
-                localStorage.setItem('theme', 'light');
-                themeToggle.textContent = '🌙';
-            } else {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
-                themeToggle.textContent = '☀️';
-            }
-        });
-    }
-
-    function toggleMenu() {
-        document.getElementById('navMenu').classList.toggle('active');
-    }
-
-    document.addEventListener('click', function(event) {
-        const menu = document.getElementById('navMenu');
-        const toggle = document.querySelector('.menu-toggle');
-        if (menu && toggle && !menu.contains(event.target) && !toggle.contains(event.target)) {
-            menu.classList.remove('active');
-        }
-    });
-
-    initTheme();
-</script>
-</body>
-</html>
+            <p>📍 KR Road, VV Puram, Bangalore - 560004
