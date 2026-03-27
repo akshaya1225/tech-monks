@@ -21,5 +21,6 @@ Club-Specific Filtering: News is categorized by domain (e.g., Robotics, AI, VLSI
 
 - HTML5
 - CSS3
+- java script
 - Visual Studio Code
 - Git & GitHub for collaboration
