@@ -189,16 +189,10 @@
             padding: 0 20px 60px;
         }
 
-        .section-subtitle {
-            text-align: center;
-            color: var(--text-secondary);
-            margin-bottom: 3rem;
-        }
-
-        /* Category Filters */
+        /* Main Category Filters */
         .gallery-filters {
             text-align: center;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
         }
 
         .filter-btn {
@@ -228,7 +222,40 @@
             border-color: var(--accent);
         }
 
-        /* Gallery Grid - 3D Tilt Effect */
+        /* Sub Category Filters */
+        .sub-filters {
+            text-align: center;
+            margin-bottom: 3rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .sub-filter-btn {
+            padding: 8px 20px;
+            border: 1px solid var(--border-color);
+            background: var(--bg-card);
+            cursor: pointer;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            transition: all 0.3s;
+            color: var(--text-primary);
+        }
+
+        .sub-filter-btn.active {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .sub-filter-btn:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent);
+        }
+
+        /* Gallery Grid */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -240,15 +267,13 @@
             border-radius: 20px;
             overflow: hidden;
             box-shadow: var(--shadow);
-            cursor: none;
+            cursor: pointer;
             transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            transform-style: preserve-3d;
-            perspective: 1000px;
         }
 
         .gallery-item:hover {
-            transform: translateY(-15px) rotateX(5deg) rotateY(5deg);
-            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-hover);
         }
 
         .image-wrapper {
@@ -265,7 +290,7 @@
         }
 
         .gallery-item:hover .image-wrapper img {
-            transform: scale(1.15);
+            transform: scale(1.1);
         }
 
         .gallery-info {
@@ -274,7 +299,7 @@
         }
 
         .gallery-info h3 {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             color: #1e3c72;
             margin-bottom: 0.5rem;
         }
@@ -284,27 +309,11 @@
         }
 
         .gallery-info p {
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: var(--text-secondary);
-            margin-bottom: 0.8rem;
         }
 
-        .category-tag {
-            display: inline-block;
-            padding: 6px 16px;
-            background: linear-gradient(135deg, var(--accent), #1e3c72);
-            color: white;
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 600;
-            transition: transform 0.3s;
-        }
-
-        .gallery-item:hover .category-tag {
-            transform: translateY(-3px) scale(1.05);
-        }
-
-        /* Lightbox - Enhanced */
+        /* Lightbox */
         .lightbox {
             display: none;
             position: fixed;
@@ -316,7 +325,6 @@
             z-index: 2000;
             justify-content: center;
             align-items: center;
-            cursor: none;
             backdrop-filter: blur(10px);
         }
 
@@ -329,12 +337,6 @@
             color: white;
             max-width: 90%;
             max-height: 90%;
-            transform: scale(0.8);
-            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        }
-
-        .lightbox.active .lightbox-content {
-            transform: scale(1);
         }
 
         .lightbox-content img {
@@ -346,15 +348,13 @@
         }
 
         .lightbox-content h3 {
-            font-size: 1.8rem;
+            font-size: 1.5rem;
             margin-bottom: 0.5rem;
         }
 
         .lightbox-content p {
             font-size: 1rem;
             opacity: 0.9;
-            max-width: 500px;
-            margin: 0 auto;
         }
 
         .close-lightbox {
@@ -413,10 +413,6 @@
             margin-top: 1rem;
         }
 
-        .social-links a {
-            font-size: 1.2rem;
-        }
-
         .copyright {
             text-align: center;
             margin-top: 2rem;
@@ -451,7 +447,6 @@
             color: white;
         }
 
-        /* Responsive */
         @media (max-width: 768px) {
             .menu-toggle {
                 display: block;
@@ -483,12 +478,15 @@
             }
             .gallery-grid {
                 grid-template-columns: 1fr;
-                gap: 1.5rem;
             }
             .filter-btn {
                 padding: 6px 15px;
                 margin: 4px;
                 font-size: 0.8rem;
+            }
+            .sub-filter-btn {
+                padding: 5px 12px;
+                font-size: 0.7rem;
             }
             .cursor, .cursor-follower {
                 display: none;
@@ -535,13 +533,17 @@
 </section>
 
 <div class="container">
+    <!-- Main Category Filters -->
     <div class="gallery-filters">
-        <button class="filter-btn active" onclick="filterGallery('all')">All</button>
-        <button class="filter-btn" onclick="filterGallery('events')">Events</button>
-        <button class="filter-btn" onclick="filterGallery('campus')">Campus</button>
-        <button class="filter-btn" onclick="filterGallery('labs')">Labs & Facilities</button>
+        <button class="filter-btn active" onclick="switchMainCategory('events')">Events</button>
+        <button class="filter-btn" onclick="switchMainCategory('campus')">Campus</button>
+        <button class="filter-btn" onclick="switchMainCategory('labs')">Labs & Facilities</button>
     </div>
 
+    <!-- Sub Category Filters (Dynamic) -->
+    <div id="subFilters" class="sub-filters"></div>
+
+    <!-- Gallery Grid -->
     <div class="gallery-grid" id="galleryGrid"></div>
 </div>
 
@@ -638,21 +640,6 @@
     }
     updateCursor();
 
-    // Magnetic Hover Effect for Buttons and Cards
-    document.querySelectorAll('.filter-btn, .gallery-item').forEach(el => {
-        el.addEventListener('mousemove', (e) => {
-            const rect = el.getBoundingClientRect();
-            const x = (e.clientX - rect.left - rect.width/2) * 0.1;
-            const y = (e.clientY - rect.top - rect.height/2) * 0.1;
-            el.style.transform = `translate(${x}px, ${y}px) rotateY(${x*0.5}deg)`;
-            follower.style.transform = 'scale(0.8)';
-        });
-        el.addEventListener('mouseleave', () => {
-            el.style.transform = '';
-            follower.style.transform = 'scale(1)';
-        });
-    });
-
     // Floating Particles
     function createParticle() {
         const heroSection = document.querySelector('.hero-gallery');
@@ -667,84 +654,179 @@
     }
     setInterval(createParticle, 300);
 
-    // Gallery Data
+    // Gallery Data with 4 images for each sub-category
     const galleryData = {
-        events: [
-            { title: "🎓 Annual Convocation 2024", description: "Graduation ceremony of the class of 2024", image: "https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=600&h=400&fit=crop" },
-            { title: "💻 Tech Fest 2024", description: "Annual technology festival with coding competitions", image: "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=600&h=400&fit=crop" },
-            { title: "🎭 Cultural Night", description: "Celebrating diversity and culture with performances", image: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&h=400&fit=crop" },
-            { title: "⚽ Sports Championship", description: "Annual sports meet with 20+ competitions", image: "https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=600&h=400&fit=crop" }
-        ],
-        campus: [
-            { title: "🏛️ Main Campus Building", description: "Architectural marvel at the heart of campus", image: "https://images.unsplash.com/photo-1562774053-701939374585?w=600&h=400&fit=crop" },
-            { title: "📚 Central Library", description: "Knowledge hub with 50,000+ books", image: "https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=600&h=400&fit=crop" },
-            { title: "🏫 Academic Block", description: "Modern classrooms and lecture halls", image: "https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=600&h=400&fit=crop" },
-            { title: "🏢 Student Center", description: "Hub of student activities and events", image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=600&h=400&fit=crop" }
-        ],
-        labs: [
-            { title: "🖥️ Computer Science Lab", description: "State-of-the-art computing facilities", image: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=600&h=400&fit=crop" },
-            { title: "🤖 Robotics Lab", description: "Advanced robotics and automation research", image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&h=400&fit=crop" },
-            { title: "🧬 Biotechnology Lab", description: "Modern research facilities for life sciences", image: "https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=600&h=400&fit=crop" },
-            { title: "🔬 Physics Research Lab", description: "Cutting-edge research equipment", image: "https://images.unsplash.com/photo-1581092335871-5d9ff0af1a1f?w=600&h=400&fit=crop" }
-        ]
+        events: {
+            convocation: {
+                name: "🎓 Annual Convocation",
+                images: [
+                    { url: "https://i.pinimg.com/1200x/18/06/6f/18066f653f78bce2cc1a2edf5eb541cd.jpg", title: "Convocation Ceremony 2024", desc: "Graduates receiving their degrees" },
+                    { url: "https://i.pinimg.com/1200x/4a/cc/69/4acc69c38387f1052086ed96cf04bb29.jpg", title: "Chief Guest Address", desc: "Distinguished guests addressing the gathering" },
+                    { url: "https://i.pinimg.com/1200x/dd/2a/e5/dd2ae588067f3de2f93f6832be937a0c.jpg", title: "Graduation Day", desc: "Students celebrating their achievement" },
+                    { url: "https://i.pinimg.com/1200x/31/23/58/3123586909e54cdb6e651fa1a0eeefd4.jpg", title: "Academic Procession", desc: "Faculty procession during convocation" }
+                ]
+            },
+            techfest: {
+                name: "💻 Tech Fest 2024",
+                images: [
+                    { url: "https://i.pinimg.com/1200x/9c/8e/52/9c8e52540934e63e3a30786342c82d34.jpg", title: "Coding Competition", desc: "Students participating in hackathon" },
+                    { url: "https://i.pinimg.com/1200x/ad/51/68/ad5168ffc64f0cec40371a659e1d6b55.jpg", title: "Robotics Challenge", desc: "Robot competition finals" },
+                    { url: "https://i.pinimg.com/736x/89/f2/8d/89f28d9faf48e361ab0f94678ca5efe1.jpg", title: "Tech Exhibition", desc: "Student projects on display" },
+                    { url: "https://i.pinimg.com/1200x/fe/50/1f/fe501f211bbad96b39f0f67b0549eede.jpg", title: "Workshop Session", desc: "Industry experts conducting workshop" }
+                ]
+            },
+            cultural: {
+                name: "🎭 Cultural Night",
+                images: [
+                    { url: "https://images.pexels.com/photos/1190298/pexels-photo-1190298.jpeg?w=800&h=600&fit=crop", title: "Dance Performance", desc: "Traditional dance showcase" },
+                    { url: "https://i.pinimg.com/736x/e5/c3/c1/e5c3c13e75f8807efba4ee448d4155c9.jpg", title: "Music Concert", desc: "Live band performance" },
+                    { url: "https://i.pinimg.com/736x/c3/74/a8/c374a868a948b77642d33b4c67effb72.jpg", title: "Drama Act", desc: "Student theater performance" },
+                    { url: "https://i.pinimg.com/736x/cc/66/61/cc66613fcfe3adf8aaf47e378bbfd783.jpg", title: "Cultural Parade", desc: "Students in traditional attire" }
+                ]
+            },
+            sports: {
+                name: "⚽ Sports Championship",
+                images: [
+                    { url: "https://images.pexels.com/photos/46798/the-ball-stadion-football-the-pitch-46798.jpeg?w=800&h=600&fit=crop", title: "Football Match", desc: "Intense football competition" },
+                    { url: "https://i.pinimg.com/736x/06/42/81/064281447c9a9fc867673e30c431f81e.jpg", title: "Swimming Competition", desc: "Aquatic sports event" },
+                    { url: "https://i.pinimg.com/736x/63/e5/d0/63e5d02c47702f123f90a7fdcb92ccf9.jpg", title: "Athletics Meet", desc: "Track and field events" },
+                    { url: "https://i.pinimg.com/1200x/68/e6/1e/68e61ea7ea3ba5bed18ddc888dcf004b.jpg", title: "Prize Distribution", desc: "Winners receiving medals" }
+                ]
+            }
+        },
+        campus: {
+            mainBuilding: {
+                name: "🏛️ Main Building",
+                images: [
+                    { url: "https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?w=800&h=600&fit=crop", title: "Main Entrance", desc: "Grand entrance of BIT" },
+                    { url: "https://images.pexels.com/photos/256490/pexels-photo-256490.jpeg?w=800&h=600&fit=crop", title: "Administrative Block", desc: "Admin building facade" },
+                    { url: "https://i.pinimg.com/1200x/33/fb/d0/33fbd0e09a5ea0470e4319072b27bde8.jpg", title: "Architecture Detail", desc: "Modern architectural design" },
+                    { url: "https://i.pinimg.com/736x/55/f1/d7/55f1d7319917fa8dae8f7a5f488f7516.jpg", title: "Night View", desc: "Campus illuminated at night" }
+                ]
+            },
+            library: {
+                name: "📚 Central Library",
+                images: [
+                    { url: "https://images.pexels.com/photos/290595/pexels-photo-290595.jpeg?w=800&h=600&fit=crop", title: "Reading Hall", desc: "Quiet study area" },
+                    { url: "https://images.pexels.com/photos/238135/pexels-photo-238135.jpeg?w=800&h=600&fit=crop", title: "Book Stacks", desc: "Vast collection of books" },
+                    { url: "https://images.pexels.com/photos/267885/pexels-photo-267885.jpeg?w=800&h=600&fit=crop", title: "Digital Section", desc: "E-resources center" },
+                    { url: "https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?w=800&h=600&fit=crop", title: "Study Pods", desc: "Group study rooms" }
+                ]
+            },
+            garden: {
+                name: "🌳 Campus Garden",
+                images: [
+                    { url: "https://images.pexels.com/photos/158028/bellingrath-gardens-alabama-landscape-scenery-158028.jpeg?w=800&h=600&fit=crop", title: "Green Spaces", desc: "Lush greenery on campus" },
+                    { url: "https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?w=800&h=600&fit=crop", title: "Flower Garden", desc: "Colorful flowers" },
+                    { url: "https://images.pexels.com/photos/256490/pexels-photo-256490.jpeg?w=800&h=600&fit=crop", title: "Meditation Spot", desc: "Peaceful corner" },
+                    { url: "https://images.pexels.com/photos/301926/pexels-photo-301926.jpeg?w=800&h=600&fit=crop", title: "Walking Path", desc: "Scenic walkways" }
+                ]
+            }
+        },
+        labs: {
+            csLab: {
+                name: "🖥️ Computer Science Lab",
+                images: [
+                    { url: "https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?w=800&h=600&fit=crop", title: "Workstations", desc: "Modern computing facilities" },
+                    { url: "https://images.pexels.com/photos/3862634/pexels-photo-3862634.jpeg?w=800&h=600&fit=crop", title: "AI Research", desc: "Artificial Intelligence lab" },
+                    { url: "https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg?w=800&h=600&fit=crop", title: "Coding Session", desc: "Students programming" },
+                    { url: "https://images.pexels.com/photos/256490/pexels-photo-256490.jpeg?w=800&h=600&fit=crop", title: "Server Room", desc: "Data center" }
+                ]
+            },
+            robotics: {
+                name: "🤖 Robotics Lab",
+                images: [
+                    { url: "https://images.pexels.com/photos/3862634/pexels-photo-3862634.jpeg?w=800&h=600&fit=crop", title: "Robot Assembly", desc: "Building robots" },
+                    { url: "https://images.pexels.com/photos/1181467/pexels-photo-1181467.jpeg?w=800&h=600&fit=crop", title: "Testing Area", desc: "Robot testing zone" },
+                    { url: "https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?w=800&h=600&fit=crop", title: "Competition Prep", desc: "Preparing for contest" },
+                    { url: "https://images.pexels.com/photos/256490/pexels-photo-256490.jpeg?w=800&h=600&fit=crop", title: "Automation Demo", desc: "Automated systems" }
+                ]
+            },
+            biotech: {
+                name: "🧬 Biotechnology Lab",
+                images: [
+                    { url: "https://images.pexels.com/photos/356040/pexels-photo-356040.jpeg?w=800&h=600&fit=crop", title: "Research Equipment", desc: "Advanced lab equipment" },
+                    { url: "https://images.pexels.com/photos/256541/pexels-photo-256541.jpeg?w=800&h=600&fit=crop", title: "Microscope Work", desc: "Microscopic analysis" },
+                    { url: "https://images.pexels.com/photos/207691/pexels-photo-207691.jpeg?w=800&h=600&fit=crop", title: "Sample Analysis", desc: "Laboratory experiments" },
+                    { url: "https://images.pexels.com/photos/301926/pexels-photo-301926.jpeg?w=800&h=600&fit=crop", title: "Research Team", desc: "Scientists at work" }
+                ]
+            }
+        }
     };
 
-    let currentFilter = 'all';
+    let currentMainCategory = 'events';
+    let currentSubCategory = 'convocation';
+
+    function renderSubFilters() {
+        const subFiltersDiv = document.getElementById('subFilters');
+        const subCategories = Object.keys(galleryData[currentMainCategory]);
+        subFiltersDiv.innerHTML = '';
+        
+        subCategories.forEach(key => {
+            const btn = document.createElement('button');
+            btn.className = 'sub-filter-btn' + (currentSubCategory === key ? ' active' : '');
+            btn.textContent = galleryData[currentMainCategory][key].name;
+            btn.onclick = () => {
+                currentSubCategory = key;
+                renderSubFilters();
+                displayGallery();
+            };
+            subFiltersDiv.appendChild(btn);
+        });
+    }
 
     function displayGallery() {
         const galleryGrid = document.getElementById('galleryGrid');
         galleryGrid.innerHTML = '';
         
-        let items = [];
-        if (currentFilter === 'all') {
-            items = [
-                ...galleryData.events.map(item => ({ ...item, category: 'events' })),
-                ...galleryData.campus.map(item => ({ ...item, category: 'campus' })),
-                ...galleryData.labs.map(item => ({ ...item, category: 'labs' }))
-            ];
-        } else {
-            items = galleryData[currentFilter].map(item => ({ ...item, category: currentFilter }));
-        }
+        const images = galleryData[currentMainCategory][currentSubCategory].images;
         
-        items.forEach((item) => {
+        images.forEach((image, index) => {
             const galleryItem = document.createElement('div');
             galleryItem.className = 'gallery-item';
             galleryItem.innerHTML = `
-                <div class="image-wrapper" onclick="openLightbox('${item.title}', '${item.description}', '${item.image}')">
-                    <img src="${item.image}" alt="${item.title}" loading="lazy">
+                <div class="image-wrapper" onclick="openLightbox('${image.title.replace(/'/g, "\\'")}', '${image.desc.replace(/'/g, "\\'")}', '${image.url}')">
+                    <img src="${image.url}" alt="${image.title}" loading="lazy">
                 </div>
                 <div class="gallery-info">
-                    <h3>${item.title}</h3>
-                    <p>${item.description}</p>
-                    <span class="category-tag">${item.category.toUpperCase()}</span>
+                    <h3>${image.title}</h3>
+                    <p>${image.desc}</p>
                 </div>
             `;
             galleryGrid.appendChild(galleryItem);
-            
-            // Add magnetic effect to new cards
-            galleryItem.addEventListener('mousemove', (e) => {
-                const rect = galleryItem.getBoundingClientRect();
-                const x = (e.clientX - rect.left - rect.width/2) * 0.1;
-                const y = (e.clientY - rect.top - rect.height/2) * 0.1;
-                galleryItem.style.transform = `translate(${x}px, ${y}px) rotateY(${x*0.5}deg)`;
-            });
-            galleryItem.addEventListener('mouseleave', () => {
-                galleryItem.style.transform = '';
-            });
+        });
+        
+        // Animate cards
+        const cards = document.querySelectorAll('.gallery-item');
+        cards.forEach((card, idx) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.6s ease';
+            setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, idx * 100);
         });
     }
 
-    function filterGallery(category) {
-        currentFilter = category;
-        displayGallery();
+    function switchMainCategory(category) {
+        currentMainCategory = category;
+        // Set default subcategory for each main category
+        if (category === 'events') currentSubCategory = 'convocation';
+        else if (category === 'campus') currentSubCategory = 'mainBuilding';
+        else if (category === 'labs') currentSubCategory = 'csLab';
         
-        const buttons = document.querySelectorAll('.filter-btn');
-        buttons.forEach(btn => {
+        // Update active main button
+        const mainBtns = document.querySelectorAll('.filter-btn');
+        mainBtns.forEach(btn => {
             btn.classList.remove('active');
-            if (btn.textContent.toLowerCase().includes(category) || (category === 'all' && btn.textContent === 'All')) {
+            if (btn.textContent.toLowerCase().includes(category)) {
                 btn.classList.add('active');
             }
         });
+        
+        renderSubFilters();
+        displayGallery();
     }
 
     function openLightbox(title, description, imageUrl) {
@@ -754,18 +836,19 @@
             <img src="${imageUrl}" alt="${title}">
             <h3>${title}</h3>
             <p>${description}</p>
-            <div style="margin-top: 1.5rem; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 10px;">
+            <div style="margin-top: 1rem; padding: 0.8rem; background: rgba(255,255,255,0.1); border-radius: 8px;">
                 <p>📍 Bangalore Institute of Technology</p>
-                <p>📅 Experience the excellence</p>
             </div>
         `;
         lightbox.classList.add('active');
+        document.body.style.overflow = 'hidden';
     }
 
     function closeLightbox(event) {
         if (event.target.classList.contains('close-lightbox') || event.target.id === 'lightbox') {
             const lightbox = document.getElementById('lightbox');
             lightbox.classList.remove('active');
+            document.body.style.overflow = '';
         }
     }
 
@@ -782,22 +865,21 @@
         }
     });
 
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            const lightbox = document.getElementById('lightbox');
+            if (lightbox.classList.contains('active')) {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+    });
+
     // Initialize
     window.addEventListener('load', () => {
+        renderSubFilters();
         displayGallery();
         initTheme();
-        
-        // Animation for cards
-        const cards = document.querySelectorAll('.gallery-item');
-        cards.forEach((card, index) => {
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(20px)';
-            card.style.transition = 'all 0.6s ease';
-            setTimeout(() => {
-                card.style.opacity = '1';
-                card.style.transform = 'translateY(0)';
-            }, index * 100);
-        });
     });
 </script>
 </body>
