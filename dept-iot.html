@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Internet of Things (IoT) - Bangalore Institute of Technology</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Theme Variables */
+        :root {
+            --bg-primary: #f4f7fc;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --border-color: #e0e0e0;
+            --shadow: 0 2px 10px rgba(0,0,0,0.1);
+            --shadow-hover: 0 5px 25px rgba(0,0,0,0.15);
+            --nav-bg: #ffffff;
+            --footer-bg: #1e3c72;
+            --footer-text: #ffffff;
+            --accent: #4a90e2;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1a1a2e;
+            --bg-secondary: #16213e;
+            --bg-card: #0f0f1a;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --border-color: #2a2a3a;
+            --shadow: 0 2px 10px rgba(0,0,0,0.3);
+            --shadow-hover: 0 5px 25px rgba(0,0,0,0.4);
+            --nav-bg: #0a0a1a;
+            --footer-bg: #0a0a1a;
+            --footer-text: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: var(--nav-bg);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1e3c72;
+            text-decoration: none;
+        }
+
+        [data-theme="dark"] .logo {
+            color: var(--accent);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--accent);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-primary);
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-header .breadcrumb {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .page-header .breadcrumb a {
+            color: white;
+            text-decoration: none;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* Section Styles */
+        .section-card {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+        }
+
+        .section-card:hover {
+            box-shadow: var(--shadow-hover);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #1e3c72;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--accent);
+            display: inline-block;
+        }
+
+        [data-theme="dark"] .section-title {
+            color: var(--accent);
+        }
+
+        /* About Section */
+        .about-text {
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+
+        .vision-mission {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .vision-box, .mission-box {
+            background: var(--bg-primary);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .vision-box h3, .mission-box h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        /* Programs Grid */
+        .programs-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .program-item {
+            background: var(--bg-primary);
+            padding: 1.5rem;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        .program-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .program-item h4 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .program-item .duration {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        /* Curriculum */
+        .curriculum-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .semester {
+            background: var(--bg-primary);
+            padding: 1rem;
+            border-radius: 10px;
+        }
+
+        .semester h4 {
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+        }
+
+        .semester ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .semester li {
+            padding: 0.3rem 0;
+            padding-left: 1.2rem;
+            position: relative;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .semester li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        /* Faculty Grid */
+        .faculty-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .faculty-card {
+            background: var(--bg-primary);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: all 0.3s;
+            display: flex;
+            padding: 1rem;
+            gap: 1rem;
+        }
+
+        .faculty-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .faculty-avatar {
+            width: 80px;
+            height: 80px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .faculty-info h4 {
+            color: var(--accent);
+            margin-bottom: 0.3rem;
+        }
+
+        .faculty-info .designation {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.3rem;
+        }
+
+        .faculty-info .qualification {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .faculty-info .expertise {
+            font-size: 0.75rem;
+            color: var(--accent);
+            margin-top: 0.3rem;
+        }
+
+        /* Labs & Research */
+        .labs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .lab-card {
+            background: var(--bg-primary);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .lab-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .achievements-list {
+            list-style: none;
+        }
+
+        .achievements-list li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .achievements-list li:last-child {
+            border-bottom: none;
+        }
+
+        .achievements-list li::before {
+            content: "🏆";
+            font-size: 1.2rem;
+        }
+
+        /* Contact Section */
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-primary);
+            border-radius: 10px;
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            color: var(--accent);
+        }
+
+        .contact-details h4 {
+            color: var(--text-primary);
+            margin-bottom: 0.3rem;
+        }
+
+        .contact-details p {
+            color: var(--text-secondary);
+        }
+
+        /* Back Button */
+        .back-button {
+            display: inline-block;
+            margin-bottom: 1rem;
+            padding: 0.5rem 1rem;
+            background: var(--bg-primary);
+            color: var(--accent);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .back-button:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateX(-5px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 3rem 0 1rem;
+            margin-top: 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 0 20px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: var(--footer-text);
+            text-decoration: none;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Theme Toggle */
+        .theme-toggle-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            z-index: 1000;
+            transition: all 0.3s;
+            box-shadow: var(--shadow);
+        }
+
+        .theme-toggle-btn:hover {
+            transform: scale(1.1);
+            background: var(--accent);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--nav-bg);
+                flex-direction: column;
+                padding: 1rem;
+                text-align: center;
+                gap: 1rem;
+                box-shadow: var(--shadow);
+            }
+            .nav-menu.active {
+                display: flex;
+            }
+            .vision-mission {
+                grid-template-columns: 1fr;
+            }
+            .faculty-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            .faculty-avatar {
+                margin: 0 auto;
+            }
+            .theme-toggle-btn {
+                bottom: 20px;
+                right: 20px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="academics.html">Academics</a></li>
+            <li><a href="programs.html">Programs</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="placements.html">Placements</a></li>
+            <li><a href="facilities.html">Facilities</a></li>
+            <li><a href="login-student.html">Student Login</a></li>
+            <li><a href="login-teacher.html">Teacher Login</a></li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Page Header -->
+<div class="page-header">
+    <h1><i class="fas fa-microchip"></i> Department of Internet of Things (IoT)</h1>
+    <div class="breadcrumb"><a href="index.html">Home</a> / <a href="programs.html">Programs</a> / Internet of Things</div>
+</div>
+
+<div class="container">
+    <a href="programs.html" class="back-button"><i class="fas fa-arrow-left"></i> Back to Programs</a>
+
+    <!-- About Section -->
+    <div class="section-card">
+        <h2 class="section-title">About the Department</h2>
+        <div class="about-text">
+            <p>The Department of Internet of Things (IoT) at Bangalore Institute of Technology is a pioneer in connected technologies education. Established in 2018, our department focuses on the intersection of hardware, software, and connectivity that powers the next generation of smart devices and intelligent systems.</p>
+            <p>With the world moving towards Industry 4.0 and smart cities, our program prepares students to design, develop, and deploy IoT solutions across various domains including healthcare, agriculture, manufacturing, and urban infrastructure. Our curriculum combines embedded systems, sensor networks, cloud computing, and data analytics to create complete IoT ecosystems.</p>
+        </div>
+        
+        <div class="vision-mission">
+            <div class="vision-box">
+                <h3><i class="fas fa-eye"></i> Vision</h3>
+                <p>To be a premier center for IoT education and research, nurturing innovators who will lead the connected world revolution and create intelligent solutions for global challenges.</p>
+            </div>
+            <div class="mission-box">
+                <h3><i class="fas fa-bullseye"></i> Mission</h3>
+                <p>To provide hands-on learning in embedded systems, sensor technologies, and cloud platforms; foster innovation through industry collaborations; and develop professionals capable of building end-to-end IoT solutions.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Programs Offered -->
+    <div class="section-card">
+        <h2 class="section-title">📚 Programs Offered</h2>
+        <div class="programs-list">
+            <div class="program-item">
+                <h4>B.Tech in Internet of Things (IoT)</h4>
+                <div class="duration">Duration: 4 Years | Intake: 60 Seats</div>
+                <p>Comprehensive program covering embedded systems, sensor networks, wireless communication, cloud integration, and IoT analytics.</p>
+            </div>
+            <div class="program-item">
+                <h4>M.Tech in IoT & Embedded Systems</h4>
+                <div class="duration">Duration: 2 Years | Intake: 30 Seats</div>
+                <p>Advanced program focusing on industrial IoT, edge computing, real-time systems, and AI at the edge.</p>
+            </div>
+            <div class="program-item">
+                <h4>PG Diploma in Industrial IoT</h4>
+                <div class="duration">Duration: 1 Year | Intake: 30 Seats</div>
+                <p>Industry-oriented program for working professionals focusing on Industry 4.0, predictive maintenance, and smart manufacturing.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Curriculum -->
+    <div class="section-card">
+        <h2 class="section-title">📖 Curriculum Highlights</h2>
+        <div class="curriculum-grid">
+            <div class="semester">
+                <h4>Year 1 - Foundation</h4>
+                <ul>
+                    <li>Introduction to IoT & Embedded Systems</li>
+                    <li>Programming in C & Python</li>
+                    <li>Digital Electronics & Microcontrollers</li>
+                    <li>Sensors & Actuators Fundamentals</li>
+                </ul>
+            </div>
+            <div class="semester">
+                <h4>Year 2 - Core IoT</h4>
+                <ul>
+                    <li>Embedded Systems Design</li>
+                    <li>Wireless Sensor Networks</li>
+                    <li>IoT Communication Protocols (MQTT, CoAP)</li>
+                    <li>Raspberry Pi & Arduino Programming</li>
+                </ul>
+            </div>
+            <div class="semester">
+                <h4>Year 3 - Advanced Topics</h4>
+                <ul>
+                    <li>Cloud Computing for IoT (AWS IoT, Azure IoT)</li>
+                    <li>Edge Computing & Fog Computing</li>
+                    <li>Machine Learning for IoT</li>
+                    <li>Real-time Operating Systems (RTOS)</li>
+                </ul>
+            </div>
+            <div class="semester">
+                <h4>Year 4 - Specialization & Project</h4>
+                <ul>
+                    <li>Industrial IoT (IIoT) & Industry 4.0</li>
+                    <li>Smart City Technologies</li>
+                    <li>IoT Security & Privacy</li>
+                    <li>Capstone IoT Project</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Faculty List -->
+    <div class="section-card">
+        <h2 class="section-title">👨‍🏫 Distinguished Faculty</h2>
+        <div class="faculty-grid">
+            <div class="faculty-card">
+                <div class="faculty-avatar"><i class="fas fa-user-tie"></i></div>
+                <div class="faculty-info">
+                    <h4>Dr. Suresh Rao</h4>
+                    <div class="designation">Professor & Head of Department</div>
+                    <div class="qualification">Ph.D (IIT Delhi) | Embedded Systems Expert</div>
+                    <div class="expertise">Expertise: Embedded Systems, RTOS, IoT Architectures</div>
+                </div>
+            </div>
+            <div class="faculty-card">
+                <div class="faculty-avatar"><i class="fas fa-user-tie"></i></div>
+                <div class="faculty-info">
+                    <h4>Dr. Meera Krishnan</h4>
+                    <div class="designation">Professor</div>
+                    <div class="qualification">Ph.D (IIT Madras) | Wireless Communication</div>
+                    <div class="expertise">Expertise: Wireless Sensor Networks, LoRa, 5G for IoT</div>
+                </div>
+            </div>
+            <div class="faculty-card">
+                <div class="faculty-avatar"><i class="fas fa-user-tie"></i></div>
+                <div class="faculty-info">
+                    <h4>Dr. Arjun Reddy</h4>
+                    <div class="designation">Associate Professor</div>
+                    <div class="qualification">Ph.D (IIIT Bangalore) | Cloud & Edge Computing</div>
+                    <div class="expertise">Expertise: AWS IoT, Azure IoT Hub, Edge Analytics</div>
+                </div>
+            </div>
+            <div class="faculty-card">
+                <div class="faculty-avatar"><i class="fas fa-user-tie"></i></div>
+                <div class="faculty-info">
+                    <h4>Prof. Kavita Desai</h4>
+                    <div class="designation">Assistant Professor</div>
+                    <div class="qualification">M.Tech (NIT Surathkal) | AI/ML Specialist</div>
+                    <div class="expertise">Expertise: Machine Learning for IoT, Predictive Analytics</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Labs & Facilities -->
+    <div class="section-card">
+        <h2 class="section-title">🔬 Specialized IoT Labs</h2>
+        <div class="labs-grid">
+            <div class="lab-card">
+                <div class="lab-icon"><i class="fas fa-microchip"></i></div>
+                <h4>Embedded Systems Lab</h4>
+                <p>State-of-the-art lab with ARM Cortex, Arduino, Raspberry Pi, ESP32, and various microcontroller development boards.</p>
+            </div>
+            <div class="lab-card">
+                <div class="lab-icon"><i class="fas fa-wifi"></i></div>
+                <h4>Wireless Sensor Networks Lab</h4>
+                <p>Complete setup for testing ZigBee, LoRa, NB-IoT, and 5G connectivity for IoT applications.</p>
+            </div>
+            <div class="lab-card">
+                <div class="lab-icon"><i class="fas fa-cloud-upload-alt"></i></div>
+                <h4>Cloud IoT Lab</h4>
+                <p>Hands-on experience with AWS IoT Core, Azure IoT Hub, Google Cloud IoT, and IBM Watson IoT platforms.</p>
+            </div>
+            <div class="lab-card">
+                <div class="lab-icon"><i class="fas fa-robot"></i></div>
+                <h4>Industry 4.0 Lab</h4>
+                <p>Industrial automation setup with PLC, SCADA, robotic arms, and smart manufacturing demonstration.</p>
+            </div>
+            <div class="lab-card">
+                <div class="lab-icon"><i class="fas fa-chart-line"></i></div>
+                <h4>IoT Analytics Lab</h4>
+                <p>High-performance computing facility for real-time data processing, visualization, and predictive analytics.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Research & Achievements -->
+    <div class="section-card">
+        <h2 class="section-title">🏆 Research & Achievements</h2>
+        <ul class="achievements-list">
+            <li>Smart Agriculture Project: Developed IoT-based precision farming system deployed in 50+ farms across Karnataka</li>
+            <li>Healthcare IoT: Created wearable health monitor for remote patient monitoring, funded by Ministry of Health</li>
+            <li>Smart Campus Initiative: Deployed 1000+ sensors across campus for energy management and security</li>
+            <li>3 patents filed in IoT-based predictive maintenance and smart grid technologies</li>
+            <li>Students won 1st prize at National IoT Design Challenge 2024</li>
+            <li>Research collaboration with Bosch, Siemens, and Texas Instruments</li>
+            <li>₹1.8 Cr funded research project from DST on "AI-enabled IoT for Smart Cities"</li>
+            <li>Published 35+ research papers in top IEEE/IoT journals (2023-2024)</li>
+        </ul>
+    </div>
+
+    <!-- Industry Collaborations -->
+    <div class="section-card">
+        <h2 class="section-title">🤝 Industry Collaborations</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
+            <div style="background: var(--bg-primary); padding: 1rem; border-radius: 10px; text-align: center;">
+                <i class="fab fa-aws" style="font-size: 2rem; color: var(--accent);"></i>
+                <h4>AWS Educate</h4>
+                <p style="font-size: 0.8rem;">Cloud Computing Partner</p>
+            </div>
+            <div style="background: var(--bg-primary); padding: 1rem; border-radius: 10px; text-align: center;">
+                <i class="fab fa-microsoft" style="font-size: 2rem; color: var(--accent);"></i>
+                <h4>Microsoft Azure</h4>
+                <p style="font-size: 0.8rem;">IoT Hub Partner</p>
+            </div>
+            <div style="background: var(--bg-primary); padding: 1rem; border-radius: 10px; text-align: center;">
+                <i class="fas fa-microchip" style="font-size: 2rem; color: var(--accent);"></i>
+                <h4>Texas Instruments</h4>
+                <p style="font-size: 0.8rem;">Embedded Systems Partner</p>
+            </div>
+            <div style="background: var(--bg-primary); padding: 1rem; border-radius: 10px; text-align: center;">
+                <i class="fas fa-industry" style="font-size: 2rem; color: var(--accent);"></i>
+                <h4>Bosch</h4>
+                <p style="font-size: 0.8rem;">Industrial IoT Partner</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Contact Information -->
+    <div class="section-card">
+        <h2 class="section-title">📞 Contact Information</h2>
+        <div class="contact-info">
+            <div class="contact-icon"><i class="fas fa-user-graduate"></i></div>
+            <div class="contact-details">
+                <h4>Dr. Suresh Rao</h4>
+                <p>Head of Department, Internet of Things (IoT)</p>
+                <p><i class="fas fa-phone"></i> +91 80 2660 5678</p>
+                <p><i class="fas fa-envelope"></i> hod.iot@bit-bangalore.edu.in</p>
+            </div>
+        </div>
+        <div style="margin-top: 1rem; padding: 1rem; background: var(--bg-primary); border-radius: 10px;">
+            <p><strong>Department Office:</strong> Room No. 405, 4th Floor, IoT Block, Main Academic Building</p>
+            <p><strong>Office Hours:</strong> Monday - Friday, 9:00 AM to 5:00 PM</p>
+            <p><strong>Lab Access:</strong> 8:00 AM to 8:00 PM (Monday - Saturday)</p>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>Bangalore Institute of Technology</h3>
+            <p>Excellence in education since 1979</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="programs.html">Programs</a></li>
+                <li><a href="academics.html">Academics</a></li>
+                <li><a href="placements.html">Placements</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Contact Info</h3>
+            <p>📍 KR Road, VV Puram, Bangalore - 560004</p>
+            <p>📞 +91 80 2660 1234</p>
+            <p>✉️ info@bit-bangalore.edu.in</p>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>&copy; 2024 Bangalore Institute of Technology. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- Theme Toggle -->
+<button class="theme-toggle-btn" id="themeToggle">🌙</button>
+
+<script>
+    // Theme Toggle
+    function initTheme() {
+        const themeToggle = document.getElementById('themeToggle');
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            themeToggle.textContent = '☀️';
+        } else {
+            document.documentElement.setAttribute('data-theme', 'light');
+            themeToggle.textContent = '🌙';
+        }
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+                themeToggle.textContent = '🌙';
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                themeToggle.textContent = '☀️';
+            }
+        });
+    }
+
+    function toggleMenu() {
+        document.getElementById('navMenu').classList.toggle('active');
+    }
+
+    initTheme();
+</script>
+</body>
+</html>
