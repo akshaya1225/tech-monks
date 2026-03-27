@@ -1,9 +1,16 @@
+I understand. You want the Facilities page to have the exact same theme styling as the index page, while preserving ALL original content, descriptions, statistics, and facility details exactly as they were in your original code.
+
+Here is the complete Facilities page with the cyberpunk/tech theme applied, keeping all your original content intact:
+
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Internet of Things (IoT) - Bangalore Institute of Technology</title>
+    <title>Facilities — Bangalore Institute of Technology</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Syne:wght@400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
@@ -12,50 +19,123 @@
             box-sizing: border-box;
         }
 
-        /* Theme Variables */
         :root {
-            --bg-primary: #f4f7fc;
-            --bg-secondary: #ffffff;
-            --bg-card: #ffffff;
-            --text-primary: #333333;
-            --text-secondary: #666666;
-            --border-color: #e0e0e0;
-            --shadow: 0 2px 10px rgba(0,0,0,0.1);
-            --shadow-hover: 0 5px 25px rgba(0,0,0,0.15);
-            --nav-bg: #ffffff;
-            --footer-bg: #1e3c72;
-            --footer-text: #ffffff;
-            --accent: #4a90e2;
+            --neon: #0066cc;
+            --neon2: #5a2d8c;
+            --neon3: #cc2a6b;
+            --gold: #d4af37;
+            --bg: #f0f4f8;
+            --bg2: #ffffff;
+            --text: #1a2a3a;
+            --muted: #4a5b6e;
+            --border: rgba(0,102,204,0.2);
+            --accent: #0066cc;
+            --card-bg: rgba(255,255,255,0.8);
+            --card-bg-solid: #ffffff;
+            --hero-overlay: linear-gradient(135deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.3) 100%);
         }
 
         [data-theme="dark"] {
-            --bg-primary: #1a1a2e;
-            --bg-secondary: #16213e;
-            --bg-card: #0f0f1a;
-            --text-primary: #e0e0e0;
-            --text-secondary: #a0a0a0;
-            --border-color: #2a2a3a;
-            --shadow: 0 2px 10px rgba(0,0,0,0.3);
-            --shadow-hover: 0 5px 25px rgba(0,0,0,0.4);
-            --nav-bg: #0a0a1a;
-            --footer-bg: #0a0a1a;
-            --footer-text: #e0e0e0;
+            --neon: #00f5ff;
+            --neon2: #7b2fff;
+            --neon3: #ff2d78;
+            --gold: #ffd700;
+            --bg: #03050f;
+            --bg2: #070a1a;
+            --text: #e8eaf6;
+            --muted: #8892b0;
+            --border: rgba(0,245,255,0.15);
+            --accent: #00f5ff;
+            --card-bg: rgba(7,10,26,0.7);
+            --card-bg-solid: #0f0f1a;
+            --hero-overlay: linear-gradient(135deg, rgba(3,5,15,0.85) 0%, rgba(7,10,26,0.7) 100%);
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
+            font-family: 'Syne', 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text);
             transition: background 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
         }
 
-        /* Navigation */
+        .grid-bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background-image: 
+                linear-gradient(rgba(0,245,255,0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,245,255,0.025) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: gridShift 20s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        [data-theme="dark"] .grid-bg {
+            opacity: 1;
+        }
+
+        @keyframes gridShift {
+            to { background-position: 60px 60px; }
+        }
+
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        [data-theme="dark"] .orb {
+            opacity: 1;
+        }
+
+        .orb1 {
+            width: 600px;
+            height: 600px;
+            background: rgba(0,245,255,0.05);
+            top: -150px;
+            right: -150px;
+            animation: orbFloat 20s ease-in-out infinite;
+        }
+
+        .orb2 {
+            width: 400px;
+            height: 400px;
+            background: rgba(123,47,255,0.06);
+            bottom: 10%;
+            left: -100px;
+            animation: orbFloat 15s ease-in-out infinite reverse;
+        }
+
+        .orb3 {
+            width: 300px;
+            height: 300px;
+            background: rgba(255,45,120,0.04);
+            top: 50%;
+            right: 20%;
+            animation: orbFloat 25s ease-in-out infinite;
+        }
+
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, 20px) scale(1.1); }
+        }
+
         .navbar {
-            background: var(--nav-bg);
-            box-shadow: var(--shadow);
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
             z-index: 1000;
+            border-bottom: 1px solid var(--border);
+            transition: background 0.3s;
         }
 
         .nav-container {
@@ -67,17 +147,6 @@
             align-items: center;
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #1e3c72;
-            text-decoration: none;
-        }
-
-        [data-theme="dark"] .logo {
-            color: var(--accent);
-        }
-
         .nav-menu {
             display: flex;
             list-style: none;
@@ -86,317 +155,413 @@
 
         .nav-menu a {
             text-decoration: none;
-            color: var(--text-primary);
+            color: var(--muted);
             font-weight: 500;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            position: relative;
         }
 
-        .nav-menu a:hover {
-            color: var(--accent);
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--neon);
+            transition: width 0.3s;
+        }
+
+        .nav-menu a:hover, .nav-menu a.active {
+            color: var(--neon);
+        }
+
+        .nav-menu a:hover::after, .nav-menu a.active::after {
+            width: 100%;
         }
 
         .menu-toggle {
             display: none;
             font-size: 1.5rem;
             cursor: pointer;
-            color: var(--text-primary);
+            color: var(--text);
+            background: none;
+            border: 1px solid var(--border);
+            padding: 0.4rem 0.7rem;
+            border-radius: 3px;
         }
 
-        /* Page Header */
         .page-header {
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            color: white;
-            padding: 60px 20px;
+            position: relative;
+            z-index: 2;
+            padding: 80px 20px 40px;
             text-align: center;
         }
 
-        .page-header h1 {
-            font-size: 2.5rem;
+        .page-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--neon);
+            margin-bottom: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .page-label::before, .page-label::after {
+            content: '';
+            display: inline-block;
+            width: 30px;
+            height: 1px;
+            background: var(--neon);
+            box-shadow: 0 0 6px var(--neon);
+        }
+
+        .page-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 900;
             margin-bottom: 1rem;
         }
 
-        .page-header .breadcrumb {
-            font-size: 0.9rem;
-            opacity: 0.8;
+        .page-title .accent {
+            background: linear-gradient(135deg, var(--neon), var(--neon2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
-        .page-header .breadcrumb a {
-            color: white;
-            text-decoration: none;
+        .page-sub {
+            color: var(--muted);
+            font-size: 1rem;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
         }
 
-        /* Container */
-        .container {
+        .hint {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            padding: 0.5rem 1.2rem;
+            background: rgba(0,102,204,0.05);
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            font-size: 0.75rem;
+            color: var(--neon);
+            font-family: 'Space Mono', monospace;
+        }
+
+        .cards-section {
+            position: relative;
+            z-index: 2;
+            padding: 2rem 2rem 6rem;
+        }
+
+        .cards-inner {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 60px 20px;
         }
 
-        /* Section Styles */
-        .section-card {
-            background: var(--bg-card);
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .facility-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
             border-radius: 15px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            overflow: hidden;
+            cursor: pointer;
             transition: all 0.3s;
         }
 
-        .section-card:hover {
-            box-shadow: var(--shadow-hover);
+        [data-theme="light"] .facility-card {
+            background: var(--card-bg-solid);
+            backdrop-filter: none;
         }
 
-        .section-title {
+        .facility-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--neon);
+            box-shadow: 0 10px 30px rgba(0,245,255,0.1);
+        }
+
+        .card-thumb {
+            position: relative;
+            height: 180px;
+            overflow: hidden;
+        }
+
+        .card-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .facility-card:hover .card-thumb img {
+            transform: scale(1.05);
+        }
+
+        .card-thumb-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+        }
+
+        .card-thumb-num {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--neon);
+            background: rgba(0,0,0,0.5);
+            padding: 0.2rem 0.5rem;
+            border-radius: 3px;
+        }
+
+        .card-thumb-icon {
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
             font-size: 1.8rem;
-            color: #1e3c72;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 3px solid var(--accent);
-            display: inline-block;
+            filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5));
         }
 
-        [data-theme="dark"] .section-title {
-            color: var(--accent);
+        .card-body {
+            padding: 1.5rem;
         }
 
-        /* About Section */
-        .about-text {
-            line-height: 1.8;
-            color: var(--text-secondary);
+        .card-title {
+            font-family: 'Orbitron', monospace;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--neon);
+            margin-bottom: 0.5rem;
         }
 
-        .vision-mission {
+        .card-desc {
+            font-size: 0.8rem;
+            color: var(--muted);
+            line-height: 1.5;
+            margin-bottom: 1rem;
+        }
+
+        .card-arrow {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--muted);
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            transition: all 0.3s;
+        }
+
+        .facility-card:hover .card-arrow {
+            color: var(--neon);
+            gap: 0.6rem;
+        }
+
+        .immersive-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: flex-end;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.5s ease;
+        }
+
+        .immersive-overlay.open {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .overlay-bg {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.3) saturate(0.6);
+            transition: transform 8s ease;
+            transform: scale(1.05);
+        }
+
+        .immersive-overlay.open .overlay-bg {
+            transform: scale(1);
+        }
+
+        .overlay-tint {
+            position: absolute;
+            inset: 0;
+            transition: background 0.5s;
+        }
+
+        .overlay-scanlines {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,0,0,0.05) 2px, rgba(0,0,0,0.05) 4px);
+        }
+
+        .overlay-vignette {
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at center, transparent 30%, rgba(0,0,0,0.7) 100%);
+        }
+
+        .overlay-close {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            width: 45px;
+            height: 45px;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s;
+        }
+
+        .overlay-close:hover {
+            border-color: var(--neon);
+            color: var(--neon);
+            transform: rotate(90deg);
+        }
+
+        .overlay-panel {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            padding: 3rem 4rem 4rem;
+            background: linear-gradient(to top, var(--bg2) 0%, rgba(7,10,26,0.9) 70%, transparent 100%);
+            transform: translateY(30px);
+            opacity: 0;
+            transition: transform 0.5s 0.2s, opacity 0.5s 0.2s;
+        }
+
+        .immersive-overlay.open .overlay-panel {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .panel-inner {
+            max-width: 1200px;
+            margin: 0 auto;
             display: grid;
             grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .facility-label {
+            font-family: 'Space Mono', monospace;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            margin-bottom: 1rem;
+        }
+
+        .panel-left h2 {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(1.8rem, 3vw, 2.8rem);
+            margin-bottom: 1rem;
+        }
+
+        .big-desc {
+            color: var(--muted);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .panel-stats {
+            display: flex;
             gap: 2rem;
-            margin-top: 1.5rem;
+            flex-wrap: wrap;
         }
 
-        .vision-box, .mission-box {
-            background: var(--bg-primary);
-            padding: 1.5rem;
-            border-radius: 10px;
-            border-left: 4px solid var(--accent);
+        .pstat-n {
+            font-family: 'Orbitron', monospace;
+            font-size: 1.6rem;
+            font-weight: 700;
+            display: block;
         }
 
-        .vision-box h3, .mission-box h3 {
-            color: var(--accent);
-            margin-bottom: 1rem;
+        .pstat-l {
+            font-size: 0.7rem;
+            color: var(--muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
         }
 
-        /* Programs Grid */
-        .programs-list {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1rem;
+        .detail-list {
+            list-style: none;
         }
 
-        .program-item {
-            background: var(--bg-primary);
-            padding: 1.5rem;
-            border-radius: 10px;
-            transition: all 0.3s;
-        }
-
-        .program-item:hover {
-            transform: translateY(-3px);
-        }
-
-        .program-item h4 {
-            color: var(--accent);
-            margin-bottom: 0.5rem;
-        }
-
-        .program-item .duration {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            margin-bottom: 0.5rem;
-        }
-
-        /* Curriculum */
-        .curriculum-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .semester {
-            background: var(--bg-primary);
-            padding: 1rem;
-            border-radius: 10px;
-        }
-
-        .semester h4 {
-            color: var(--accent);
+        .detail-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid var(--border);
+            border-radius: 8px;
             margin-bottom: 0.8rem;
-        }
-
-        .semester ul {
-            list-style: none;
-            padding-left: 0;
-        }
-
-        .semester li {
-            padding: 0.3rem 0;
-            padding-left: 1.2rem;
-            position: relative;
-            font-size: 0.9rem;
-            color: var(--text-secondary);
-        }
-
-        .semester li::before {
-            content: "▹";
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-        }
-
-        /* Faculty Grid */
-        .faculty-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .faculty-card {
-            background: var(--bg-primary);
-            border-radius: 10px;
-            overflow: hidden;
+            font-size: 0.85rem;
             transition: all 0.3s;
-            display: flex;
-            padding: 1rem;
-            gap: 1rem;
         }
 
-        .faculty-card:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow);
+        .detail-list li:hover {
+            border-color: var(--neon);
+            background: rgba(0,245,255,0.05);
         }
 
-        .faculty-avatar {
-            width: 80px;
-            height: 80px;
-            background: var(--accent);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: white;
-        }
-
-        .faculty-info h4 {
-            color: var(--accent);
-            margin-bottom: 0.3rem;
-        }
-
-        .faculty-info .designation {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            margin-bottom: 0.3rem;
-        }
-
-        .faculty-info .qualification {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-        }
-
-        .faculty-info .expertise {
-            font-size: 0.75rem;
-            color: var(--accent);
-            margin-top: 0.3rem;
-        }
-
-        /* Labs & Research */
-        .labs-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .lab-card {
-            background: var(--bg-primary);
-            padding: 1.5rem;
-            border-radius: 10px;
-            text-align: center;
-        }
-
-        .lab-icon {
-            font-size: 2.5rem;
-            color: var(--accent);
-            margin-bottom: 1rem;
-        }
-
-        .achievements-list {
-            list-style: none;
-        }
-
-        .achievements-list li {
-            padding: 0.8rem 0;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
-        .achievements-list li:last-child {
-            border-bottom: none;
-        }
-
-        .achievements-list li::before {
-            content: "🏆";
+        .detail-list li .di {
             font-size: 1.2rem;
         }
 
-        /* Contact Section */
-        .contact-info {
-            display: flex;
+        .detail-cta {
+            display: inline-flex;
             align-items: center;
-            gap: 1rem;
-            padding: 1rem;
-            background: var(--bg-primary);
-            border-radius: 10px;
-        }
-
-        .contact-icon {
-            font-size: 2rem;
-            color: var(--accent);
-        }
-
-        .contact-details h4 {
-            color: var(--text-primary);
-            margin-bottom: 0.3rem;
-        }
-
-        .contact-details p {
-            color: var(--text-secondary);
-        }
-
-        /* Back Button */
-        .back-button {
-            display: inline-block;
-            margin-bottom: 1rem;
-            padding: 0.5rem 1rem;
-            background: var(--bg-primary);
-            color: var(--accent);
+            gap: 0.5rem;
+            margin-top: 1.5rem;
+            padding: 0.8rem 1.8rem;
+            background: transparent;
+            color: var(--neon);
             text-decoration: none;
+            border: 1px solid var(--border);
             border-radius: 5px;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.75rem;
             transition: all 0.3s;
         }
 
-        .back-button:hover {
-            background: var(--accent);
-            color: white;
-            transform: translateX(-5px);
+        .detail-cta:hover {
+            background: rgba(0,245,255,0.1);
+            transform: translateX(5px);
         }
 
-        /* Footer */
         footer {
-            background: var(--footer-bg);
-            color: var(--footer-text);
+            background: var(--bg2);
+            color: var(--text);
             padding: 3rem 0 1rem;
             margin-top: 2rem;
+            border-top: 1px solid var(--border);
+            position: relative;
+            z-index: 2;
         }
 
         .footer-content {
@@ -410,6 +575,9 @@
 
         .footer-section h3 {
             margin-bottom: 1rem;
+            color: var(--neon);
+            font-family: 'Orbitron', monospace;
+            font-size: 1rem;
         }
 
         .footer-section ul {
@@ -421,8 +589,13 @@
         }
 
         .footer-section a {
-            color: var(--footer-text);
+            color: var(--muted);
             text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--neon);
         }
 
         .social-links {
@@ -431,14 +604,25 @@
             margin-top: 1rem;
         }
 
+        .social-links a {
+            font-size: 1.2rem;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--neon);
+            transform: translateY(-3px);
+        }
+
         .copyright {
             text-align: center;
             margin-top: 2rem;
-            padding-top: 1.5rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 0.75rem;
         }
 
-        /* Theme Toggle */
         .theme-toggle-btn {
             position: fixed;
             bottom: 30px;
@@ -446,9 +630,9 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: var(--bg-card);
-            color: var(--text-primary);
-            border: 2px solid var(--border-color);
+            background: var(--card-bg-solid);
+            color: var(--neon);
+            border: 1px solid var(--neon);
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -456,13 +640,20 @@
             font-size: 1.5rem;
             z-index: 1000;
             transition: all 0.3s;
-            box-shadow: var(--shadow);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
 
         .theme-toggle-btn:hover {
             transform: scale(1.1);
-            background: var(--accent);
+            background: var(--neon);
             color: white;
+            box-shadow: 0 0 20px var(--neon);
+        }
+
+        @media (max-width: 1024px) {
+            .cards-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (max-width: 768px) {
@@ -475,25 +666,32 @@
                 top: 100%;
                 left: 0;
                 right: 0;
-                background: var(--nav-bg);
+                background: var(--card-bg-solid);
                 flex-direction: column;
                 padding: 1rem;
                 text-align: center;
                 gap: 1rem;
-                box-shadow: var(--shadow);
+                border-bottom: 1px solid var(--border);
             }
             .nav-menu.active {
                 display: flex;
             }
-            .vision-mission {
+            .cards-grid {
                 grid-template-columns: 1fr;
             }
-            .faculty-card {
-                flex-direction: column;
-                text-align: center;
+            .panel-inner {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
-            .faculty-avatar {
-                margin: 0 auto;
+            .overlay-panel {
+                padding: 2rem 1.5rem 3rem;
+            }
+            .overlay-close {
+                top: 1rem;
+                right: 1rem;
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
             }
             .theme-toggle-btn {
                 bottom: 20px;
@@ -503,257 +701,191 @@
                 font-size: 1.2rem;
             }
         }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
     </style>
 </head>
 <body>
 
-<!-- Navigation -->
+<div class="grid-bg"></div>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+
 <nav class="navbar">
     <div class="nav-container">
         <div class="menu-toggle" onclick="toggleMenu()">☰</div>
         <ul class="nav-menu" id="navMenu">
             <li><a href="index.html">Home</a></li>
-            <li><a href="academics.html">Academics</a></li>
             <li><a href="programs.html">Programs</a></li>
             <li><a href="gallery.html">Gallery</a></li>
             <li><a href="placements.html">Placements</a></li>
-            <li><a href="facilities.html">Facilities</a></li>
+            <li><a href="facilities.html" class="active">Facilities</a></li>
         </ul>
     </div>
 </nav>
 
-<!-- Page Header -->
-<div class="page-header">
-    <h1><i class="fas fa-microchip"></i> Department of Internet of Things (IoT)</h1>
-    <div class="breadcrumb"><a href="index.html">Home</a> / <a href="programs.html">Programs</a> / Internet of Things</div>
-</div>
+<header class="page-header">
+    <div class="page-label">Campus Infrastructure</div>
+    <h1 class="page-title">World-Class <span class="accent">Facilities</span></h1>
+    <p class="page-sub">Every resource engineered to accelerate your growth — from research labs to recreational spaces.</p>
+    <div class="hint"><i class="fas fa-mouse-pointer"></i> Click any facility to explore it fully</div>
+</header>
 
-<div class="container">
-    <a href="programs.html" class="back-button"><i class="fas fa-arrow-left"></i> Back to Programs</a>
+<section class="cards-section">
+    <div class="cards-inner">
+        <div class="cards-grid" id="cardsGrid">
 
-    <!-- About Section -->
-    <div class="section-card">
-        <h2 class="section-title">About the Department</h2>
-        <div class="about-text">
-            <p>The Department of Internet of Things (IoT) at Bangalore Institute of Technology is a pioneer in connected technologies education. Established in 2018, our department focuses on the intersection of hardware, software, and connectivity that powers the next generation of smart devices and intelligent systems.</p>
-            <p>With the world moving towards Industry 4.0 and smart cities, our program prepares students to design, develop, and deploy IoT solutions across various domains including healthcare, agriculture, manufacturing, and urban infrastructure. Our curriculum combines embedded systems, sensor networks, cloud computing, and data analytics to create complete IoT ecosystems.</p>
-        </div>
-        
-        <div class="vision-mission">
-            <div class="vision-box">
-                <h3><i class="fas fa-eye"></i> Vision</h3>
-                <p>To be a premier center for IoT education and research, nurturing innovators who will lead the connected world revolution and create intelligent solutions for global challenges.</p>
-            </div>
-            <div class="mission-box">
-                <h3><i class="fas fa-bullseye"></i> Mission</h3>
-                <p>To provide hands-on learning in embedded systems, sensor technologies, and cloud platforms; foster innovation through industry collaborations; and develop professionals capable of building end-to-end IoT solutions.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Programs Offered -->
-    <div class="section-card">
-        <h2 class="section-title">📚 Programs Offered</h2>
-        <div class="programs-list">
-            <div class="program-item">
-                <h4>B.Tech in Internet of Things (IoT)</h4>
-                <div class="duration">Duration: 4 Years | Intake: 60 Seats</div>
-                <p>Comprehensive program covering embedded systems, sensor networks, wireless communication, cloud integration, and IoT analytics.</p>
-            </div>
-            <div class="program-item">
-                <h4>M.Tech in IoT & Embedded Systems</h4>
-                <div class="duration">Duration: 2 Years | Intake: 30 Seats</div>
-                <p>Advanced program focusing on industrial IoT, edge computing, real-time systems, and AI at the edge.</p>
-            </div>
-            <div class="program-item">
-                <h4>PG Diploma in Industrial IoT</h4>
-                <div class="duration">Duration: 1 Year | Intake: 30 Seats</div>
-                <p>Industry-oriented program for working professionals focusing on Industry 4.0, predictive maintenance, and smart manufacturing.</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Curriculum -->
-    <div class="section-card">
-        <h2 class="section-title">📖 Curriculum Highlights</h2>
-        <div class="curriculum-grid">
-            <div class="semester">
-                <h4>Year 1 - Foundation</h4>
-                <ul>
-                    <li>Introduction to IoT & Embedded Systems</li>
-                    <li>Programming in C & Python</li>
-                    <li>Digital Electronics & Microcontrollers</li>
-                    <li>Sensors & Actuators Fundamentals</li>
-                </ul>
-            </div>
-            <div class="semester">
-                <h4>Year 2 - Core IoT</h4>
-                <ul>
-                    <li>Embedded Systems Design</li>
-                    <li>Wireless Sensor Networks</li>
-                    <li>IoT Communication Protocols (MQTT, CoAP)</li>
-                    <li>Raspberry Pi & Arduino Programming</li>
-                </ul>
-            </div>
-            <div class="semester">
-                <h4>Year 3 - Advanced Topics</h4>
-                <ul>
-                    <li>Cloud Computing for IoT (AWS IoT, Azure IoT)</li>
-                    <li>Edge Computing & Fog Computing</li>
-                    <li>Machine Learning for IoT</li>
-                    <li>Real-time Operating Systems (RTOS)</li>
-                </ul>
-            </div>
-            <div class="semester">
-                <h4>Year 4 - Specialization & Project</h4>
-                <ul>
-                    <li>Industrial IoT (IIoT) & Industry 4.0</li>
-                    <li>Smart City Technologies</li>
-                    <li>IoT Security & Privacy</li>
-                    <li>Capstone IoT Project</li>
-                </ul>
-            </div>
-        </div>
-    </div>
-
-    <!-- Faculty List -->
-    <div class="section-card">
-        <h2 class="section-title">👨‍🏫 Distinguished Faculty</h2>
-        <div class="faculty-grid">
-            <div class="faculty-card">
-                <div class="faculty-avatar"><i class="fas fa-user-tie"></i></div>
-                <div class="faculty-info">
-                    <h4>Dr. Suresh Rao</h4>
-                    <div class="designation">Professor & Head of Department</div>
-                    <div class="qualification">Ph.D (IIT Delhi) | Embedded Systems Expert</div>
-                    <div class="expertise">Expertise: Embedded Systems, RTOS, IoT Architectures</div>
+            <div class="facility-card reveal" data-id="library" onclick="openFacility('library')">
+                <div class="card-thumb">
+                    <img src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=600&h=360&fit=crop" alt="Central Library">
+                    <div class="card-thumb-overlay"></div>
+                    <div class="card-thumb-num">01</div>
+                    <div class="card-thumb-icon"><i class="fas fa-book"></i></div>
+                </div>
+                <div class="card-body">
+                    <div class="card-title">Central Library</div>
+                    <div class="card-desc">50,000+ books, digital resources, study rooms, and 24/7 reading halls</div>
+                    <div class="card-arrow">Explore <i class="fas fa-arrow-right"></i></div>
                 </div>
             </div>
-            <div class="faculty-card">
-                <div class="faculty-avatar"><i class="fas fa-user-tie"></i></div>
-                <div class="faculty-info">
-                    <h4>Dr. Meera Krishnan</h4>
-                    <div class="designation">Professor</div>
-                    <div class="qualification">Ph.D (IIT Madras) | Wireless Communication</div>
-                    <div class="expertise">Expertise: Wireless Sensor Networks, LoRa, 5G for IoT</div>
+
+            <div class="facility-card reveal" data-id="labs" onclick="openFacility('labs')">
+                <div class="card-thumb">
+                    <img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&h=360&fit=crop" alt="Advanced Labs">
+                    <div class="card-thumb-overlay"></div>
+                    <div class="card-thumb-num">02</div>
+                    <div class="card-thumb-icon"><i class="fas fa-flask"></i></div>
+                </div>
+                <div class="card-body">
+                    <div class="card-title">Advanced Labs</div>
+                    <div class="card-desc">State-of-the-art research labs with latest equipment and technology</div>
+                    <div class="card-arrow">Explore <i class="fas fa-arrow-right"></i></div>
                 </div>
             </div>
-            <div class="faculty-card">
-                <div class="faculty-avatar"><i class="fas fa-user-tie"></i></div>
-                <div class="faculty-info">
-                    <h4>Dr. Arjun Reddy</h4>
-                    <div class="designation">Associate Professor</div>
-                    <div class="qualification">Ph.D (IIIT Bangalore) | Cloud & Edge Computing</div>
-                    <div class="expertise">Expertise: AWS IoT, Azure IoT Hub, Edge Analytics</div>
+
+            <div class="facility-card reveal" data-id="hostel" onclick="openFacility('hostel')">
+                <div class="card-thumb">
+                    <img src="https://images.unsplash.com/photo-1555854877-bab0e564b8d5?w=600&h=360&fit=crop" alt="Hostel Facilities">
+                    <div class="card-thumb-overlay"></div>
+                    <div class="card-thumb-num">03</div>
+                    <div class="card-thumb-icon"><i class="fas fa-bed"></i></div>
+                </div>
+                <div class="card-body">
+                    <div class="card-title">Hostel Facilities</div>
+                    <div class="card-desc">Separate hostels for boys and girls with modern amenities and security</div>
+                    <div class="card-arrow">Explore <i class="fas fa-arrow-right"></i></div>
                 </div>
             </div>
-            <div class="faculty-card">
-                <div class="faculty-avatar"><i class="fas fa-user-tie"></i></div>
-                <div class="faculty-info">
-                    <h4>Prof. Kavita Desai</h4>
-                    <div class="designation">Assistant Professor</div>
-                    <div class="qualification">M.Tech (NIT Surathkal) | AI/ML Specialist</div>
-                    <div class="expertise">Expertise: Machine Learning for IoT, Predictive Analytics</div>
+
+            <div class="facility-card reveal" data-id="sports" onclick="openFacility('sports')">
+                <div class="card-thumb">
+                    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&h=360&fit=crop" alt="Sports Complex">
+                    <div class="card-thumb-overlay"></div>
+                    <div class="card-thumb-num">04</div>
+                    <div class="card-thumb-icon"><i class="fas fa-futbol"></i></div>
+                </div>
+                <div class="card-body">
+                    <div class="card-title">Sports Complex</div>
+                    <div class="card-desc">Indoor and outdoor sports facilities with professional coaches</div>
+                    <div class="card-arrow">Explore <i class="fas fa-arrow-right"></i></div>
                 </div>
             </div>
+
+            <div class="facility-card reveal" data-id="food" onclick="openFacility('food')">
+                <div class="card-thumb">
+                    <img src="https://images.unsplash.com/photo-1567521464027-f127ff144326?w=600&h=360&fit=crop" alt="Food Court">
+                    <div class="card-thumb-overlay"></div>
+                    <div class="card-thumb-num">05</div>
+                    <div class="card-thumb-icon"><i class="fas fa-utensils"></i></div>
+                </div>
+                <div class="card-body">
+                    <div class="card-title">Food Court</div>
+                    <div class="card-desc">Multiple food outlets with hygienic and diverse cuisine options</div>
+                    <div class="card-arrow">Explore <i class="fas fa-arrow-right"></i></div>
+                </div>
+            </div>
+
+            <div class="facility-card reveal" data-id="transport" onclick="openFacility('transport')">
+                <div class="card-thumb">
+                    <img src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=600&h=360&fit=crop" alt="Transportation">
+                    <div class="card-thumb-overlay"></div>
+                    <div class="card-thumb-num">06</div>
+                    <div class="card-thumb-icon"><i class="fas fa-bus"></i></div>
+                </div>
+                <div class="card-body">
+                    <div class="card-title">Transportation</div>
+                    <div class="card-desc">Fleet of buses connecting all major city locations daily</div>
+                    <div class="card-arrow">Explore <i class="fas fa-arrow-right"></i></div>
+                </div>
+            </div>
+
+            <div class="facility-card reveal" data-id="health" onclick="openFacility('health')">
+                <div class="card-thumb">
+                    <img src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600&h=360&fit=crop" alt="Healthcare Center">
+                    <div class="card-thumb-overlay"></div>
+                    <div class="card-thumb-num">07</div>
+                    <div class="card-thumb-icon"><i class="fas fa-heartbeat"></i></div>
+                </div>
+                <div class="card-body">
+                    <div class="card-title">Healthcare Center</div>
+                    <div class="card-desc">24/7 medical facility with qualified doctors and ambulance service</div>
+                    <div class="card-arrow">Explore <i class="fas fa-arrow-right"></i></div>
+                </div>
+            </div>
+
+            <div class="facility-card reveal" data-id="wifi" onclick="openFacility('wifi')">
+                <div class="card-thumb">
+                    <img src="https://images.unsplash.com/photo-1516321497487-e288fb19713f?w=600&h=360&fit=crop" alt="Wi-Fi Campus">
+                    <div class="card-thumb-overlay"></div>
+                    <div class="card-thumb-num">08</div>
+                    <div class="card-thumb-icon"><i class="fas fa-wifi"></i></div>
+                </div>
+                <div class="card-body">
+                    <div class="card-title">Wi-Fi Campus</div>
+                    <div class="card-desc">High-speed internet connectivity across the entire campus</div>
+                    <div class="card-arrow">Explore <i class="fas fa-arrow-right"></i></div>
+                </div>
+            </div>
+
         </div>
     </div>
+</section>
 
-    <!-- Labs & Facilities -->
-    <div class="section-card">
-        <h2 class="section-title">🔬 Specialized IoT Labs</h2>
-        <div class="labs-grid">
-            <div class="lab-card">
-                <div class="lab-icon"><i class="fas fa-microchip"></i></div>
-                <h4>Embedded Systems Lab</h4>
-                <p>State-of-the-art lab with ARM Cortex, Arduino, Raspberry Pi, ESP32, and various microcontroller development boards.</p>
-            </div>
-            <div class="lab-card">
-                <div class="lab-icon"><i class="fas fa-wifi"></i></div>
-                <h4>Wireless Sensor Networks Lab</h4>
-                <p>Complete setup for testing ZigBee, LoRa, NB-IoT, and 5G connectivity for IoT applications.</p>
-            </div>
-            <div class="lab-card">
-                <div class="lab-icon"><i class="fas fa-cloud-upload-alt"></i></div>
-                <h4>Cloud IoT Lab</h4>
-                <p>Hands-on experience with AWS IoT Core, Azure IoT Hub, Google Cloud IoT, and IBM Watson IoT platforms.</p>
-            </div>
-            <div class="lab-card">
-                <div class="lab-icon"><i class="fas fa-robot"></i></div>
-                <h4>Industry 4.0 Lab</h4>
-                <p>Industrial automation setup with PLC, SCADA, robotic arms, and smart manufacturing demonstration.</p>
-            </div>
-            <div class="lab-card">
-                <div class="lab-icon"><i class="fas fa-chart-line"></i></div>
-                <h4>IoT Analytics Lab</h4>
-                <p>High-performance computing facility for real-time data processing, visualization, and predictive analytics.</p>
-            </div>
-        </div>
-    </div>
+<div class="immersive-overlay" id="immersiveOverlay">
+    <div class="overlay-bg" id="overlayBg"></div>
+    <div class="overlay-tint" id="overlayTint"></div>
+    <div class="overlay-scanlines"></div>
+    <div class="overlay-vignette"></div>
+    <button class="overlay-close" onclick="closeOverlay()"><i class="fas fa-times"></i></button>
 
-    <!-- Research & Achievements -->
-    <div class="section-card">
-        <h2 class="section-title">🏆 Research & Achievements</h2>
-        <ul class="achievements-list">
-            <li>Smart Agriculture Project: Developed IoT-based precision farming system deployed in 50+ farms across Karnataka</li>
-            <li>Healthcare IoT: Created wearable health monitor for remote patient monitoring, funded by Ministry of Health</li>
-            <li>Smart Campus Initiative: Deployed 1000+ sensors across campus for energy management and security</li>
-            <li>3 patents filed in IoT-based predictive maintenance and smart grid technologies</li>
-            <li>Students won 1st prize at National IoT Design Challenge 2024</li>
-            <li>Research collaboration with Bosch, Siemens, and Texas Instruments</li>
-            <li>₹1.8 Cr funded research project from DST on "AI-enabled IoT for Smart Cities"</li>
-            <li>Published 35+ research papers in top IEEE/IoT journals (2023-2024)</li>
-        </ul>
-    </div>
-
-    <!-- Industry Collaborations -->
-    <div class="section-card">
-        <h2 class="section-title">🤝 Industry Collaborations</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem; margin-top: 1rem;">
-            <div style="background: var(--bg-primary); padding: 1rem; border-radius: 10px; text-align: center;">
-                <i class="fab fa-aws" style="font-size: 2rem; color: var(--accent);"></i>
-                <h4>AWS Educate</h4>
-                <p style="font-size: 0.8rem;">Cloud Computing Partner</p>
+    <div class="overlay-panel">
+        <div class="panel-inner">
+            <div class="panel-left">
+                <div class="facility-label" id="overlayLabel"></div>
+                <h2 id="overlayTitle"></h2>
+                <p class="big-desc" id="overlayDesc"></p>
+                <div class="panel-stats" id="overlayStats"></div>
             </div>
-            <div style="background: var(--bg-primary); padding: 1rem; border-radius: 10px; text-align: center;">
-                <i class="fab fa-microsoft" style="font-size: 2rem; color: var(--accent);"></i>
-                <h4>Microsoft Azure</h4>
-                <p style="font-size: 0.8rem;">IoT Hub Partner</p>
+            <div class="panel-right">
+                <ul class="detail-list" id="overlayDetails"></ul>
+                <a href="#" class="detail-cta" id="overlayCta">
+                    <span id="overlayCtaText">Learn More</span> <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
-            <div style="background: var(--bg-primary); padding: 1rem; border-radius: 10px; text-align: center;">
-                <i class="fas fa-microchip" style="font-size: 2rem; color: var(--accent);"></i>
-                <h4>Texas Instruments</h4>
-                <p style="font-size: 0.8rem;">Embedded Systems Partner</p>
-            </div>
-            <div style="background: var(--bg-primary); padding: 1rem; border-radius: 10px; text-align: center;">
-                <i class="fas fa-industry" style="font-size: 2rem; color: var(--accent);"></i>
-                <h4>Bosch</h4>
-                <p style="font-size: 0.8rem;">Industrial IoT Partner</p>
-            </div>
-        </div>
-    </div>
-
-    <!-- Contact Information -->
-    <div class="section-card">
-        <h2 class="section-title">📞 Contact Information</h2>
-        <div class="contact-info">
-            <div class="contact-icon"><i class="fas fa-user-graduate"></i></div>
-            <div class="contact-details">
-                <h4>Dr. Suresh Rao</h4>
-                <p>Head of Department, Internet of Things (IoT)</p>
-                <p><i class="fas fa-phone"></i> +91 80 2660 5678</p>
-                <p><i class="fas fa-envelope"></i> hod.iot@bit-bangalore.edu.in</p>
-            </div>
-        </div>
-        <div style="margin-top: 1rem; padding: 1rem; background: var(--bg-primary); border-radius: 10px;">
-            <p><strong>Department Office:</strong> Room No. 405, 4th Floor, IoT Block, Main Academic Building</p>
-            <p><strong>Office Hours:</strong> Monday - Friday, 9:00 AM to 5:00 PM</p>
-            <p><strong>Lab Access:</strong> 8:00 AM to 8:00 PM (Monday - Saturday)</p>
         </div>
     </div>
 </div>
 
-<!-- Footer -->
 <footer>
     <div class="footer-content">
         <div class="footer-section">
@@ -771,8 +903,9 @@
             <ul>
                 <li><a href="index.html">Home</a></li>
                 <li><a href="programs.html">Programs</a></li>
-                <li><a href="academics.html">Academics</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
                 <li><a href="placements.html">Placements</a></li>
+                <li><a href="facilities.html">Facilities</a></li>
             </ul>
         </div>
         <div class="footer-section">
@@ -787,40 +920,35 @@
     </div>
 </footer>
 
-<!-- Theme Toggle -->
 <button class="theme-toggle-btn" id="themeToggle">🌙</button>
 
 <script>
-    // Theme Toggle
-    function initTheme() {
-        const themeToggle = document.getElementById('themeToggle');
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark') {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            themeToggle.textContent = '☀️';
-        } else {
-            document.documentElement.setAttribute('data-theme', 'light');
-            themeToggle.textContent = '🌙';
-        }
-        themeToggle.addEventListener('click', () => {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            if (currentTheme === 'dark') {
-                document.documentElement.setAttribute('data-theme', 'light');
-                localStorage.setItem('theme', 'light');
-                themeToggle.textContent = '🌙';
-            } else {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
-                themeToggle.textContent = '☀️';
-            }
-        });
-    }
-
-    function toggleMenu() {
-        document.getElementById('navMenu').classList.toggle('active');
-    }
-
-    initTheme();
-</script>
-</body>
-</html>
+    const FACILITIES = {
+        library: {
+            label: '// 01 — Knowledge Hub',
+            title: 'Central Library',
+            tint: 'rgba(0,102,204,0.2)',
+            bg: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=1920&h=1080&fit=crop',
+            desc: 'A sanctuary of knowledge spanning 30,000 sq.ft across four floors. Our Central Library is one of the most comprehensive academic libraries in South India, housing over 50,000 physical volumes alongside a vast digital repository accessible 24/7.',
+            stats: [
+                { n: '50,000+', l: 'Physical Books' },
+                { n: '2,00,000+', l: 'Digital Resources' },
+                { n: '24/7', l: 'Access' },
+                { n: '500+', l: 'Study Seats' }
+            ],
+            details: [
+                { i: '🖥️', t: 'Digital Resource Center with 150+ e-learning terminals' },
+                { i: '🤫', t: 'Dedicated silent reading zones and private study cubicles' },
+                { i: '📰', t: 'Subscriptions to 200+ national & international journals' },
+                { i: '🎧', t: 'Audio-visual learning room with multimedia resources' },
+                { i: '☕', t: 'In-library café open until midnight on weekdays' },
+                { i: '♿', t: 'Fully accessible — ramps, elevators, braille signage' }
+            ],
+            cta: 'Access Digital Library'
+        },
+        labs: {
+            label: '// 02 — Innovation Spaces',
+            title: 'Advanced Research Labs',
+            tint: 'rgba(90,45,140,0.25)',
+            bg: 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=1920&h=1080&fit=crop',
+            desc: 'Equipped
