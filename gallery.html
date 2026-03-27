@@ -15,6 +15,32 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: #f4f7fc;
             color: #333;
+            overflow-x: hidden;
+            cursor: none; /* Custom cursor */
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            background: rgba(74, 144, 226, 0.8);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: transform 0.1s ease-out;
+            mix-blend-mode: difference;
+        }
+
+        .cursor-follower {
+            position: fixed;
+            width: 40px;
+            height: 40px;
+            border: 2px solid #4a90e2;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            transition: all 0.2s ease-out;
         }
 
         /* Navigation Bar */
@@ -62,21 +88,65 @@
         .menu-toggle {
             display: none;
             font-size: 1.5rem;
-            cursor: pointer;
+            cursor: none;
         }
 
-        /* Gallery Styles */
+        /* Hero Gallery Section */
+        .hero-gallery {
+            position: relative;
+            height: 400px;
+            background: linear-gradient(135deg, #1e3c72, #4a90e2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            overflow: hidden;
+            margin-bottom: 60px;
+        }
+
+        .hero-content h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #fff, rgba(255,255,255,0.8));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: heroFloat 6s ease-in-out infinite;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+
+        @keyframes heroFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Floating Particles */
+        .particle {
+            position: absolute;
+            background: rgba(255,255,255,0.5);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(400px) rotate(0deg); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(-400px) rotate(360deg); opacity: 0; }
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 60px 20px;
-        }
-
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: #1e3c72;
+            padding: 0 20px 60px;
         }
 
         .section-subtitle {
@@ -85,104 +155,202 @@
             margin-bottom: 3rem;
         }
 
-        /* Category Filters */
+        /* Category Filters - Magnetic */
         .gallery-filters {
             text-align: center;
             margin-bottom: 2rem;
         }
 
         .filter-btn {
-            padding: 10px 25px;
-            margin: 0 5px;
-            border: none;
+            padding: 12px 28px;
+            margin: 0 8px;
+            border: 2px solid transparent;
             background: white;
-            cursor: pointer;
-            border-radius: 5px;
+            cursor: none;
+            border-radius: 50px;
             font-size: 1rem;
-            transition: all 0.3s;
+            font-weight: 600;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             color: #333;
+            position: relative;
+            transform: translateZ(0);
         }
 
         .filter-btn.active {
-            background: #1e3c72;
+            background: linear-gradient(135deg, #1e3c72, #4a90e2);
             color: white;
+            box-shadow: 0 10px 30px rgba(74, 144, 226, 0.4);
         }
 
         .filter-btn:hover {
-            background: #4a90e2;
-            color: white;
-            transform: translateY(-2px);
+            transform: translateY(-8px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            border-color: #4a90e2;
         }
+        /* FOOTER - EXACTLY LIKE SCREENSHOT 316 */
+footer {
+    background: #1e3c72;
+    color: white;
+    padding: 2.5rem 2rem;
+    margin-top: 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
 
-        /* Gallery Grid */
+.logo-branding {
+    font-weight: bold;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+}
+
+.quick-links {
+    list-style: none;
+    padding: 0;
+}
+
+.quick-links li {
+    margin-bottom: 0.8rem;
+}
+
+.quick-links a {
+    color: #e0e7ff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.quick-links a:hover {
+    color: white;
+}
+
+.contact {
+    text-align: right;
+    font-size: 1.1rem;
+}
+
+.contact-info {
+    margin-top: 0.5rem;
+    line-height: 1.8;
+}
+
+        /* Gallery Grid - Lovart 3D Tilt */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 2rem;
-            margin-top: 2rem;
         }
 
         .gallery-item {
             background: white;
-            border-radius: 10px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            cursor: pointer;
-            transition: all 0.3s;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            cursor: none;
+            transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            position: relative;
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(74,144,226,0.1), transparent);
+            opacity: 0;
+            transition: opacity 0.3s;
+            z-index: 2;
+        }
+
+        .gallery-item:hover::before {
+            opacity: 1;
         }
 
         .gallery-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+            transform: translateY(-20px) rotateX(5deg) rotateY(5deg);
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
+        }
+
+        .image-wrapper {
+            position: relative;
+            height: 250px;
+            overflow: hidden;
+            transform-style: preserve-3d;
         }
 
         .image-placeholder {
             width: 100%;
-            height: 250px;
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.3s;
+            height: 100%;
+            position: relative;
+            transition: transform 0.6s ease;
             background-size: cover;
             background-position: center;
         }
 
-        .image-placeholder .icon {
-            font-size: 5rem;
-            color: white;
+        .image-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
         }
 
         .gallery-item:hover .image-placeholder {
-            transform: scale(1.05);
+            transform: scale(1.1) translateZ(50px);
+        }
+
+        .gallery-item:hover .image-placeholder img {
+            transform: scale(1.2);
+        }
+
+        .icon {
+            font-size: 5rem;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: all 0.4s;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.3));
+        }
+
+        .gallery-item:hover .icon {
+            transform: translate(-50%, -50%) scale(1.2) rotate(10deg);
         }
 
         .gallery-info {
-            padding: 1rem;
+            padding: 1.5rem;
             text-align: center;
+            position: relative;
+            z-index: 3;
         }
 
         .gallery-info h3 {
             color: #1e3c72;
             margin-bottom: 0.5rem;
-        }
-
-        .gallery-info p {
-            color: #666;
-            font-size: 0.9rem;
+            font-size: 1.3rem;
         }
 
         .category-tag {
             display: inline-block;
-            padding: 4px 12px;
-            background: #4a90e2;
+            padding: 6px 16px;
+            background: linear-gradient(135deg, #4a90e2, #1e3c72);
             color: white;
-            border-radius: 15px;
+            border-radius: 20px;
             font-size: 0.8rem;
-            margin-top: 0.5rem;
+            font-weight: 600;
+            transition: transform 0.3s;
         }
 
-        /* Lightbox */
+        .gallery-item:hover .category-tag {
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        /* Lightbox - Enhanced */
         .lightbox {
             display: none;
             position: fixed;
@@ -190,11 +358,12 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0,0,0,0.9);
+            background: rgba(0,0,0,0.95);
             z-index: 2000;
             justify-content: center;
             align-items: center;
-            cursor: pointer;
+            cursor: none;
+            backdrop-filter: blur(10px);
         }
 
         .lightbox.active {
@@ -206,96 +375,25 @@
             color: white;
             max-width: 90%;
             max-height: 90%;
+            transform: scale(0.8);
+            transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
         }
 
-        .lightbox-image {
-            max-width: 90vw;
-            max-height: 70vh;
-            border-radius: 10px;
-            margin-bottom: 2rem;
+        .lightbox.active .lightbox-content {
+            transform: scale(1);
         }
 
-        .lightbox-icon {
-            font-size: 10rem;
-            margin-bottom: 2rem;
-        }
-
-        .lightbox h3 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .close-lightbox {
-            position: absolute;
-            top: 20px;
-            right: 40px;
-            color: white;
-            font-size: 40px;
-            cursor: pointer;
-            transition: color 0.3s;
-        }
-
-        .close-lightbox:hover {
-            color: #4a90e2;
-        }
-
-        /* Footer */
+        /* Footer - Same as original */
         footer {
             background: #1e3c72;
             color: white;
             padding: 3rem 0 1rem;
-            margin-top: 2rem;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            padding: 0 20px;
-        }
-
-        .footer-section h3 {
-            margin-bottom: 1rem;
-        }
-
-        .footer-section ul {
-            list-style: none;
-        }
-
-        .footer-section ul li {
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-section a {
-            color: white;
-            text-decoration: none;
-        }
-
-        .social-links {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1rem;
-        }
-
-        .social-links a {
-            font-size: 1.5rem;
-        }
-
-        .copyright {
-            text-align: center;
-            margin-top: 2rem;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            margin-top: 4rem;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            .menu-toggle {
-                display: block;
-            }
-            
+            .menu-toggle { display: block; }
             .nav-menu {
                 display: none;
                 position: absolute;
@@ -305,105 +403,154 @@
                 background: white;
                 flex-direction: column;
                 padding: 1rem;
-                text-align: center;
                 gap: 1rem;
                 box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             }
-            
-            .nav-menu.active {
-                display: flex;
-            }
-            
+            .nav-menu.active { display: flex; }
             .gallery-grid {
-                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-                gap: 1rem;
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
             }
-            
-            .section-title {
-                font-size: 2rem;
-            }
+            .hero-gallery { height: 300px; }
+            .hero-content h1 { font-size: 2.5rem; }
+            .cursor { display: none; }
         }
+
+        .image-wrapper {
+    position: relative;
+    height: 250px;
+    overflow: hidden;
+    transform-style: preserve-3d;
+}
+:root {
+    --bg-primary: #f4f7fc;
+    --bg-secondary: white;
+    --text-primary: #333;
+    --text-secondary: #666;
+    --primary-blue: #1e3c72;
+    --accent-blue: #4a90e2;
+    --shadow: rgba(0,0,0,0.1);
+}
+
+[data-theme="dark"] {
+    --bg-primary: #0f0f23;
+    --bg-secondary: #1a1a2e;
+    --text-primary: #ffffff;
+    --text-secondary: #b8b8cc;
+    --primary-blue: #4a90e2;
+    --accent-blue: #00d4ff;
+    --shadow: rgba(0,0,0,0.5);
+}
+
+body { background: var(--bg-primary); color: var(--text-primary); transition: all 0.4s; }
+.navbar { background: var(--bg-secondary); }
+.gallery-item { background: var(--bg-secondary); box-shadow: 0 10px 30px var(--shadow); }
+.section-title, .gallery-info h3 { color: var(--primary-blue); }
+.filter-btn { background: var(--bg-secondary); color: var(--text-primary); }
+.filter-btn.active { background: var(--primary-blue); color: white; }
+footer { background: var(--primary-blue); }
+
+.image-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.6s ease;
+}
+
+.gallery-item:hover .image-inner {
+    transform: scale(1.1);
+}
+.theme-toggle {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 10000;
+    background: rgba(255,255,255,0.95);
+    backdrop-filter: blur(20px);
+    border: 2px solid var(--accent-blue);
+    color: var(--accent-blue);
+    padding: 12px 16px;
+    border-radius: 50px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.4s;
+    font-weight: 600;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+}
+
+.theme-toggle:hover { transform: scale(1.2) rotate(180deg); }
+[data-theme="dark"] .theme-toggle { background: rgba(26,26,46,0.95); color: #00d4ff; border-color: #00d4ff; }
     </style>
 </head>
 <body>
+    <!-- Custom Cursor -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
-            <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="academics.html">Academics</a></li>
-                <li><a href="programs.html">Programs</a></li>
-                <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="placements.html">Placements</a></li>
-                <li><a href="facilities.html">Facilities</a></li>
-                <li><a href="login-student.html">Student Login</a></li>
-                <li><a href="login-teacher.html">Teacher Login</a></li>
-            </ul>
-        </div>
+            <a href="#" class="logo">BIT Gallery</a>
+             <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="programs.html">Programs</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="placements.html">Placements</a></li>
+                    <li><a href="facilities.html">Facilities</a></li>
+                </ul>
+            </div>
     </nav>
+    <button id="themeToggle" class="theme-toggle">🌙</button>
 
-    <!-- Gallery Section -->
+    <!-- Hero Gallery Section -->
+    <section class="hero-gallery">
+        <div class="hero-content">
+            <h1>📸 Campus Gallery</h1>
+            <p>Explore our beautiful campus, events, and facilities through these captivating moments</p>
+        </div>
+    </section>
+
     <div class="container">
-        <h2 class="section-title">📸 Campus Gallery</h2>
-        <p class="section-subtitle">Explore our beautiful campus, events, and facilities through these moments</p>
-        
         <div class="gallery-filters">
             <button class="filter-btn active" onclick="filterGallery('all')">All</button>
             <button class="filter-btn" onclick="filterGallery('events')">Events</button>
             <button class="filter-btn" onclick="filterGallery('campus')">Campus</button>
             <button class="filter-btn" onclick="filterGallery('labs')">Labs & Facilities</button>
         </div>
-        
-        <div class="gallery-grid" id="galleryGrid">
-            <!-- Gallery items will be inserted here by JavaScript -->
-        </div>
+
+        <div class="gallery-grid" id="galleryGrid"></div>
     </div>
 
     <!-- Lightbox -->
     <div class="lightbox" id="lightbox" onclick="closeLightbox()">
         <span class="close-lightbox" onclick="closeLightbox(event)">×</span>
-        <div class="lightbox-content" id="lightboxContent">
-            <!-- Content will be inserted here -->
-        </div>
+        <div class="lightbox-content" id="lightboxContent"></div>
     </div>
 
-    <!-- Footer -->
+    <!-- Footer (unchanged) -->
     <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <p>Excellence in education since 1995</p>
-                <div class="social-links">
-                    <a href="#">📘</a>
-                    <a href="#">🐦</a>
-                    <a href="#">🔗</a>
-                    <a href="#">📷</a>
-                </div>
-            </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="academics.html">Academics</a></li>
-                    <li><a href="programs.html">Programs</a></li>
-                    <li><a href="gallery.html">Gallery</a></li>
-                    <li><a href="placements.html">Placements</a></li>
-                    <li><a href="facilities.html">Facilities</a></li>
-                    <li><a href="login-student.html">Student Login</a></li>
-                    <li><a href="login-teacher.html">Teacher Login</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Contact Info</h3>
-                <p>📍 123 University Avenue, City, State</p>
-                <p>📞 +1 (234) 567-8900</p>
-                <p>✉️ info@bit.edu.in</p>
-            </div>
+    <div>
+        <div class="logo-branding">BIT ✓ in excellence since 1979</div>
+        <ul class="quick-links">
+            <li><a href="programs.html">Programs</a></li>
+            <li><a href="facilities.html">Facilities</a></li>
+            <li><a href="placements.html">Placements</a></li>
+            <li><a href="login-student.html">Student Login</a></li>
+            <li><a href="login-teacher.html">Teacher Login</a></li>
+        </ul>
+    </div>
+    <div class="contact">
+        <strong>Contact Info</strong>
+        <div class="contact-info">
+            Bengaluru<br>
+            +91 80 2661 5800<br>
+            info@bit-bangalore.edu.in
         </div>
-        <div class="copyright">
-            <p>&copy; 2026 Bangalore Institute of Technology. All rights reserved.</p>
-        </div>
-    </footer>
+    </div>
+</footer>
 
     <script>
         // Gallery Data with Real Image for Convocation
@@ -412,7 +559,7 @@
                 {
                     title: "🎓 Annual Convocation 2024",
                     description: "Graduation ceremony of the class of 2024",
-                    image: "https://i.pinimg.com/736x/a4/c0/c6/a4c0c688ebb3f99b079d20c8ecd9736f.jpg", // Pinterest image added here
+                    image: "https://i.pinimg.com/1200x/c7/a1/66/c7a16671e45c3e06ae6be866fb54ddf5.jpg",
                     icon: "🎓",
                     color: "linear-gradient(135deg, #667eea 0%, #764ba2 100%)",
                     hasImage: true
@@ -420,94 +567,154 @@
                 {
                     title: "💻 Tech Fest 2024",
                     description: "Annual technology festival with coding competitions",
+                    image: "https://i.pinimg.com/1200x/d2/76/85/d27685513ff1a0dfece9763d6ec836a8.jpg",
                     icon: "💻",
                     color: "linear-gradient(135deg, #f093fb 0%, #f5576c 100%)",
-                    hasImage: false
+                    hasImage: true
                 },
                 {
                     title: "🎭 Cultural Night",
                     description: "Celebrating diversity and culture with performances",
+                    image: "https://i.pinimg.com/1200x/6a/19/05/6a1905e068bbebe55d49b76e874d3bc1.jpg",
                     icon: "🎭",
                     color: "linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)",
-                    hasImage: false
+                    hasImage: true
                 },
                 {
                     title: "⚽ Sports Championship",
                     description: "Annual sports meet with 20+ competitions",
+                    image: "https://i.pinimg.com/736x/99/dc/a5/99dca5ca59b4993ab376b799fbdee544.jpg",
                     icon: "⚽",
                     color: "linear-gradient(135deg, #43e97b 0%, #38f9d7 100%)",
-                    hasImage: false
+                    hasImage: true
                 }
             ],
             campus: [
                 {
                     title: "🏛️ Main Campus Building",
                     description: "Architectural marvel at the heart of campus",
+                    image: "https://i.pinimg.com/736x/13/62/bd/1362bd50a7c9b29d33f87ffcf3523016.jpg",
                     icon: "🏛️",
                     color: "linear-gradient(135deg, #fa709a 0%, #fee140 100%)",
-                    hasImage: false
+                    hasImage: true
                 },
                 {
                     title: "📚 Central Library",
                     description: "Knowledge hub with 50,000+ books",
+                    image: "https://i.pinimg.com/736x/41/bd/b6/41bdb64c4284405c8303ba9a340611dc.jpg",
                     icon: "📚",
                     color: "linear-gradient(135deg, #30cfd0 0%, #330867 100%)",
-                    hasImage: false
+                    hasImage: true
                 },
                 {
                     title: "🏫 Academic Block",
                     description: "Modern classrooms and lecture halls",
+                    image: "https://i.pinimg.com/1200x/e7/f0/53/e7f0534a57380b50f209713d1d7921d3.jpg",
                     icon: "🏫",
                     color: "linear-gradient(135deg, #a8edea 0%, #fed6e3 100%)",
-                    hasImage: false
+                    hasImage: true
                 },
                 {
                     title: "🏢 Student Center",
                     description: "Hub of student activities and events",
+                    image: "https://i.pinimg.com/474x/5c/f1/53/5cf153e71033b308fc7292dedb748015.jpg",
                     icon: "🏢",
                     color: "linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%)",
-                    hasImage: false
+                    hasImage: true
                 }
             ],
             labs: [
                 {
                     title: "🖥️ Computer Science Lab",
                     description: "State-of-the-art computing facilities with 200+ systems",
+                    image: "https://i.pinimg.com/736x/ec/03/10/ec03109be16ffeec998f861abc22e414.jpg",
                     icon: "🖥️",
                     color: "linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%)",
-                    hasImage: false
+                    hasImage: true
                 },
                 {
                     title: "🤖 Robotics Lab",
                     description: "Advanced robotics and automation research",
+                    image: "https://i.pinimg.com/736x/a1/de/4b/a1de4bd7b9d33c9786f857814309f248.jpg",
                     icon: "🤖",
                     color: "linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%)",
-                    hasImage: false
+                    hasImage: true
                 },
                 {
                     title: "🧬 Biotechnology Lab",
                     description: "Modern research facilities for life sciences",
+                    image: "https://i.pinimg.com/736x/c5/e1/2d/c5e12d41e101588d58f42ef6f560a962.jpg",
                     icon: "🧬",
                     color: "linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%)",
-                    hasImage: false
+                    hasImage: true
                 },
                 {
                     title: "🔬 Physics Research Lab",
                     description: "Cutting-edge research equipment and facilities",
+                    image: "https://i.pinimg.com/1200x/6f/68/54/6f6854ed3a1bc9de3e61f3a292cd3272.jpg",
                     icon: "🔬",
                     color: "linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%)",
-                    hasImage: false
+                    hasImage: true
                 }
             ]
         };
 
+
         let currentFilter = 'all';
+        // Mouse Follow for Cursor & Magnetic Effect
+        const cursor = document.querySelector('.cursor');
+        const follower = document.querySelector('.cursor-follower');
+        let mouseX = 0, mouseY = 0;
+        let cursorX = 0, cursorY = 0;
+
+        document.addEventListener('mousemove', (e) => {
+            mouseX = e.clientX;
+            mouseY = e.clientY;
+        });
+
+        function updateCursor() {
+            cursorX += (mouseX - cursorX) * 0.1;
+            cursorY += (mouseY - cursorY) * 0.1;
+            cursor.style.left = cursorX + 'px';
+            cursor.style.top = cursorY + 'px';
+            follower.style.left = (cursorX - 10) + 'px';
+            follower.style.top = (cursorY - 10) + 'px';
+            requestAnimationFrame(updateCursor);
+        }
+        updateCursor();
+
+        // Magnetic Hover
+        document.querySelectorAll('.filter-btn, .gallery-item').forEach(el => {
+            el.addEventListener('mousemove', (e) => {
+                const rect = el.getBoundingClientRect();
+                const x = (e.clientX - rect.left - rect.width/2) * 0.1;
+                const y = (e.clientY - rect.top - rect.height/2) * 0.1;
+                el.style.transform = `translate(${x}px, ${y}px) rotateY(${x*0.5}deg)`;
+                follower.style.transform = 'scale(0.8)';
+            });
+            el.addEventListener('mouseleave', () => {
+                el.style.transform = '';
+            });
+        });
+
+        // Floating Particles
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.width = particle.style.height = (Math.random() * 6 + 2) + 'px';
+            particle.style.animationDuration = (Math.random() * 10 + 15) + 's';
+            document.querySelector('.hero-gallery').appendChild(particle);
+            setTimeout(() => particle.remove(), 20000);
+        }
+        setInterval(createParticle, 300);
+
 
         // Display gallery items
         function displayGallery() {
             const galleryGrid = document.getElementById('galleryGrid');
             galleryGrid.innerHTML = '';
-            
+           
             let items = [];
             if (currentFilter === 'all') {
                 items = [
@@ -518,79 +725,87 @@
             } else {
                 items = galleryData[currentFilter].map(item => ({ ...item, category: currentFilter }));
             }
-            
+           
             items.forEach((item) => {
                 const galleryItem = document.createElement('div');
                 galleryItem.className = 'gallery-item';
-                
+               
                 let imageContent = '';
-                if (item.hasImage && item.image) {
-                    imageContent = `<img src="${item.image}" alt="${item.title}" style="width:100%; height:100%; object-fit:cover;" onclick="openLightbox('${item.title}', '${item.icon}', '${item.description}', '${item.image}', true)">`;
-                } else {
-                    imageContent = `<div class="icon" style="font-size: 5rem;">${item.icon}</div>`;
-                }
-                
-                galleryItem.innerHTML = `
-                    <div class="image-placeholder" style="background: ${item.color}" onclick="openLightbox('${item.title}', '${item.icon}', '${item.description}', '${item.image || item.color}', ${item.hasImage || false})">
-                        ${imageContent}
-                    </div>
-                    <div class="gallery-info">
-                        <h3>${item.title}</h3>
-                        <p>${item.description}</p>
-                        <span class="category-tag">${item.category.toUpperCase()}</span>
-                    </div>
-                `;
+if (item.hasImage && item.image) {
+    imageContent = `<div class="image-inner">
+        <img src="${item.image}" alt="${item.title}" style="width:100%; height:100%; object-fit:cover;">
+    </div>`;
+} else {
+    imageContent = `<div class="icon" style="font-size: 5rem;">${item.icon}</div>`;
+}
+
+galleryItem.innerHTML = `
+    <div class="image-wrapper">
+        <div class="image-placeholder" style="background: ${item.color}" onclick="openLightbox('${item.title}', '${item.icon}', '${item.description}', '${item.image || item.color}', ${!!item.hasImage})">
+            ${imageContent}
+        </div>
+    </div>
+    <div class="gallery-info">
+        <h3>${item.title}</h3>
+        <p>${item.description}</p>
+        <span class="category-tag">${item.category.toUpperCase()}</span>
+    </div>
+`;
                 galleryGrid.appendChild(galleryItem);
             });
         }
+
 
         // Filter gallery
         function filterGallery(category) {
             currentFilter = category;
             displayGallery();
-            
+           
             // Update active button
             const buttons = document.querySelectorAll('.filter-btn');
             buttons.forEach(btn => {
                 btn.classList.remove('active');
-                if (btn.textContent.toLowerCase().includes(category) || 
+                if (btn.textContent.toLowerCase().includes(category) ||
                     (category === 'all' && btn.textContent === 'All')) {
                     btn.classList.add('active');
                 }
             });
         }
 
+
         // Lightbox functions
         function openLightbox(title, icon, description, imageOrColor, hasImage) {
-            const lightbox = document.getElementById('lightbox');
-            const lightboxContent = document.getElementById('lightboxContent');
-            
-            let content = '';
-            if (hasImage && imageOrColor.startsWith('http')) {
-                content = `
-                    <img src="${imageOrColor}" alt="${title}" class="lightbox-image">
-                    <h3>${title}</h3>
-                    <p style="font-size: 1.2rem; margin-top: 1rem;">${description}</p>
-                    <div style="margin-top: 2rem; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 10px;">
-                        <p>📍 Bangalore Institute of Technology</p>
-                        <p>📅 Experience the excellence</p>
-                    </div>
-                `;
-            } else {
-                content = `
-                    <div class="lightbox-icon">${icon}</div>
-                    <h3>${title}</h3>
-                    <p style="font-size: 1.2rem; margin-top: 1rem;">${description}</p>
-                    <div style="margin-top: 2rem; padding: 1rem; background: rgba(255,255,255,0.1); border-radius: 10px;">
-                        <p>📍 Bangalore Institute of Technology</p>
-                        <p>📅 Experience the excellence</p>
-                    </div>
-                `;
-            }
-            
-            lightboxContent.innerHTML = content;
-            lightbox.classList.add('active');
-        }
+    const lightbox = document.getElementById('lightbox');
+    const lightboxContent = document.getElementById('lightboxContent');
+    
+    let content = '';
+    if (hasImage && imageOrColor.startsWith('http')) {
+        content = `
+            <img src="${imageOrColor}" alt="${title}" class="lightbox-image" style="max-width:90vw; max-height:70vh; border-radius:20px;">
+            <h3>${title}</h3>
+            <p style="font-size:1.2rem; margin:1.5rem 0; max-width:600px; margin-left:auto; margin-right:auto;">${description}</p>
+            <div style="padding:1.5rem; background:rgba(255,255,255,0.1); border-radius:15px; backdrop-filter:blur(10px);">
+                <p>📍 Bangalore Institute of Technology</p>
+                <p>📅 Experience the excellence</p>
+            </div>
+        `;
+    } else {
+        content = `
+            <div class="lightbox-icon" style="font-size:8rem; margin-bottom:1rem;">${icon}</div>
+            <h3>${title}</h3>
+            <p style="font-size:1.2rem; margin:1.5rem 0; max-width:600px; margin-left:auto; margin-right:auto;">${description}</p>
+            <div style="padding:1.5rem; background:rgba(255,255,255,0.1); border-radius:15px; backdrop-filter:blur(10px);">
+                <p>📍 Bangalore Institute of Technology</p>
+                <p>📅 Experience the excellence</p>
+            </div>
+        `;
+    }
+    
+    lightboxContent.innerHTML = content;
+    lightbox.classList.add('active');
+}
+        
+
 
         function closeLightbox(event) {
             if (event.target.classList.contains('close-lightbox') || event.target.id === 'lightbox') {
@@ -599,11 +814,13 @@
             }
         }
 
+
         // Mobile menu toggle
         function toggleMenu() {
             const menu = document.getElementById('navMenu');
             menu.classList.toggle('active');
         }
+
 
         // Close menu when clicking outside
         document.addEventListener('click', function(event) {
@@ -613,6 +830,29 @@
                 menu.classList.remove('active');
             }
         });
+        const themeToggle = document.getElementById('themeToggle');
+const html = document.documentElement;
+
+themeToggle.addEventListener('click', () => {
+    const currentTheme = html.getAttribute('data-theme');
+    if (currentTheme === 'dark') {
+        html.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'light');
+        themeToggle.textContent = '🌙';
+    } else {
+        html.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+        themeToggle.textContent = '☀️';
+    }
+});
+
+// Load saved theme
+const savedTheme = localStorage.getItem('theme') || 'light';
+if (savedTheme === 'dark') {
+    html.setAttribute('data-theme', 'dark');
+    themeToggle.textContent = '☀️';
+}
+
 
         // Initialize gallery on page load
         window.addEventListener('load', () => {
