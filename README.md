@@ -8,8 +8,6 @@ Most university websites are static directories. University Hub+ re-imagines the
 🚀 Key Features
 Student-Led Tech Pulse: A dedicated section managed by campus technical clubs. This isn't "official" PR; it's real-world news, hackathon alerts, and industry trends curated by students, for students.
 
-Interactive Campus Bot: A JavaScript-powered chatbot designed to help users navigate campus resources and query club news instantly.
-
 Responsive Architecture: A fully fluid design that works seamlessly on desktops, tablets, and smartphones.
 
 Club-Specific Filtering: News is categorized by domain (e.g., Robotics, AI, VLSI), allowing users to follow their specific interests.
