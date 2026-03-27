@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Artificial Intelligence & Machine Learning - Bangalore Institute of Technology</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Copy all the CSS from the cyber security page - same styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #f4f7fc;
+            --bg-secondary: #ffffff;
+            --bg-card: #ffffff;
+            --text-primary: #333333;
+            --text-secondary: #666666;
+            --border-color: #e0e0e0;
+            --shadow: 0 2px 10px rgba(0,0,0,0.1);
+            --shadow-hover: 0 5px 25px rgba(0,0,0,0.15);
+            --nav-bg: #ffffff;
+            --footer-bg: #1e3c72;
+            --footer-text: #ffffff;
+            --accent: #4a90e2;
+        }
+
+        [data-theme="dark"] {
+            --bg-primary: #1a1a2e;
+            --bg-secondary: #16213e;
+            --bg-card: #0f0f1a;
+            --text-primary: #e0e0e0;
+            --text-secondary: #a0a0a0;
+            --border-color: #2a2a3a;
+            --shadow: 0 2px 10px rgba(0,0,0,0.3);
+            --shadow-hover: 0 5px 25px rgba(0,0,0,0.4);
+            --nav-bg: #0a0a1a;
+            --footer-bg: #0a0a1a;
+            --footer-text: #e0e0e0;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+
+        .navbar {
+            background: var(--nav-bg);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1e3c72;
+            text-decoration: none;
+        }
+
+        [data-theme="dark"] .logo {
+            color: var(--accent);
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--text-primary);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: var(--accent);
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-primary);
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-header .breadcrumb {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .section-card {
+            background: var(--bg-card);
+            border-radius: 15px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow);
+            transition: all 0.3s;
+        }
+
+        .section-card:hover {
+            box-shadow: var(--shadow-hover);
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #1e3c72;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid var(--accent);
+            display: inline-block;
+        }
+
+        [data-theme="dark"] .section-title {
+            color: var(--accent);
+        }
+
+        .about-text {
+            line-height: 1.8;
+            color: var(--text-secondary);
+        }
+
+        .vision-mission {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+
+        .vision-box, .mission-box {
+            background: var(--bg-primary);
+            padding: 1.5rem;
+            border-radius: 10px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .vision-box h3, .mission-box h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .programs-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .program-item {
+            background: var(--bg-primary);
+            padding: 1.5rem;
+            border-radius: 10px;
+            transition: all 0.3s;
+        }
+
+        .program-item h4 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+        }
+
+        .program-item .duration {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+        }
+
+        .curriculum-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .semester {
+            background: var(--bg-primary);
+            padding: 1rem;
+            border-radius: 10px;
+        }
+
+        .semester h4 {
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+        }
+
+        .semester ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .semester li {
+            padding: 0.3rem 0;
+            padding-left: 1.2rem;
+            position: relative;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .semester li::before {
+            content: "▹";
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+        }
+
+        .faculty-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .faculty-card {
+            background: var(--bg-primary);
+            border-radius: 10px;
+            display: flex;
+            padding: 1rem;
+            gap: 1rem;
+            transition: all 0.3s;
+        }
+
+        .faculty-card:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .faculty-avatar {
+            width: 80px;
+            height: 80px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: white;
+        }
+
+        .faculty-info h4 {
+            color: var(--accent);
+            margin-bottom: 0.3rem;
+        }
+
+        .faculty-info .designation {
+            font-size: 0.8rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.3rem;
+        }
+
+        .faculty-info .qualification {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .faculty-info .expertise {
+            font-size: 0.75rem;
+            color: var(--accent);
+            margin-top: 0.3rem;
+        }
+
+        .labs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .lab-card {
+            background: var(--bg-primary);
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .lab-icon {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .achievements-list {
+            list-style: none;
+        }
+
+        .achievements-list li {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .achievements-list li:last-child {
+            border-bottom: none;
+        }
+
+        .achievements-list li::before {
+            content: "🏆";
+            font-size: 1.2rem;
+        }
+
+        .contact-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--bg-primary);
+            border-radius: 10px;
+        }
+
+        .contact-icon {
+            font-size: 2rem;
+            color: var(--accent);
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 1rem;
+            padding: 0.5rem 1rem;
+            background: var(--bg-primary);
+            color: var(--accent);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s;
+        }
+
+        .back-button:hover {
+            background: var(--accent);
+            color: white;
+            transform: translateX(-5px);
+        }
+
+        footer {
+            background: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 3rem 0 1rem;
+            margin-top: 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 0 20px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: var(--footer-text);
+            text-decoration: none;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .theme-toggle-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--bg-card);
+            color: var(--text-primary);
+            border: 2px solid var(--border-color);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            z-index: 1000;
+            transition: all 0.3s;
+            box-shadow: var(--shadow);
+        }
+
+        .theme-toggle-btn:hover {
+            transform: scale(1.1);
+            background: var(--accent);
+            color: white;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--nav-bg);
+                flex-direction: column;
+                padding: 1rem;
+                text-align: center;
+                gap: 1rem;
+                box-shadow: var(--shadow);
+            }
+            .nav-menu.active {
+                display: flex;
+            }
+            .vision-mission {
+                grid-template-columns: 1fr;
+            }
+            .faculty-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            .faculty-avatar {
+                margin: 0 auto;
+            }
+            .theme-toggle-btn {
+                bottom: 20px;
+                right: 20px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="academics.html">Academics</a></li>
+            <li><a href="programs.html">Programs</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="placements.html">Placements</a></li>
+            <li><a href="facilities.html">Facilities</a></li>
+            <li><a href="login-student.html">Student Login</a></li>
+            <li><a href="login-teacher.html">Teacher Login</a></li>
+        </ul>
+    </div>
+</nav>
+
+<div class="page-header">
+    <h1><i class="fas fa-brain"></i> Department of Artificial Intelligence & Machine Learning</h1>
+    <div class="breadcrumb"><a href="index.html">Home</a> / <a href="programs.html">Programs</a> / AI & Machine Learning</div>
+</div>
+
+<div class="container">
+    <a href="programs.html" class="back-button"><i class="fas fa-arrow-left"></i> Back to Programs</a>
+
+    <div class="section-card">
+        <h2 class="section-title">About the Department</h2>
+        <div class="about-text">
+            <p>The Department of Artificial Intelligence & Machine Learning at Bangalore Institute of Technology is at the forefront of intelligent systems education. Established in 2021, our department focuses on developing the next generation of AI researchers, data scientists, and ML engineers who will shape the future of technology.</p>
+            <p>With AI transforming every industry from healthcare to finance, our program provides a strong foundation in machine learning algorithms, deep learning architectures, natural language processing, and computer vision. Students work on real-world AI projects using industry-standard frameworks like TensorFlow, PyTorch, and scikit-learn.</p>
+        </div>
+        
+        <div class="vision-mission">
+            <div class="vision-box">
+                <h3><i class="fas fa-eye"></i> Vision</h3>
+                <p>To be a global leader in AI education and research, producing innovators who leverage artificial intelligence to solve complex real-world problems and drive technological advancement.</p>
+            </div>
+            <div class="mission-box">
+                <h3><i class="fas fa-bullseye"></i> Mission</h3>
+                <p>To provide comprehensive AI education through industry-aligned curriculum, foster cutting-edge research in machine learning, and develop ethical AI practitioners who create responsible and impactful solutions.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-card">
+        <h2 class="section-title">📚 Programs Offered</h2>
+        <div class="programs-list">
+            <div class="program-item">
+                <h4>B.Tech in Artificial Intelligence & Machine Learning</h4>
+                <div class="duration">Duration: 4 Years | Intake: 90 Seats</div>
+                <p>Comprehensive program covering machine learning, deep learning, computer vision, NLP, and AI ethics.</p>
+            </div>
+            <div class="program-item">
+                <h4>M.Tech in AI & Data Science</h4>
+                <div class="duration">Duration: 2 Years | Intake: 45 Seats</div>
+                <p>Advanced program focusing on deep learning architectures, generative AI, and large language models.</p>
+            </div>
+            <div class="program-item">
+                <h4>PG Diploma in Data Science & AI</h4>
+                <div class="duration">Duration: 1 Year | Intake: 30 Seats</div>
+                <p>Industry-focused program for professionals seeking expertise in AI/ML applications.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-card">
+        <h2 class="section-title">📖 Curriculum Highlights</h2>
+        <div class="curriculum-grid">
+            <div class="semester">
+                <h4>Year 1 - Foundation</h4>
+                <ul>
+                    <li>Mathematics for Machine Learning</li>
+                    <li>Python Programming & Data Structures</li>
+                    <li>Statistics & Probability</li>
+                    <li>Introduction to AI</li>
+                </ul>
+            </div>
+            <div class="semester">
+                <h4>Year 2 - Core AI/ML</h4>
+                <ul>
+                    <li>Machine Learning Algorithms</li>
+                    <li>Data Visualization & Analytics</li>
+                    <li>Database Management for AI</li>
+                    <li>Big Data Technologies</li>
+                </ul>
+            </div>
+            <div class="semester">
+                <h4>Year 3 - Advanced Topics</h4>
+                <ul>
+                    <li>Deep Learning & Neural Networks</li>
+                    <li>Natural Language Processing</li>
+                    <li>Computer Vision</li>
+                    <li>Reinforcement Learning</li>
+                </ul>
+            </div>
+            <div class="semester">
+                <h4>Year 4 - Specialization & Project</h4>
+                <ul>
+                    <li>Generative AI & LLMs</li>
+                    <li>AI Ethics & Responsible AI</li>
+                    <li>Industry Capstone Project</li>
+                    <li>Research Internship</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-card">
+        <h2 class="section-title">👨‍🏫 Distinguished Faculty</h2>
+        <div class="faculty-grid">
+            <div class="faculty-card">
+                <div class="faculty-avatar"><i class="fas fa-user-tie"></i></div>
+                <div class="faculty-info">
+                    <h4>Dr. Priya Sharma</h4>
+                    <div class="designation">Professor & Head of Department</div>
+                    <div class="qualification">Ph.D (IIT Delhi) | AI/ML Expert</div>
+                    <div class="expertise">Expertise: Deep Learning, Neural Networks, Computer Vision</div>
+                </div>
+            </div>
+            <div class="faculty-card">
+                <div class="faculty-avatar"><i class="fas fa-user-tie"></i></div>
+                <div class="faculty-info">
+                    <h4>Dr. Rajesh Kumar</h4>
+                    <div class="designation">Professor</div>
+                    <div class="qualification">Ph.D (IISc Bangalore) | Data Science</div>
+                    <div class="expertise">Expertise: Big Data Analytics, Statistical Learning</div>
+                </div>
+            </div>
+            <div class="faculty-card">
+                <div class="faculty-avatar"><i class="fas fa-user-tie"></i></div>
+                <div class="faculty-info">
+                    <h4>Dr. Meera Krishnan</h4>
+                    <div class="designation">Associate Professor</div>
+                    <div class="qualification">Ph.D (IIT Madras) | NLP Expert</div>
+                    <div class="expertise">Expertise: Natural Language Processing, Generative AI</div>
+                </div>
+            </div>
+            <div class="faculty-card">
+                <div class="faculty-avatar"><i class="fas fa-user-tie"></i></div>
+                <div class="faculty-info">
+                    <h4>Prof. Vikram Singh</h4>
+                    <div class="designation">Assistant Professor</div>
+                    <div class="qualification">M.Tech (IIT Bombay) | ML Engineer</div>
+                    <div class="expertise">Expertise: MLOps, Production ML Systems</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-card">
+        <h2 class="section-title">🔬 Specialized Labs</h2>
+        <div class="labs-grid">
+            <div class="lab-card">
+                <div class="lab-icon"><i class="fas fa-chart-line"></i></div>
+                <h4>AI Research Lab</h4>
+                <p>High-performance computing cluster with NVIDIA A100 GPUs for deep learning research.</p>
+            </div>
+            <div class="lab-card">
+                <div class="lab-icon"><i class="fas fa-language"></i></div>
+                <h4>NLP & Computer Vision Lab</h4>
+                <p>Specialized facility for text analytics, image processing, and multimodal AI research.</p>
+            </div>
+            <div class="lab-card">
+                <div class="lab-icon"><i class="fas fa-database"></i></div>
+                <h4>Big Data Analytics Lab</h4>
+                <p>Hands-on experience with Hadoop, Spark, and distributed computing frameworks.</p>
+            </div>
+            <div class="lab-card">
+                <div class="lab-icon"><i class="fas fa-robot"></i></div>
+                <h4>Robotics & AI Lab</h4>
+                <p>Integration of AI with robotics for autonomous systems and intelligent agents.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-card">
+        <h2 class="section-title">🏆 Research & Achievements</h2>
+        <ul class="achievements-list">
+            <li>Students won 1st prize at National AI Hackathon 2024 with "Smart Agriculture Solution"</li>
+            <li>3 research papers on "Federated Learning" accepted at NeurIPS 2024</li>
+            <li>Developed IndicBERT model for 12 Indian languages in collaboration with AI4Bharat</li>
+            <li>5 patents filed in generative AI and medical image analysis domains</li>
+            <li>Students selected for Google Summer of Code and MLH Fellowships</li>
+            <li>Research collaboration with NVIDIA, Google AI, and Microsoft Research</li>
+            <li>₹3 Cr funded project from DST on "AI for Healthcare"</li>
+        </ul>
+    </div>
+
+    <div class="section-card">
+        <h2 class="section-title">🤝 Industry Partnerships</h2>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+            <div style="background: var(--bg-primary); padding: 1rem; border-radius: 10px; text-align: center;">
+                <i class="fab fa-google" style="font-size: 2rem; color: var(--accent);"></i>
+                <h4>Google</h4>
+                <p style="font-size: 0.8rem;">TensorFlow Certified Partner</p>
+            </div>
+            <div style="background: var(--bg-primary); padding: 1rem; border-radius: 10px; text-align: center;">
+                <i class="fab fa-microsoft" style="font-size: 2rem; color: var(--accent);"></i>
+                <h4>Microsoft</h4>
+                <p style="font-size: 0.8rem;">Azure AI Partner</p>
+            </div>
+            <div style="background: var(--bg-primary); padding: 1rem; border-radius: 10px; text-align: center;">
+                <i class="fas fa-chart-simple" style="font-size: 2rem; color: var(--accent);"></i>
+                <h4>NVIDIA</h4>
+                <p style="font-size: 0.8rem;">Deep Learning Institute</p>
+            </div>
+            <div style="background: var(--bg-primary); padding: 1rem; border-radius: 10px; text-align: center;">
+                <i class="fab fa-aws" style="font-size: 2rem; color: var(--accent);"></i>
+                <h4>AWS</h4>
+                <p style="font-size: 0.8rem;">Machine Learning Partner</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section-card">
+        <h2 class="section-title">📞 Contact Information</h2>
+        <div class="contact-info">
+            <div class="contact-icon"><i class="fas fa-user-graduate"></i></div>
+            <div class="contact-details">
+                <h4>Dr. Priya Sharma</h4>
+                <p>Head of Department, Artificial Intelligence & Machine Learning</p>
+                <p><i class="fas fa-phone"></i> +91 80 2660 8912</p>
+                <p><i class="fas fa-envelope"></i> hod.aiml@bit-bangalore.edu.in</p>
+            </div>
+        </div>
+        <div style="margin-top: 1rem; padding: 1rem; background: var(--bg-primary); border-radius: 10px;">
+            <p><strong>Department Office:</strong> Room No. 601, 6th Floor, AI Block</p>
+            <p><strong>AI Research Center:</strong> 24x7 Access for Research Scholars</p>
+            <p><strong>Office Hours:</strong> Monday - Friday, 9:00 AM to 5:00 PM</p>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>Bangalore Institute of Technology</h3>
+            <p>Excellence in education since 1979</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="programs.html">Programs</a></li>
+                <li><a href="academics.html">Academics</a></li>
+                <li><a href="placements.html">Placements</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Contact Info</h3>
+            <p>📍 KR Road, VV Puram, Bangalore - 560004</p>
+            <p>📞 +91 80 2660 1234</p>
+            <p>✉️ info@bit-bangalore.edu.in</p>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>&copy; 2024 Bangalore Institute of Technology. All rights reserved.</p>
+    </div>
+</footer>
+
+<button class="theme-toggle-btn" id="themeToggle">🌙</button>
+
+<script>
+    function initTheme() {
+        const themeToggle = document.getElementById('themeToggle');
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            themeToggle.textContent = '☀️';
+        } else {
+            document.documentElement.setAttribute('data-theme', 'light');
+            themeToggle.textContent = '🌙';
+        }
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.documentElement.getAttribute('data-theme');
+            if (currentTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'light');
+                localStorage.setItem('theme', 'light');
+                themeToggle.textContent = '🌙';
+            } else {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                themeToggle.textContent = '☀️';
+            }
+        });
+    }
+
+    function toggleMenu() {
+        document.getElementById('navMenu').classList.toggle('active');
+    }
+
+    initTheme();
+</script>
+</body>
+</html>
