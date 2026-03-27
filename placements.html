@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Placements - Bangalore Institute of Technology</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f4f7fc;
+            color: #333;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1e3c72;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #4a90e2;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #1e3c72;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 3rem;
+        }
+
+        /* Statistics Cards */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 4rem;
+        }
+
+        .stat-card {
+            background: white;
+            text-align: center;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #4a90e2;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: #666;
+        }
+
+        .stat-trend {
+            margin-top: 0.5rem;
+            color: #28a745;
+            font-size: 0.9rem;
+        }
+
+        /* Companies Grid */
+        .companies-section {
+            margin-bottom: 4rem;
+        }
+
+        .companies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .company-card {
+            background: white;
+            text-align: center;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .company-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+        }
+
+        .company-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .company-card h3 {
+            color: #1e3c72;
+            margin-bottom: 0.5rem;
+        }
+
+        .company-package {
+            color: #4a90e2;
+            font-weight: bold;
+            margin-top: 0.5rem;
+        }
+
+        /* Success Stories */
+        .stories-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .story-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .story-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+        }
+
+        .quote-icon {
+            font-size: 2rem;
+            color: #4a90e2;
+            margin-bottom: 1rem;
+        }
+
+        .story-text {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            font-style: italic;
+        }
+
+        .student-name {
+            font-weight: bold;
+            color: #1e3c72;
+            margin-bottom: 0.25rem;
+        }
+
+        .student-details {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        .company-offer {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #1e3c72;
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 0 20px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            font-size: 1.5rem;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                text-align: center;
+                gap: 1rem;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+            
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .companies-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            }
+            
+            .stories-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+           
+            <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+           <ul class="nav-menu" id="navMenu">
+                      <li><a href="index.html">Home</a></li>
+                      <li><a href="academics.html">Academics</a></li>
+                      <li><a href="programs.html">Programs</a></li>
+                      <li><a href="gallery.html">Gallery</a></li>
+                      <li><a href="placements.html">Placements</a></li>
+                      <li><a href="facilities.html">Facilities</a></li>
+                      <li><a href="login-student.html">Student Login</a></li>
+                       <li><a href="login-teacher.html">Teacher Login</a></li>
+                 </ul>
+        </div>
+    </nav>
+
+    <!-- Placements Section -->
+    <div class="container">
+        <h2 class="section-title">📊 Placement Statistics 2024</h2>
+        <p class="section-subtitle">Outstanding placement records with top multinational companies</p>
+        
+        <!-- Statistics Cards -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">95%</div>
+                <div class="stat-label">Placement Rate</div>
+                <div class="stat-trend">↑ 5% from last year</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">₹12.5 LPA</div>
+                <div class="stat-label">Average Package</div>
+                <div class="stat-trend">Highest: ₹45 LPA</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">200+</div>
+                <div class="stat-label">Recruiters</div>
+                <div class="stat-trend">Including Fortune 500</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">500+</div>
+                <div class="stat-label">Offers Made</div>
+                <div class="stat-trend">Multiple offers per student</div>
+            </div>
+        </div>
+
+        <!-- Top Recruiters -->
+        <div class="companies-section">
+            <h2 class="section-title" style="font-size: 2rem;">🏢 Top Recruiters</h2>
+            <p class="section-subtitle">Our students are placed in world's leading companies</p>
+            <div class="companies-grid">
+                <div class="company-card">
+                    <div class="company-icon">🔵</div>
+                    <h3>Google</h3>
+                    <div class="company-package">₹42 LPA</div>
+                </div>
+                <div class="company-card">
+                    <div class="company-icon">🟢</div>
+                    <h3>Microsoft</h3>
+                    <div class="company-package">₹38 LPA</div>
+                </div>
+                <div class="company-card">
+                    <div class="company-icon">🟠</div>
+                    <h3>Amazon</h3>
+                    <div class="company-package">₹35 LPA</div>
+                </div>
+                <div class="company-card">
+                    <div class="company-icon">⚪</div>
+                    <h3>Apple</h3>
+                    <div class="company-package">₹40 LPA</div>
+                </div>
+                <div class="company-card">
+                    <div class="company-icon">🔷</div>
+                    <h3>Meta</h3>
+                    <div class="company-package">₹44 LPA</div>
+                </div>
+                <div class="company-card">
+                    <div class="company-icon">💼</div>
+                    <h3>Goldman Sachs</h3>
+                    <div class="company-package">₹32 LPA</div>
+                </div>
+                <div class="company-card">
+                    <div class="company-icon">🏦</div>
+                    <h3>JP Morgan</h3>
+                    <div class="company-package">₹30 LPA</div>
+                </div>
+                <div class="company-card">
+                    <div class="company-icon">🔴</div>
+                    <h3>Adobe</h3>
+                    <div class="company-package">₹36 LPA</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Stories -->
+        <div>
+            <h2 class="section-title" style="font-size: 2rem;">🌟 Student Success Stories</h2>
+            <p class="section-subtitle">Real stories of our students who made it big</p>
+            <div class="stories-grid">
+                <div class="story-card">
+                    <div class="quote-icon">"</div>
+                    <div class="story-text">
+                        The placement training and faculty support at BIT were instrumental in helping me crack Google. The coding culture here is exceptional, and the mentors guided me throughout my preparation journey.
+                    </div>
+                    <div class="student-name">Rahul Sharma</div>
+                    <div class="student-details">Computer Science, 2024</div>
+                    <div class="company-offer">Placed at Google | ₹42 LPA</div>
+                </div>
+                
+                <div class="story-card">
+                    <div class="quote-icon">"</div>
+                    <div class="story-text">
+                        Secured a position at Microsoft with a dream package. The placement cell's mock interviews and resume building workshops were incredibly helpful. Grateful for the amazing opportunities provided.
+                    </div>
+                    <div class="student-name">Priya Patel</div>
+                    <div class="student-details">Computer Science, 2024</div>
+                    <div class="company-offer">Placed at Microsoft | ₹38 LPA</div>
+                </div>
+                
+                <div class="story-card">
+                    <div class="quote-icon">"</div>
+                    <div class="story-text">
+                        Got placed at Amazon as SDE. The industry connections and alumni network helped me get referrals. The practical exposure through internships made me industry-ready.
+                    </div>
+                    <div class="student-name">Aditya Kumar</div>
+                    <div class="student-details">Information Technology, 2024</div>
+                    <div class="company-offer">Placed at Amazon | ₹35 LPA</div>
+                </div>
+                
+                <div class="story-card">
+                    <div class="quote-icon">"</div>
+                    <div class="story-text">
+                        As a non-CS student, I never thought I'd get into Goldman Sachs. The placement team's guidance and the holistic curriculum prepared me for the rigorous interview process.
+                    </div>
+                    <div class="student-name">Neha Gupta</div>
+                    <div class="student-details">Finance, 2024</div>
+                    <div class="company-offer">Placed at Goldman Sachs | ₹32 LPA</div>
+                </div>
+                
+                <div class="story-card">
+                    <div class="quote-icon">"</div>
+                    <div class="story-text">
+                        The research opportunities and projects at BIT gave me an edge during interviews. I'm thrilled to join Adobe's R&D team!
+                    </div>
+                    <div class="student-name">Vikram Singh</div>
+                    <div class="student-details">Electronics Engineering, 2024</div>
+                    <div class="company-offer">Placed at Adobe | ₹36 LPA</div>
+                </div>
+                
+                <div class="story-card">
+                    <div class="quote-icon">"</div>
+                    <div class="story-text">
+                        The soft skills training and personality development sessions were game-changers. From being nervous to confidently cracking JP Morgan interviews - what a journey!
+                    </div>
+                    <div class="student-name">Anjali Mehta</div>
+                    <div class="student-details">Business Analytics, 2024</div>
+                    <div class="company-offer">Placed at JP Morgan | ₹30 LPA</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3> Bangalore Institute of Technology</h3>
+                <p>Excellence in education since 1995</p>
+                <div class="social-links">
+                    <a href="#">📘</a>
+                    <a href="#">🐦</a>
+                    <a href="#">🔗</a>
+                    <a href="#">📷</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="placements.html">Placements</a></li>
+                    <li><a href="facilities.html">Facilities</a></li>
+                    <li><a href="login-student.html">Student Login</a></li>
+                    <li><a href="login-teacher.html">Teacher Login</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>📍 123 University Avenue, City, State 12345</p>
+                <p>📞 +1 (234) 567-8900</p>
+                <p>✉️ info@ Bangalore Institute of Technology.edu</p>
+                <p>🌐 www. Bangalore Institute of Technology.edu</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2024  Bangalore Institute of Technology. All rights reserved. | Placement Success Rate 95%</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMenu() {
+            const menu = document.getElementById('navMenu');
+            if (menu) {
+                menu.classList.toggle('active');
+            }
+        }
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('navMenu');
+            const toggle = document.querySelector('.menu-toggle');
+            if (menu && toggle && !menu.contains(event.target) && !toggle.contains(event.target)) {
+                menu.classList.remove('active');
+            }
+        });
+        
+        // Animate numbers on scroll
+        function animateNumbers() {
+            const statNumbers = document.querySelectorAll('.stat-number');
+            statNumbers.forEach(stat => {
+                const text = stat.innerText;
+                if (text.includes('%')) {
+                    const value = parseInt(text);
+                    if (!stat.hasAttribute('data-animated')) {
+                        let current = 0;
+                        const increment = value / 50;
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= value) {
+                                stat.innerText = value + '%';
+                                clearInterval(timer);
+                            } else {
+                                stat.innerText = Math.floor(current) + '%';
+                            }
+                        }, 20);
+                        stat.setAttribute('data-animated', 'true');
+                    }
+                }
+            });
+        }
+        
+        // Trigger animation on scroll
+        window.addEventListener('scroll', () => {
+            const statsSection = document.querySelector('.stats-grid');
+            if (statsSection) {
+                const position = statsSection.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.2;
+                if (position < screenPosition) {
+                    animateNumbers();
+                }
+            }
+        });
+        
+        // Add animation on page load
+        window.addEventListener('load', () => {
+            // Animate cards on load
+            const cards = document.querySelectorAll('.stat-card, .company-card, .story-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.6s ease';
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Academics - Bangalore Institute of Technology</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f4f7fc;
+            color: #333;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1e3c72;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover, .nav-menu a.active {
+            color: #4a90e2;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Page Header */
+        .page-header {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* Department Section */
+        .department-section {
+            margin-bottom: 4rem;
+        }
+
+        .dept-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid #4a90e2;
+        }
+
+        .dept-icon {
+            font-size: 2.5rem;
+            background: #4a90e2;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .dept-header h2 {
+            font-size: 1.8rem;
+            color: #1e3c72;
+        }
+
+        .dept-desc {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            line-height: 1.6;
+        }
+
+        /* Programs Grid */
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .program-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .program-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+        }
+
+        .program-header {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 1.5rem;
+        }
+
+        .program-header h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .program-duration {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .program-body {
+            padding: 1.5rem;
+        }
+
+        .program-body h4 {
+            color: #1e3c72;
+            margin: 1rem 0 0.5rem;
+            font-size: 1rem;
+        }
+
+        .program-body h4:first-child {
+            margin-top: 0;
+        }
+
+        .program-body ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .program-body li {
+            padding: 0.3rem 0;
+            padding-left: 1.2rem;
+            position: relative;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+
+        .program-body li::before {
+            content: "✓";
+            color: #4a90e2;
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+        }
+
+        /* Faculty Section */
+        .faculty-section {
+            margin-top: 2rem;
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+        }
+
+        .faculty-section h4 {
+            color: #1e3c72;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .faculty-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+        }
+
+        .faculty-card {
+            background: white;
+            padding: 1rem;
+            border-radius: 8px;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .faculty-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .faculty-avatar {
+            width: 50px;
+            height: 50px;
+            background: #4a90e2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+        }
+
+        .faculty-info h5 {
+            color: #1e3c72;
+            margin-bottom: 0.2rem;
+        }
+
+        .faculty-info p {
+            font-size: 0.8rem;
+            color: #666;
+        }
+
+        /* Footer */
+        footer {
+            background: #1e3c72;
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 0 20px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            font-size: 1.5rem;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                text-align: center;
+                gap: 1rem;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+            
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .programs-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .faculty-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+           
+            <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="academics.html" class="active">Academics</a></li>
+                <li><a href="programs.html">Programs</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="placements.html">Placements</a></li>
+                <li><a href="facilities.html">Facilities</a></li>
+                <li><a href="login-student.html">Student Login</a></li>
+                <li><a href="login-teacher.html">Teacher Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>📚 Academics at BIT</h1>
+        <p>Explore our diverse academic programs, world-class faculty, and innovative curriculum</p>
+    </div>
+
+    <div class="container">
+        <!-- Computer Science Department -->
+        <div class="department-section">
+            <div class="dept-header">
+                <div class="dept-icon">💻</div>
+                <h2>Department of Computer Science & Engineering</h2>
+            </div>
+            <div class="dept-desc">
+                The Department of Computer Science & Engineering is dedicated to producing skilled professionals who can lead the digital revolution. With state-of-the-art labs and industry-aligned curriculum, we prepare students for successful careers in technology.
+            </div>
+            
+            <div class="programs-grid">
+                <!-- B.Tech CSE Program -->
+                <div class="program-card">
+                    <div class="program-header">
+                        <h3>B.Tech in Computer Science & Engineering</h3>
+                        <div class="program-duration">📅 Duration: 4 Years | 🎓 Intake: 120 Seats</div>
+                    </div>
+                    <div class="program-body">
+                        <h4>🎯 Program Objectives:</h4>
+                        <ul>
+                            <li>Build strong foundation in programming, algorithms, and data structures</li>
+                            <li>Develop expertise in Artificial Intelligence, Machine Learning, and Data Science</li>
+                            <li>Prepare students for global IT industry and research opportunities</li>
+                            <li>Foster innovation and entrepreneurial mindset</li>
+                        </ul>
+                        <h4>📖 Core Subjects:</h4>
+                        <ul>
+                            <li>Data Structures & Algorithms</li>
+                            <li>Database Management Systems</li>
+                            <li>Operating Systems</li>
+                            <li>Computer Networks</li>
+                            <li>Artificial Intelligence & Machine Learning</li>
+                            <li>Cloud Computing & DevOps</li>
+                        </ul>
+                        <h4>💼 Career Opportunities:</h4>
+                        <ul>
+                            <li>Software Engineer | Data Scientist | AI/ML Engineer</li>
+                            <li>Cloud Architect | Cybersecurity Analyst | Full Stack Developer</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- M.Tech CSE Program -->
+                <div class="program-card">
+                    <div class="program-header">
+                        <h3>M.Tech in Computer Science & Engineering</h3>
+                        <div class="program-duration">📅 Duration: 2 Years | 🎓 Intake: 30 Seats</div>
+                    </div>
+                    <div class="program-body">
+                        <h4>🎯 Program Objectives:</h4>
+                        <ul>
+                            <li>Advanced specialization in cutting-edge technologies</li>
+                            <li>Research-oriented curriculum with thesis component</li>
+                            <li>Industry collaboration for real-world problem solving</li>
+                            <li>Prepare for leadership roles in R&D and academia</li>
+                        </ul>
+                        <h4>📖 Specializations:</h4>
+                        <ul>
+                            <li>Artificial Intelligence & Machine Learning</li>
+                            <li>Data Science & Big Data Analytics</li>
+                            <li>Cyber Security & Blockchain</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Faculty Section for CSE -->
+            <div class="faculty-section">
+                <h4>👨‍🏫 Distinguished Faculty</h4>
+                <div class="faculty-grid">
+                    <div class="faculty-card">
+                        <div class="faculty-avatar">👩‍💻</div>
+                        <div class="faculty-info">
+                            <h5>Dr. Priya Sharma</h5>
+                            <p>Professor & HOD | Ph.D (IIT Bombay)</p>
+                            <p>Expertise: AI, Machine Learning | 15+ Years Experience</p>
+                        </div>
+                    </div>
+                    <div class="faculty-card">
+                        <div class="faculty-avatar">👨‍🏫</div>
+                        <div class="faculty-info">
+                            <h5>Dr. Rajesh Kumar</h5>
+                            <p>Professor | Ph.D (IISc Bangalore)</p>
+                            <p>Expertise: Data Science, Big Data | 12+ Years Experience</p>
+                        </div>
+                    </div>
+                    <div class="faculty-card">
+                        <div class="faculty-avatar">👩‍🏫</div>
+                        <div class="faculty-info">
+                            <h5>Dr. Anjali Nair</h5>
+                            <p>Associate Professor | Ph.D (NIT Surathkal)</p>
+                            <p>Expertise: Cybersecurity, Blockchain | 8+ Years Experience</p>
+                        </div>
+                    </div>
+                    <div class="faculty-card">
+                        <div class="faculty-avatar">👨‍💻</div>
+                        <div class="faculty-info">
+                            <h5>Prof. Vikram Singh</h5>
+                            <p>Assistant Professor | M.Tech (IIT Madras)</p>
+                            <p>Expertise: Cloud Computing, DevOps | 6+ Years Experience</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Electronics & Communication Department -->
+        <div class="department-section">
+            <div class="dept-header">
+                <div class="dept-icon">📡</div>
+                <h2>Department of Electronics & Communication Engineering</h2>
+            </div>
+            <div class="dept-desc">
+                The Department of Electronics & Communication Engineering focuses on cutting-edge research in VLSI, Embedded Systems, and Communication Technologies. Our curriculum blends theoretical knowledge with hands-on lab experience.
+            </div>
+            
+            <div class="programs-grid">
+                <div class="program-card">
+                    <div class="program-header">
+                        <h3>B.Tech in Electronics & Communication Engineering</h3>
+                        <div class="program-duration">📅 Duration: 4 Years | 🎓 Intake: 90 Seats</div>
+                    </div>
+                    <div class="program-body">
+                        <h4>🎯 Program Objectives:</h4>
+                        <ul>
+                            <li>Master core concepts in electronics, communication systems, and signal processing</li>
+                            <li>Develop expertise in VLSI design, embedded systems, and IoT</li>
+                            <li>Prepare students for careers in semiconductor, telecom, and consumer electronics</li>
+                        </ul>
+                        <h4>📖 Core Subjects:</h4>
+                        <ul>
+                            <li>Analog & Digital Electronics</li>
+                            <li>Communication Systems</li>
+                            <li>VLSI Design & Fabrication</li>
+                            <li>Embedded Systems & IoT</li>
+                            <li>Signal Processing & Antenna Design</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Faculty Section for ECE -->
+            <div class="faculty-section">
+                <h4>👨‍🏫 Distinguished Faculty</h4>
+                <div class="faculty-grid">
+                    <div class="faculty-card">
+                        <div class="faculty-avatar">👨‍🔬</div>
+                        <div class="faculty-info">
+                            <h5>Dr. Suresh Rao</h5>
+                            <p>Professor & HOD | Ph.D (IIT Delhi)</p>
+                            <p>Expertise: VLSI Design, Embedded Systems | 18+ Years Experience</p>
+                        </div>
+                    </div>
+                    <div class="faculty-card">
+                        <div class="faculty-avatar">👩‍🔬</div>
+                        <div class="faculty-info">
+                            <h5>Dr. Meera Krishnan</h5>
+                            <p>Professor | Ph.D (IIT Madras)</p>
+                            <p>Expertise: Wireless Communication, Antenna Design | 14+ Years Experience</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mechanical Engineering Department -->
+        <div class="department-section">
+            <div class="dept-header">
+                <div class="dept-icon">⚙️</div>
+                <h2>Department of Mechanical Engineering</h2>
+            </div>
+            <div class="dept-desc">
+                The Department of Mechanical Engineering focuses on design, manufacturing, thermal engineering, and robotics. Our students gain hands-on experience through industry projects and state-of-the-art labs.
+            </div>
+            
+            <div class="programs-grid">
+                <div class="program-card">
+                    <div class="program-header">
+                        <h3>B.Tech in Mechanical Engineering</h3>
+                        <div class="program-duration">📅 Duration: 4 Years | 🎓 Intake: 90 Seats</div>
+                    </div>
+                    <div class="program-body">
+                        <h4>🎯 Program Objectives:</h4>
+                        <ul>
+                            <li>Build strong foundation in design, thermodynamics, and manufacturing</li>
+                            <li>Develop expertise in CAD/CAM, robotics, and automation</li>
+                            <li>Prepare students for automotive, aerospace, and manufacturing sectors</li>
+                        </ul>
+                        <h4>📖 Core Subjects:</h4>
+                        <ul>
+                            <li>Thermodynamics & Heat Transfer</li>
+                            <li>Machine Design & Manufacturing Processes</li>
+                            <li>CAD/CAM & Robotics</li>
+                            <li>Automotive Engineering</li>
+                            <li>Renewable Energy Systems</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Faculty Section for Mechanical -->
+            <div class="faculty-section">
+                <h4>👨‍🏫 Distinguished Faculty</h4>
+                <div class="faculty-grid">
+                    <div class="faculty-card">
+                        <div class="faculty-avatar">👨‍🔧</div>
+                        <div class="faculty-info">
+                            <h5>Dr. Ramesh Chandra</h5>
+                            <p>Professor & HOD | Ph.D (IISc Bangalore)</p>
+                            <p>Expertise: Robotics, Automation | 20+ Years Experience</p>
+                        </div>
+                    </div>
+                    <div class="faculty-card">
+                        <div class="faculty-avatar">👩‍🔧</div>
+                        <div class="faculty-info">
+                            <h5>Dr. Kavita Desai</h5>
+                            <p>Professor | Ph.D (IIT Kanpur)</p>
+                            <p>Expertise: Thermal Engineering, Renewable Energy | 12+ Years Experience</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Bangalore Institute of Technology</h3>
+                <p>Excellence in education since 1979</p>
+                <div class="social-links">
+                    <a href="#">📘</a>
+                    <a href="#">🐦</a>
+                    <a href="#">🔗</a>
+                    <a href="#">📷</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="programs.html">Programs</a></li>
+                    <li><a href="placements.html">Placements</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>📍 KR Road, VV Puram, Bangalore - 560004</p>
+                <p>📞 +91 80 2660 1234</p>
+                <p>✉️ academics@bit-bangalore.edu.in</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2024 Bangalore Institute of Technology. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
+        }
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('navMenu');
+            const toggle = document.querySelector('.menu-toggle');
+            if (menu && toggle && !menu.contains(event.target) && !toggle.contains(event.target)) {
+                menu.classList.remove('active');
+            }
+        });
+        
+        // Animation on scroll
+        window.addEventListener('load', () => {
+            const cards = document.querySelectorAll('.program-card, .faculty-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.6s ease';
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>

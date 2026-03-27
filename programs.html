@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Programs Offered - Bangalore Institute of Technology</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f4f7fc;
+            color: #333;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1e3c72;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #4a90e2;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        /* Hero Section */
+        .programs-hero {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            text-align: center;
+            padding: 60px 20px;
+            margin-bottom: 40px;
+        }
+
+        .programs-hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .programs-hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin: 3rem 0 2rem;
+            color: #1e3c72;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background: #4a90e2;
+            margin: 10px auto 0;
+        }
+
+        /* Department Cards */
+        .department-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .department-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .department-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+        }
+
+        .dept-header {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        .dept-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .dept-header h3 {
+            font-size: 1.5rem;
+        }
+
+        .dept-content {
+            padding: 1.5rem;
+        }
+
+        .program-list {
+            list-style: none;
+        }
+
+        .program-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .program-list li:last-child {
+            border-bottom: none;
+        }
+
+        .program-name {
+            font-weight: 500;
+        }
+
+        .program-duration {
+            color: #4a90e2;
+            font-size: 0.85rem;
+            background: #e3f2fd;
+            padding: 2px 8px;
+            border-radius: 12px;
+        }
+
+        .view-more {
+            display: inline-block;
+            margin-top: 1rem;
+            color: #4a90e2;
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        /* Program Cards Grid */
+        .programs-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+
+        .program-card {
+            background: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .program-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+        }
+
+        .program-degree {
+            font-size: 0.85rem;
+            color: #4a90e2;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .program-card h3 {
+            font-size: 1.25rem;
+            color: #1e3c72;
+            margin-bottom: 0.5rem;
+        }
+
+        .program-details {
+            color: #666;
+            font-size: 0.9rem;
+            margin: 0.5rem 0;
+        }
+
+        .program-features {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .program-features span {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        /* Quick Stats */
+        .stats-banner {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 3rem;
+            border-radius: 10px;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .stats-banner h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .stats-numbers {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Footer */
+        footer {
+            background: #1e3c72;
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 0 20px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            font-size: 1.5rem;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                text-align: center;
+                gap: 1rem;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+            
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .programs-hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .department-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-numbers {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+        
+            <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="academics.html">Academics</a></li>
+                <li><a href="programs.html">Programs</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="placements.html">Placements</a></li>
+                <li><a href="facilities.html">Facilities</a></li>
+                <li><a href="login-student.html">Student Login</a></li>
+                <li><a href="login-teacher.html">Teacher Login</a></li>
+             </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <div class="programs-hero">
+        <h1>📚 Academic Programs</h1>
+        <p>Discover a world of opportunities with our diverse range of programs</p>
+    </div>
+
+    <div class="container">
+        <!-- Quick Stats -->
+        <div class="stats-banner">
+            <h3>🎓 Programs at a Glance</h3>
+            <div class="stats-numbers">
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Undergraduate Programs</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">30+</div>
+                    <div class="stat-label">Postgraduate Programs</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Doctoral Programs</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">10+</div>
+                    <div class="stat-label">Certificate Courses</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Departments Section -->
+        <h2 class="section-title">🏛️ Academic Departments</h2>
+        <div class="department-grid">
+            <div class="department-card">
+                <div class="dept-header">
+                    <div class="dept-icon">💻</div>
+                    <h3>Computer Science & Engineering</h3>
+                </div>
+                <div class="dept-content">
+                    <ul class="program-list">
+                        <li><span class="program-name">B.Tech Computer Science</span><span class="program-duration">4 Years</span></li>
+                        <li><span class="program-name">M.Tech Computer Science</span><span class="program-duration">2 Years</span></li>
+                        <li><span class="program-name">B.Tech AI & ML</span><span class="program-duration">4 Years</span></li>
+                        <li><span class="program-name">Ph.D Computer Science</span><span class="program-duration">3-5 Years</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="department-card">
+                <div class="dept-header">
+                    <div class="dept-icon">⚡</div>
+                    <h3>Electronics & Communication</h3>
+                </div>
+                <div class="dept-content">
+                    <ul class="program-list">
+                        <li><span class="program-name">B.Tech Electronics</span><span class="program-duration">4 Years</span></li>
+                        <li><span class="program-name">M.Tech VLSI Design</span><span class="program-duration">2 Years</span></li>
+                        <li><span class="program-name">B.Tech IoT</span><span class="program-duration">4 Years</span></li>
+                        <li><span class="program-name">Ph.D Electronics</span><span class="program-duration">3-5 Years</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="department-card">
+                <div class="dept-header">
+                    <div class="dept-icon">🏗️</div>
+                    <h3>Mechanical Engineering</h3>
+                </div>
+                <div class="dept-content">
+                    <ul class="program-list">
+                        <li><span class="program-name">B.Tech Mechanical</span><span class="program-duration">4 Years</span></li>
+                        <li><span class="program-name">M.Tech Robotics</span><span class="program-duration">2 Years</span></li>
+                        <li><span class="program-name">B.Tech Automobile</span><span class="program-duration">4 Years</span></li>
+                        <li><span class="program-name">Ph.D Mechanical</span><span class="program-duration">3-5 Years</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="department-card">
+                <div class="dept-header">
+                    <div class="dept-icon">📊</div>
+                    <h3>Business Administration</h3>
+                </div>
+                <div class="dept-content">
+                    <ul class="program-list">
+                        <li><span class="program-name">BBA</span><span class="program-duration">3 Years</span></li>
+                        <li><span class="program-name">MBA</span><span class="program-duration">2 Years</span></li>
+                        <li><span class="program-name">Executive MBA</span><span class="program-duration">1 Year</span></li>
+                        <li><span class="program-name">Ph.D Management</span><span class="program-duration">3-5 Years</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="department-card">
+                <div class="dept-header">
+                    <div class="dept-icon">🧪</div>
+                    <h3>Sciences</h3>
+                </div>
+                <div class="dept-content">
+                    <ul class="program-list">
+                        <li><span class="program-name">B.Sc Physics</span><span class="program-duration">3 Years</span></li>
+                        <li><span class="program-name">B.Sc Chemistry</span><span class="program-duration">3 Years</span></li>
+                        <li><span class="program-name">M.Sc Mathematics</span><span class="program-duration">2 Years</span></li>
+                        <li><span class="program-name">Ph.D Sciences</span><span class="program-duration">3-5 Years</span></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="department-card">
+                <div class="dept-header">
+                    <div class="dept-icon">📖</div>
+                    <h3>Humanities & Social Sciences</h3>
+                </div>
+                <div class="dept-content">
+                    <ul class="program-list">
+                        <li><span class="program-name">BA English</span><span class="program-duration">3 Years</span></li>
+                        <li><span class="program-name">MA Psychology</span><span class="program-duration">2 Years</span></li>
+                        <li><span class="program-name">BA Economics</span><span class="program-duration">3 Years</span></li>
+                        <li><span class="program-name">Ph.D Humanities</span><span class="program-duration">3-5 Years</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detailed Programs Section -->
+        <h2 class="section-title">🎯 Popular Programs</h2>
+        <div class="programs-grid" id="programsGrid">
+            <!-- Programs will be populated by JavaScript -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>  Bangalore Institute of Technology</h3>
+                <p>Excellence in education since 1995</p>
+                <div class="social-links">
+                    <a href="#">📘</a>
+                    <a href="#">🐦</a>
+                    <a href="#">🔗</a>
+                    <a href="#">📷</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="programs.html">Programs</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="placements.html">Placements</a></li>
+                    <li><a href="facilities.html">Facilities</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>📍 123 University Avenue, City, State</p>
+                <p>📞 +1 (234) 567-8900</p>
+                <p>✉️ admissions@ Bangalore Institute of Technology.edu</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2024  Bangalore Institute of Technology. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Detailed programs data
+        const programs = [
+            {
+                degree: "B.Tech",
+                name: "Computer Science Engineering",
+                duration: "4 Years",
+                seats: "120",
+                specializations: ["AI/ML", "Data Science", "Cybersecurity"]
+            },
+            {
+                degree: "B.Tech",
+                name: "Artificial Intelligence & Machine Learning",
+                duration: "4 Years",
+                seats: "60",
+                specializations: ["Deep Learning", "NLP", "Computer Vision"]
+            },
+            {
+                degree: "B.Tech",
+                name: "Electronics & Communication",
+                duration: "4 Years",
+                seats: "90",
+                specializations: ["VLSI", "Embedded Systems", "IoT"]
+            },
+            {
+                degree: "MBA",
+                name: "Master of Business Administration",
+                duration: "2 Years",
+                seats: "180",
+                specializations: ["Marketing", "Finance", "HR", "Operations"]
+            },
+            {
+                degree: "M.Tech",
+                name: "Data Science & Analytics",
+                duration: "2 Years",
+                seats: "45",
+                specializations: ["Big Data", "Business Analytics", "ML Engineering"]
+            },
+            {
+                degree: "BBA",
+                name: "Bachelor of Business Administration",
+                duration: "3 Years",
+                seats: "120",
+                specializations: ["Digital Marketing", "International Business"]
+            },
+            {
+                degree: "B.Sc",
+                name: "Computer Science",
+                duration: "3 Years",
+                seats: "90",
+                specializations: ["Programming", "Web Development", "Database"]
+            },
+            {
+                degree: "Ph.D",
+                name: "Computer Science & Engineering",
+                duration: "3-5 Years",
+                seats: "20",
+                specializations: ["AI", "ML", "Cloud Computing", "Blockchain"]
+            }
+        ];
+
+        // Display programs grid
+        function displayPrograms() {
+            const grid = document.getElementById('programsGrid');
+            grid.innerHTML = '';
+            
+            programs.forEach(program => {
+                const card = document.createElement('div');
+                card.className = 'program-card';
+                card.onclick = () => showProgramDetails(program);
+                card.innerHTML = `
+                    <div class="program-degree">${program.degree}</div>
+                    <h3>${program.name}</h3>
+                    <div class="program-details">${program.duration} | Seats: ${program.seats}</div>
+                    <div class="program-features">
+                        <span>🎓 ${program.specializations.length}+ Specializations</span>
+                        <span>📚 Industry-aligned</span>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Show program details in alert (can be expanded to a modal)
+        function showProgramDetails(program) {
+            let message = `📚 ${program.degree} - ${program.name}\n\n`;
+            message += `Duration: ${program.duration}\n`;
+            message += `Total Seats: ${program.seats}\n\n`;
+            message += `Specializations:\n`;
+            program.specializations.forEach(spec => {
+                message += `• ${spec}\n`;
+            });
+            message += `\nFor more details, contact Admissions Office.`;
+            alert(message);
+        }
+
+        // Mobile menu toggle
+        function toggleMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('navMenu');
+            const toggle = document.querySelector('.menu-toggle');
+            if (menu && toggle && !menu.contains(event.target) && !toggle.contains(event.target)) {
+                menu.classList.remove('active');
+            }
+        });
+
+        // Initialize page
+        window.addEventListener('load', () => {
+            displayPrograms();
+            
+            // Add animation to cards
+            const cards = document.querySelectorAll('.department-card, .program-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.5s ease';
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bangalore Institute of Technology - Excellence in Education</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #f4f7fc;
+            color: #333;
+        }
+
+        /* Navigation */
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #1e3c72;
+            text-decoration: none;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #4a90e2;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Slider Section */
+        .hero-slider {
+            position: relative;
+            height: 90vh;
+            min-height: 600px;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        /* Dark overlay for text readability */
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 100%);
+        }
+
+        .hero-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: white;
+            z-index: 2;
+            width: 90%;
+            max-width: 900px;
+            animation: fadeInUp 0.8s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -40%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .hero-content .tagline {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .hero-content .achievement {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            background: rgba(74, 144, 226, 0.9);
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            backdrop-filter: blur(5px);
+        }
+
+        .hero-content p {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: #4a90e2;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            background: #357abd;
+        }
+
+        /* Slider Indicators */
+        .slider-indicators {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 1rem;
+            z-index: 3;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .indicator.active {
+            background: #4a90e2;
+            width: 30px;
+            border-radius: 10px;
+        }
+
+        /* Slider Navigation Arrows */
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0,0,0,0.5);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 3;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+        }
+
+        .slider-arrow:hover {
+            background: #4a90e2;
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .prev {
+            left: 20px;
+        }
+
+        .next {
+            right: 20px;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #1e3c72;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        /* Tabs Styles */
+        .tabs-container {
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+            margin: 2rem 0;
+        }
+
+        .tabs-header {
+            display: flex;
+            background: #f8f9fa;
+            border-bottom: 2px solid #e0e0e0;
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 1rem 2rem;
+            background: none;
+            border: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: #666;
+            position: relative;
+        }
+
+        .tab-btn:hover {
+            background: #e3f2fd;
+            color: #1e3c72;
+        }
+
+        .tab-btn.active {
+            color: #1e3c72;
+            background: white;
+        }
+
+        .tab-btn.active::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: #4a90e2;
+        }
+
+        .tab-content {
+            padding: 2rem;
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Tab Content Cards */
+        .tab-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+
+        .tab-card {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 10px;
+            transition: all 0.3s;
+            text-align: center;
+        }
+
+        .tab-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+
+        .tab-card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tab-card h3 {
+            color: #1e3c72;
+            margin-bottom: 0.5rem;
+        }
+
+        .tab-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .stat-list {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .stat-list li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .stat-list li:last-child {
+            border-bottom: none;
+        }
+
+        .stat-number {
+            font-weight: bold;
+            color: #4a90e2;
+            font-size: 1.1rem;
+        }
+
+        /* Cards Grid for About and Highlights */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+        }
+
+        .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            background: white;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: #f4f7fc;
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .stars {
+            color: #ffc107;
+            margin-top: 0.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: #1e3c72;
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            padding: 0 20px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 1rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            font-size: 1.5rem;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+            
+            .nav-menu {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                padding: 1rem;
+                text-align: center;
+                gap: 1rem;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            }
+            
+            .nav-menu.active {
+                display: flex;
+            }
+            
+            .hero-content h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero-content .tagline {
+                font-size: 1rem;
+            }
+            
+            .hero-content .achievement {
+                font-size: 0.9rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .tabs-header {
+                flex-direction: column;
+            }
+            
+            .tab-btn {
+                padding: 0.8rem;
+            }
+            
+            .tab-btn.active::after {
+                display: none;
+            }
+            
+            .slider-arrow {
+                width: 30px;
+                height: 30px;
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            
+            <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="academics.html">Academics</a></li>
+                <li><a href="programs.html">Programs</a></li> 
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="placements.html">Placements</a></li>
+                <li><a href="facilities.html">Facilities</a></li>
+                <li><a href="login-student.html">Student Login</a></li>
+                <li><a href="login-teacher.html">Teacher Login</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Slider Section -->
+    <div class="hero-slider" id="heroSlider">
+        <!-- Slides will be added dynamically -->
+        <div class="hero-content">
+            <h1>Bangalore Institute of Technology</h1>
+            <div class="tagline">Shaping Future Leaders Through Excellence in Education</div>
+            <div class="achievement">⭐ One Among the Top 5 Engineering Colleges in Bangalore ⭐</div>
+            <p>Excellence in Education, Research, and Innovation since 1979</p>
+            <button class="cta-button" onclick="alert('Welcome to Bangalore Institute of Technology! 🎓')">Explore More</button>
+        </div>
+        
+        <!-- Slider Navigation Arrows -->
+        <div class="slider-arrow prev" onclick="changeSlide(-1)">‹</div>
+        <div class="slider-arrow next" onclick="changeSlide(1)">›</div>
+        
+        <!-- Slider Indicators -->
+        <div class="slider-indicators" id="sliderIndicators"></div>
+    </div>
+
+    <!-- About Section -->
+    <div class="container">
+        <h2 class="section-title">About Us</h2>
+        <div class="cards-grid">
+            <div class="card">
+                <div class="icon">🎓</div>
+                <h3>World-Class Education</h3>
+                <p>Offering 100+ programs with internationally recognized curriculum and expert faculty.</p>
+            </div>
+            <div class="card">
+                <div class="icon">🔬</div>
+                <h3>Research Excellence</h3>
+                <p>500+ research publications annually with state-of-the-art facilities.</p>
+            </div>
+            <div class="card">
+                <div class="icon">🌍</div>
+                <h3>Global Network</h3>
+                <p>Partnerships with 200+ universities worldwide and international collaborations.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Tabs Section: Campus Life, Research, Innovation -->
+    <div class="container">
+        <h2 class="section-title">Discover BIT Bangalore</h2>
+        <p class="section-subtitle">Explore what makes our institute a center of excellence</p>
+        
+        <div class="tabs-container">
+            <div class="tabs-header">
+                <button class="tab-btn active" onclick="switchTab('campus')">
+                    🏘️ Campus Life
+                </button>
+                <button class="tab-btn" onclick="switchTab('research')">
+                    🔬 Research & Innovation
+                </button>
+                <button class="tab-btn" onclick="switchTab('innovation')">
+                    💡 Innovation Hub
+                </button>
+            </div>
+            
+            <!-- Campus Life Tab -->
+            <div id="campus" class="tab-content active">
+                <div class="tab-cards-grid">
+                    <div class="tab-card">
+                        <div class="tab-card-icon">🏘️</div>
+                        <h3>Student Housing</h3>
+                        <p>Modern dormitories with all amenities, 24/7 security, and comfortable living spaces.</p>
+                        <ul class="stat-list">
+                            <li>🏠 <span class="stat-number">5</span> Residential Halls</li>
+                            <li>👥 <span class="stat-number">2,500+</span> Students Capacity</li>
+                            <li>🍽️ <span class="stat-number">3</span> Dining Halls</li>
+                        </ul>
+                    </div>
+                    <div class="tab-card">
+                        <div class="tab-card-icon">⚽</div>
+                        <h3>Sports & Recreation</h3>
+                        <p>World-class sports facilities and recreational activities for holistic development.</p>
+                        <ul class="stat-list">
+                            <li>🏟️ <span class="stat-number">2</span> Stadiums</li>
+                            <li>🏊 <span class="stat-number">1</span> Olympic Pool</li>
+                            <li>🏀 <span class="stat-number">10+</span> Sports Clubs</li>
+                        </ul>
+                    </div>
+                    <div class="tab-card">
+                        <div class="tab-card-icon">🎭</div>
+                        <h3>Cultural Activities</h3>
+                        <p>Rich cultural life with clubs, festivals, and events throughout the year.</p>
+                        <ul class="stat-list">
+                            <li>🎪 <span class="stat-number">20+</span> Student Clubs</li>
+                            <li>🎵 <span class="stat-number">3</span> Annual Festivals</li>
+                            <li>🎨 <span class="stat-number">15</span> Art Groups</li>
+                        </ul>
+                    </div>
+                    <div class="tab-card">
+                        <div class="tab-card-icon">🌿</div>
+                        <h3>Green Campus</h3>
+                        <p>Eco-friendly campus with sustainable practices and beautiful landscapes.</p>
+                        <ul class="stat-list">
+                            <li>🌳 <span class="stat-number">50+</span> Acres Green Space</li>
+                            <li>♻️ <span class="stat-number">100%</span> Solar Powered</li>
+                            <li>🚲 <span class="stat-number">Free</span> Campus Shuttle</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Research Tab -->
+            <div id="research" class="tab-content">
+                <div class="tab-cards-grid">
+                    <div class="tab-card">
+                        <div class="tab-card-icon">🔬</div>
+                        <h3>Research Centers</h3>
+                        <p>Cutting-edge research facilities and specialized centers for advanced studies.</p>
+                        <ul class="stat-list">
+                            <li>🏛️ <span class="stat-number">15</span> Research Centers</li>
+                            <li>🧪 <span class="stat-number">50+</span> Advanced Labs</li>
+                            <li>📊 <span class="stat-number">$50M</span> Research Funding</li>
+                        </ul>
+                    </div>
+                    <div class="tab-card">
+                        <div class="tab-card-icon">📚</div>
+                        <h3>Publications</h3>
+                        <p>High-impact research publications and academic contributions globally.</p>
+                        <ul class="stat-list">
+                            <li>📝 <span class="stat-number">500+</span> Annual Publications</li>
+                            <li>🏆 <span class="stat-number">200+</span> Citations</li>
+                            <li>📖 <span class="stat-number">50+</span> Books Published</li>
+                        </ul>
+                    </div>
+                    <div class="tab-card">
+                        <div class="tab-card-icon">🤝</div>
+                        <h3>Collaborations</h3>
+                        <p>Global partnerships with leading universities and research institutions.</p>
+                        <ul class="stat-list">
+                            <li>🌍 <span class="stat-number">100+</span> Global Partners</li>
+                            <li>👥 <span class="stat-number">50+</span> Exchange Programs</li>
+                            <li>🎓 <span class="stat-number">30+</span> Joint Degrees</li>
+                        </ul>
+                    </div>
+                    <div class="tab-card">
+                        <div class="tab-card-icon">💡</div>
+                        <h3>Research Grants</h3>
+                        <p>Major funding from government and industry for breakthrough research.</p>
+                        <ul class="stat-list">
+                            <li>🏦 <span class="stat-number">$100M+</span> Grants Secured</li>
+                            <li>🔬 <span class="stat-number">200+</span> Active Projects</li>
+                            <li>👨‍🔬 <span class="stat-number">300+</span> Researchers</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Innovation Tab -->
+            <div id="innovation" class="tab-content">
+                <div class="tab-cards-grid">
+                    <div class="tab-card">
+                        <div class="tab-card-icon">💻</div>
+                        <h3>Innovation Lab</h3>
+                        <p>State-of-the-art facility for prototyping and developing new ideas.</p>
+                        <ul class="stat-list">
+                            <li>🖥️ <span class="stat-number">200+</span> Workstations</li>
+                            <li>🖨️ <span class="stat-number">20+</span> 3D Printers</li>
+                            <li>🤖 <span class="stat-number">50+</span> Robotics Kits</li>
+                        </ul>
+                    </div>
+                    <div class="tab-card">
+                        <div class="tab-card-icon">🚀</div>
+                        <h3>Startup Incubator</h3>
+                        <p>Support for student entrepreneurs to launch their own ventures.</p>
+                        <ul class="stat-list">
+                            <li>💼 <span class="stat-number">50+</span> Startups Launched</li>
+                            <li>💰 <span class="stat-number">$10M+</span> Funding Raised</li>
+                            <li>👥 <span class="stat-number">200+</span> Student Founders</li>
+                        </ul>
+                    </div>
+                    <div class="tab-card">
+                        <div class="tab-card-icon">🏆</div>
+                        <h3>Patent & IP</h3>
+                        <p>Intellectual property creation and technology transfer office.</p>
+                        <ul class="stat-list">
+                            <li>📜 <span class="stat-number">100+</span> Patents Filed</li>
+                            <li>✨ <span class="stat-number">50+</span> Patents Granted</li>
+                            <li>💡 <span class="stat-number">30+</span> Technologies Licensed</li>
+                        </ul>
+                    </div>
+                    <div class="tab-card">
+                        <div class="tab-card-icon">🎯</div>
+                        <h3>Industry Partnerships</h3>
+                        <p>Collaborations with leading companies for real-world innovation.</p>
+                        <ul class="stat-list">
+                            <li>🏢 <span class="stat-number">100+</span> Corporate Partners</li>
+                            <li>📊 <span class="stat-number">50+</span> Live Projects</li>
+                            <li>💼 <span class="stat-number">1000+</span> Internships</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Testimonials Section -->
+    <div class="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Students Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <div class="icon" style="font-size: 2rem;">"</div>
+                    <p>The faculty and infrastructure are outstanding. The placement cell helped me secure a great job at Google.</p>
+                    <h4>— Sarah Johnson, CSE 2024</h4>
+                    <div class="stars">★★★★★</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="icon" style="font-size: 2rem;">"</div>
+                    <p>Amazing campus life and research opportunities. I've published 3 papers during my time here.</p>
+                    <h4>— Dr. Amit Patel, PhD Scholar</h4>
+                    <div class="stars">★★★★★</div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="icon" style="font-size: 2rem;">"</div>
+                    <p>The global exposure and industry connections are unmatched. Truly a world-class institution.</p>
+                    <h4>— Maria Garcia, MBA 2023</h4>
+                    <div class="stars">★★★★★</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Bangalore Institute of Technology</h3>
+                <p>Excellence in education since 1979</p>
+                <div class="social-links">
+                    <a href="#">📘</a>
+                    <a href="#">🐦</a>
+                    <a href="#">🔗</a>
+                    <a href="#">📷</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="programs.html">Programs</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="placements.html">Placements</a></li>
+                    <li><a href="facilities.html">Facilities</a></li>
+                    <li><a href="login-student.html">Student Login</a></li>
+                    <li><a href="login-teacher.html">Teacher Login</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p>📍 KR Road, VV Puram, Bangalore - 560004</p>
+                <p>📞 +91 80 2660 1234</p>
+                <p>✉️ info@bit-bangalore.edu.in</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2024 Bangalore Institute of Technology. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Image slides data
+        const slides = [
+            {
+                url: "https://www.iesonline.co.in/colleges-image/bangalore-institute-of-technology.jpg",
+                alt: "Bangalore Institute of Technology Main Campus"
+            },
+            {
+                url: "https://bit-bangalore.edu.in/assets/images/departments/eie/about-1.jpg",
+                alt: "BIT Bangalore Academic Block"
+            },
+            {
+                url: "https://i.pinimg.com/736x/86/c1/bc/86c1bc1a0dc5699a2bf431d756345792.jpg",
+                alt: "BIT Campus View"
+            },
+            {
+                url: "https://i.pinimg.com/736x/54/db/1c/54db1c475bf9a18173816b50290b8808.jpg",
+                alt: "BIT Library"
+            },
+            
+        ];
+
+        let currentSlide = 0;
+        let slideInterval;
+
+        // Create slides dynamically
+        function createSlides() {
+            const heroSlider = document.getElementById('heroSlider');
+            const indicatorsContainer = document.getElementById('sliderIndicators');
+            
+            slides.forEach((slide, index) => {
+                // Create slide div
+                const slideDiv = document.createElement('div');
+                slideDiv.className = `slide ${index === 0 ? 'active' : ''}`;
+                slideDiv.style.backgroundImage = `url('${slide.url}')`;
+                slideDiv.style.backgroundSize = 'cover';
+                slideDiv.style.backgroundPosition = 'center';
+                heroSlider.appendChild(slideDiv);
+                
+                // Create indicator
+                const indicator = document.createElement('div');
+                indicator.className = `indicator ${index === 0 ? 'active' : ''}`;
+                indicator.onclick = () => goToSlide(index);
+                indicatorsContainer.appendChild(indicator);
+            });
+        }
+
+        // Change slide function
+        function changeSlide(direction) {
+            const slidesElements = document.querySelectorAll('.slide');
+            const indicators = document.querySelectorAll('.indicator');
+            
+            slidesElements[currentSlide].classList.remove('active');
+            indicators[currentSlide].classList.remove('active');
+            
+            currentSlide = (currentSlide + direction + slides.length) % slides.length;
+            
+            slidesElements[currentSlide].classList.add('active');
+            indicators[currentSlide].classList.add('active');
+            
+            resetInterval();
+        }
+
+        // Go to specific slide
+        function goToSlide(index) {
+            const slidesElements = document.querySelectorAll('.slide');
+            const indicators = document.querySelectorAll('.indicator');
+            
+            slidesElements[currentSlide].classList.remove('active');
+            indicators[currentSlide].classList.remove('active');
+            
+            currentSlide = index;
+            
+            slidesElements[currentSlide].classList.add('active');
+            indicators[currentSlide].classList.add('active');
+            
+            resetInterval();
+        }
+
+        // Auto slide every 2 seconds
+        function startAutoSlide() {
+            slideInterval = setInterval(() => {
+                changeSlide(1);
+            }, 5000);
+        }
+
+        function resetInterval() {
+            clearInterval(slideInterval);
+            startAutoSlide();
+        }
+
+        // Tab switching function
+        function switchTab(tabId) {
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+            
+            const tabBtns = document.querySelectorAll('.tab-btn');
+            tabBtns.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            const selectedTab = document.getElementById(tabId);
+            if (selectedTab) {
+                selectedTab.classList.add('active');
+            }
+            
+            const activeBtn = Array.from(tabBtns).find(btn => 
+                btn.textContent.toLowerCase().includes(tabId.toLowerCase())
+            );
+            if (activeBtn) {
+                activeBtn.classList.add('active');
+            }
+        }
+        
+        // Mobile menu toggle
+        function toggleMenu() {
+            const menu = document.getElementById('navMenu');
+            menu.classList.toggle('active');
+        }
+        
+        // Close menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const menu = document.getElementById('navMenu');
+            const toggle = document.querySelector('.menu-toggle');
+            if (menu && toggle && !menu.contains(event.target) && !toggle.contains(event.target)) {
+                menu.classList.remove('active');
+            }
+        });
+        
+        // Smooth scroll animation for cards
+        window.addEventListener('load', () => {
+            createSlides();
+            startAutoSlide();
+            
+            const cards = document.querySelectorAll('.card, .testimonial-card, .tab-card');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'all 0.6s ease';
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+        });
+    </script>
+</body>
+</html>

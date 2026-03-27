@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Login - Global University</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            
+            <button class="menu-toggle" aria-label="Toggle menu">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="academics.html">Academics</a></li>
+                    <li><a href="programs.html">Programs</a></li>
+                    <li><a href="gallery.html">Gallery</a></li>
+                    <li><a href="placements.html">Placements</a></li>
+                    <li><a href="facilities.html">Facilities</a></li>
+                    <li><a href="login-student.html">Student Login</a></li>
+                    <li><a href="login-teacher.html">Teacher Login</a></li>
+             </ul>
+        </div>
+    </nav>
+
+    <!-- Login Section -->
+    <main class="login-container">
+        <div class="login-box">
+            <h2>
+                <i class="fas fa-user-graduate" aria-hidden="true"></i> 
+                Student Login
+            </h2>
+
+            <form id="loginForm" action="#" method="post">
+
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="student@university.edu" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter password" required>
+                </div>
+
+                <div class="checkbox-group">
+                    <label for="remember">
+                        <input type="checkbox" id="remember" name="remember"> 
+                        Remember Me
+                    </label>
+
+                    <a href="#" class="forgot-password" aria-label="Reset your password">
+                        Forgot Password?
+                    </a>
+                </div>
+
+                <button type="submit" class="login-btn">Login</button>
+
+                <!-- ✅ FIXED -->
+                <div class="demo-credentials">
+                    <p>Demo Credentials: student@university.edu / student123</p>
+                </div>
+
+            </form>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Global University</h3>
+                <p>Excellence in education since 1995</p>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>
+                    <i class="fas fa-envelope" aria-hidden="true"></i> 
+                    info@ Bangalore Institute of Technology.edu
+                </p>
+            </div>
+        </div>
+
+        <div class="copyright">
+            <p>&copy; 2024  Bangalore Institute of Technology. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="js/main.js"></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>
