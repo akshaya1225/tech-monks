@@ -1,4 +1,7 @@
 # tech-monks
+
+FOR BETTER EXPERIENCE PLEASE VIEW IN DARK MODE, THERE IS A TOGGLE BUTTON IN CORNER 
+
 University Hub+: More Than Just a Website
 A dynamic university portal featuring student-curated technical insights and an AI-driven digital concierge.
 
