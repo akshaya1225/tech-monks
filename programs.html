@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Programs — Bangalore Institute of Technology</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Syne:wght@400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
 
   <style>
@@ -15,146 +15,61 @@
       box-sizing: border-box;
     }
 
-    /* Theme Variables - Cyberpunk Theme (matching index.html) */
+    /* Theme Variables - Light/Dark Mode */
     :root {
-      --neon: #0066cc;
-      --neon2: #5a2d8c;
-      --neon3: #cc2a6b;
-      --gold: #d4af37;
-      --bg: #f0f4f8;
-      --bg2: #ffffff;
-      --text: #1a2a3a;
-      --muted: #4a5b6e;
-      --border: rgba(0,102,204,0.2);
-      --accent: #0066cc;
-      --card-bg: rgba(255,255,255,0.8);
-      --card-bg-solid: #ffffff;
-      --hero-overlay: linear-gradient(135deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.3) 100%);
-      --bg-primary: #f0f4f8;
+      --bg-primary: #f4f7fc;
       --bg-secondary: #ffffff;
-      --bg-card: rgba(255,255,255,0.8);
-      --bg-tab: rgba(255,255,255,0.6);
-      --bg-testimonial: #f0f4f8;
+      --bg-card: #ffffff;
+      --bg-tab: #f8f9fa;
+      --bg-testimonial: #f4f7fc;
+      --text-primary: #333333;
+      --text-secondary: #666666;
+      --border-color: #e0e0e0;
       --shadow: 0 2px 10px rgba(0,0,0,0.1);
       --shadow-hover: 0 5px 25px rgba(0,0,0,0.15);
-      --nav-bg: rgba(255,255,255,0.8);
-      --footer-bg: #ffffff;
-      --footer-text: #1a2a3a;
+      --nav-bg: #ffffff;
+      --footer-bg: #1e3c72;
+      --footer-text: #ffffff;
+      --card-bg: #ffffff;
+      --hero-gradient: linear-gradient(135deg, #1e3c72, #2a5298);
+      --accent: #4a90e2;
+      --accent2: #6c5ce7;
     }
 
     [data-theme="dark"] {
-      --neon: #00f5ff;
-      --neon2: #7b2fff;
-      --neon3: #ff2d78;
-      --gold: #ffd700;
-      --bg: #03050f;
-      --bg2: #070a1a;
-      --text: #e8eaf6;
-      --muted: #8892b0;
-      --border: rgba(0,245,255,0.15);
-      --accent: #00f5ff;
-      --card-bg: rgba(7,10,26,0.7);
-      --card-bg-solid: #0f0f1a;
-      --hero-overlay: linear-gradient(135deg, rgba(3,5,15,0.85) 0%, rgba(7,10,26,0.7) 100%);
-      --bg-primary: #03050f;
-      --bg-secondary: #070a1a;
-      --bg-card: rgba(7,10,26,0.7);
-      --bg-tab: rgba(7,10,26,0.5);
-      --bg-testimonial: #03050f;
+      --bg-primary: #1a1a2e;
+      --bg-secondary: #16213e;
+      --bg-card: #0f0f1a;
+      --bg-tab: #1e1e2a;
+      --bg-testimonial: #0f0f1a;
+      --text-primary: #e0e0e0;
+      --text-secondary: #a0a0a0;
+      --border-color: #2a2a3a;
       --shadow: 0 2px 10px rgba(0,0,0,0.3);
       --shadow-hover: 0 5px 25px rgba(0,0,0,0.4);
-      --nav-bg: rgba(7,10,26,0.8);
-      --footer-bg: #0f0f1a;
-      --footer-text: #e8eaf6;
+      --nav-bg: #0a0a1a;
+      --footer-bg: #0a0a1a;
+      --footer-text: #e0e0e0;
+      --card-bg: #0f0f1a;
+      --hero-gradient: linear-gradient(135deg, #0a0a1a, #1a1a2e);
+      --accent: #4a90e2;
+      --accent2: #a78bfa;
     }
 
     body {
-      font-family: 'Syne', 'Segoe UI', sans-serif;
+      font-family: 'Inter', 'Poppins', sans-serif;
       background: var(--bg-primary);
-      color: var(--text);
+      color: var(--text-primary);
       transition: background 0.3s ease, color 0.3s ease;
-      overflow-x: hidden;
-    }
-
-    /* Grid Background - Only visible in dark mode */
-    .grid-bg {
-      position: fixed;
-      inset: 0;
-      z-index: 0;
-      pointer-events: none;
-      background-image: 
-        linear-gradient(rgba(0,245,255,0.025) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(0,245,255,0.025) 1px, transparent 1px);
-      background-size: 60px 60px;
-      animation: gridShift 20s linear infinite;
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-
-    [data-theme="dark"] .grid-bg {
-      opacity: 1;
-    }
-
-    @keyframes gridShift {
-      to { background-position: 60px 60px; }
-    }
-
-    .orb {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(120px);
-      pointer-events: none;
-      z-index: 0;
-      opacity: 0;
-      transition: opacity 0.3s;
-    }
-
-    [data-theme="dark"] .orb {
-      opacity: 1;
-    }
-
-    .orb1 {
-      width: 600px;
-      height: 600px;
-      background: rgba(0,245,255,0.05);
-      top: -150px;
-      right: -150px;
-      animation: orbFloat 20s ease-in-out infinite;
-    }
-
-    .orb2 {
-      width: 400px;
-      height: 400px;
-      background: rgba(123,47,255,0.06);
-      bottom: 10%;
-      left: -100px;
-      animation: orbFloat 15s ease-in-out infinite reverse;
-    }
-
-    .orb3 {
-      width: 300px;
-      height: 300px;
-      background: rgba(255,45,120,0.04);
-      top: 50%;
-      right: 20%;
-      animation: orbFloat 25s ease-in-out infinite;
-    }
-
-    @keyframes orbFloat {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      50% { transform: translate(30px, 20px) scale(1.1); }
     }
 
     /* Navigation Bar */
     .navbar {
       background: var(--nav-bg);
-      backdrop-filter: blur(20px);
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      box-shadow: var(--shadow);
       position: sticky;
       top: 0;
       z-index: 1000;
-      border-bottom: 1px solid var(--border);
-      transition: background 0.3s;
     }
 
     .nav-container {
@@ -169,12 +84,12 @@
     .logo {
       font-size: 1.5rem;
       font-weight: bold;
-      background: linear-gradient(135deg, var(--neon), var(--neon2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: #1e3c72;
       text-decoration: none;
-      font-family: 'Orbitron', monospace;
+    }
+
+    [data-theme="dark"] .logo {
+      color: #4a90e2;
     }
 
     .nav-menu {
@@ -185,83 +100,37 @@
 
     .nav-menu a {
       text-decoration: none;
-      color: var(--muted);
+      color: var(--text-primary);
       font-weight: 500;
-      transition: all 0.3s;
-      font-size: 0.85rem;
-      letter-spacing: 0.5px;
-      position: relative;
-    }
-
-    .nav-menu a::after {
-      content: '';
-      position: absolute;
-      bottom: -5px;
-      left: 0;
-      width: 0;
-      height: 1px;
-      background: var(--neon);
-      transition: width 0.3s;
+      transition: color 0.3s;
     }
 
     .nav-menu a:hover {
-      color: var(--neon);
-    }
-
-    .nav-menu a:hover::after {
-      width: 100%;
+      color: var(--accent);
     }
 
     .menu-toggle {
       display: none;
       font-size: 1.5rem;
       cursor: pointer;
-      color: var(--text);
-      background: none;
-      border: 1px solid var(--border);
-      padding: 0.4rem 0.7rem;
-      border-radius: 3px;
+      color: var(--text-primary);
     }
 
     /* Hero Section */
     .hero {
-      background: var(--hero-overlay);
-      background-blend-mode: overlay;
-      position: relative;
-      text-align: center;
-      padding: 100px 20px;
+      background: var(--hero-gradient);
       color: white;
-      z-index: 1;
-    }
-
-    .hero::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: url('https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1920&h=400&fit=crop') center/cover no-repeat;
-      z-index: -1;
-      opacity: 0.4;
-    }
-
-    [data-theme="dark"] .hero::before {
-      opacity: 0.3;
+      text-align: center;
+      padding: 80px 20px;
     }
 
     .hero h1 {
-      font-size: 3rem;
+      font-size: 2.5rem;
       margin-bottom: 1rem;
-      font-family: 'Orbitron', monospace;
-      background: linear-gradient(135deg, #fff, var(--neon), var(--neon2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
     }
 
     .hero p {
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       opacity: 0.9;
     }
 
@@ -270,26 +139,23 @@
       max-width: 1200px;
       margin: 0 auto;
       padding: 60px 20px;
-      position: relative;
-      z-index: 2;
     }
 
     .section-title {
       text-align: center;
-      font-size: 2.5rem;
+      font-size: 2rem;
       margin-bottom: 1rem;
-      font-family: 'Orbitron', monospace;
-      background: linear-gradient(135deg, var(--text), var(--neon));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: #1e3c72;
+    }
+
+    [data-theme="dark"] .section-title {
+      color: var(--accent);
     }
 
     .section-subtitle {
       text-align: center;
-      color: var(--muted);
+      color: var(--text-secondary);
       margin-bottom: 2rem;
-      font-size: 1.1rem;
     }
 
     /* Stats Grid */
@@ -297,8 +163,6 @@
       max-width: 1200px;
       margin: -30px auto 0;
       padding: 0 20px;
-      position: relative;
-      z-index: 2;
     }
     .stats-grid {
       display: grid;
@@ -306,19 +170,14 @@
       gap: 1.5rem;
     }
     .stat-box {
-      background: var(--card-bg);
-      backdrop-filter: blur(10px);
+      background: var(--bg-card);
       padding: 2rem;
       text-align: center;
       border-radius: 10px;
-      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
       transition: all 0.3s;
       opacity: 0;
       transform: translateY(30px);
-    }
-    [data-theme="light"] .stat-box {
-      background: var(--card-bg-solid);
-      backdrop-filter: none;
     }
     .stat-box.visible {
       opacity: 1;
@@ -326,20 +185,16 @@
     }
     .stat-box:hover {
       transform: translateY(-5px);
-      border-color: var(--neon);
-      box-shadow: 0 5px 20px rgba(0,245,255,0.1);
+      box-shadow: var(--shadow-hover);
     }
     .stat-num {
       font-size: 2.5rem;
       font-weight: 800;
-      background: linear-gradient(135deg, var(--neon), var(--neon2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: var(--accent);
     }
     .stat-lbl {
       font-size: 0.85rem;
-      color: var(--muted);
+      color: var(--text-secondary);
       margin-top: 5px;
     }
 
@@ -348,15 +203,13 @@
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 20px 40px;
-      position: relative;
-      z-index: 2;
     }
     .tab-headers {
       display: flex;
       justify-content: center;
       gap: 1rem;
       margin-bottom: 2rem;
-      border-bottom: 2px solid var(--border);
+      border-bottom: 2px solid var(--border-color);
       padding-bottom: 0.5rem;
       flex-wrap: wrap;
     }
@@ -367,10 +220,9 @@
       font-size: 1rem;
       font-weight: 600;
       cursor: pointer;
-      color: var(--muted);
+      color: var(--text-secondary);
       transition: all 0.3s;
       position: relative;
-      font-family: 'Space Mono', monospace;
     }
     .tab-header-btn::after {
       content: '';
@@ -379,18 +231,18 @@
       left: 0;
       right: 0;
       height: 2px;
-      background: var(--neon);
+      background: var(--accent);
       transform: scaleX(0);
       transition: transform 0.3s;
     }
     .tab-header-btn.active {
-      color: var(--neon);
+      color: var(--accent);
     }
     .tab-header-btn.active::after {
       transform: scaleX(1);
     }
     .tab-header-btn:hover {
-      color: var(--neon);
+      color: var(--accent);
     }
 
     /* Sub Tabs */
@@ -403,26 +255,24 @@
     }
     .sub-tab-btn {
       background: var(--bg-tab);
-      backdrop-filter: blur(5px);
-      border: 1px solid var(--border);
+      border: 1px solid var(--border-color);
       border-radius: 50px;
       padding: 0.6rem 1.5rem;
       font-size: 0.85rem;
       font-weight: 500;
       cursor: pointer;
-      color: var(--muted);
+      color: var(--text-secondary);
       transition: all 0.3s;
     }
     .sub-tab-btn.active {
-      background: var(--neon);
+      background: var(--accent);
       color: white;
-      border-color: var(--neon);
-      box-shadow: 0 0 10px rgba(0,245,255,0.3);
+      border-color: var(--accent);
     }
     .sub-tab-btn:hover {
-      background: var(--neon);
+      background: var(--accent);
       color: white;
-      border-color: var(--neon);
+      border-color: var(--accent);
     }
 
     /* Program Grid */
@@ -432,19 +282,14 @@
       gap: 1.5rem;
     }
     .pc {
-      background: var(--card-bg);
-      backdrop-filter: blur(10px);
+      background: var(--bg-card);
       border-radius: 10px;
       overflow: hidden;
-      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
       transition: all 0.3s;
       cursor: pointer;
       opacity: 0;
       transform: translateY(30px);
-    }
-    [data-theme="light"] .pc {
-      background: var(--card-bg-solid);
-      backdrop-filter: none;
     }
     .pc.visible {
       opacity: 1;
@@ -452,8 +297,7 @@
     }
     .pc:hover {
       transform: translateY(-5px);
-      border-color: var(--neon);
-      box-shadow: 0 5px 20px rgba(0,245,255,0.1);
+      box-shadow: var(--shadow-hover);
     }
     .pc-iw {
       height: 180px;
@@ -473,7 +317,7 @@
       position: absolute;
       top: 12px;
       left: 12px;
-      background: linear-gradient(135deg, var(--neon), var(--neon2));
+      background: var(--accent);
       color: white;
       font-size: 0.7rem;
       font-weight: 600;
@@ -486,12 +330,12 @@
     .pc-name {
       font-size: 1rem;
       font-weight: 600;
-      color: var(--text);
+      color: var(--text-primary);
       margin-bottom: 5px;
     }
     .pc-meta {
       font-size: 0.75rem;
-      color: var(--muted);
+      color: var(--text-secondary);
       margin-bottom: 8px;
     }
     .pc-tags {
@@ -501,32 +345,29 @@
       margin-bottom: 10px;
     }
     .pc-tag {
-      background: rgba(0,102,204,0.1);
-      border: 1px solid var(--border);
-      color: var(--neon);
+      background: rgba(74, 144, 226, 0.1);
+      border: 1px solid rgba(74, 144, 226, 0.2);
+      color: var(--accent);
       font-size: 0.65rem;
       padding: 2px 8px;
       border-radius: 12px;
-    }
-    [data-theme="dark"] .pc-tag {
-      background: rgba(0,245,255,0.1);
     }
     .pc-foot {
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding-top: 10px;
-      border-top: 1px solid var(--border);
+      border-top: 1px solid var(--border-color);
     }
     .pc-seats {
       font-size: 0.7rem;
-      color: var(--muted);
+      color: var(--text-secondary);
     }
     .pc-arr {
       width: 28px;
       height: 28px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--neon), var(--neon2));
+      background: var(--accent);
       color: white;
       display: flex;
       align-items: center;
@@ -541,7 +382,7 @@
       transform: translateX(0);
     }
 
-    /* Modal - Cyberpunk styled */
+    /* Modal */
     .backdrop {
       position: fixed;
       inset: 0;
@@ -561,7 +402,7 @@
       pointer-events: all;
     }
     .modal {
-      background: var(--card-bg-solid);
+      background: var(--bg-secondary);
       border-radius: 20px;
       max-width: 700px;
       width: 100%;
@@ -570,11 +411,6 @@
       position: relative;
       transform: scale(0.95);
       transition: transform 0.3s;
-      border: 1px solid var(--border);
-    }
-    [data-theme="dark"] .modal {
-      background: rgba(7,10,26,0.95);
-      backdrop-filter: blur(20px);
     }
     .backdrop.open .modal {
       transform: scale(1);
@@ -594,7 +430,7 @@
       position: absolute;
       top: 16px;
       left: 16px;
-      background: linear-gradient(135deg, var(--neon), var(--neon2));
+      background: var(--accent);
       color: white;
       font-size: 0.7rem;
       font-weight: 600;
@@ -619,7 +455,7 @@
       transition: background 0.3s;
     }
     .m-close:hover {
-      background: var(--neon);
+      background: var(--accent);
     }
     .mb {
       padding: 1.5rem;
@@ -627,15 +463,15 @@
     .m-title {
       font-size: 1.5rem;
       font-weight: 700;
-      background: linear-gradient(135deg, var(--text), var(--neon));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: #1e3c72;
       margin-bottom: 5px;
+    }
+    [data-theme="dark"] .m-title {
+      color: var(--accent);
     }
     .m-dept {
       font-size: 0.75rem;
-      color: var(--neon);
+      color: var(--accent);
       margin-bottom: 1rem;
     }
     .m-stats {
@@ -649,16 +485,15 @@
       padding: 10px;
       text-align: center;
       border-radius: 8px;
-      border: 1px solid var(--border);
     }
     .ms-val {
       font-size: 1.2rem;
       font-weight: 700;
-      color: var(--neon);
+      color: var(--accent);
     }
     .ms-lbl {
       font-size: 0.65rem;
-      color: var(--muted);
+      color: var(--text-secondary);
     }
     .m-specs {
       display: flex;
@@ -667,18 +502,14 @@
       margin-bottom: 1rem;
     }
     .m-spec {
-      background: rgba(0,102,204,0.1);
+      background: rgba(74, 144, 226, 0.1);
       padding: 5px 12px;
       border-radius: 20px;
       font-size: 0.8rem;
-      color: var(--neon);
-      border: 1px solid var(--border);
-    }
-    [data-theme="dark"] .m-spec {
-      background: rgba(0,245,255,0.1);
+      color: var(--accent);
     }
     .m-desc {
-      color: var(--muted);
+      color: var(--text-secondary);
       line-height: 1.6;
       margin-bottom: 1rem;
       font-size: 0.9rem;
@@ -697,13 +528,12 @@
       padding: 8px 12px;
       border-radius: 8px;
       font-size: 0.85rem;
-      border: 1px solid var(--border);
     }
     .m-dot {
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: var(--neon);
+      background: var(--accent);
     }
     .m-cta {
       display: flex;
@@ -717,25 +547,23 @@
       font-weight: 600;
       cursor: pointer;
       transition: all 0.3s;
-      font-family: 'Space Mono', monospace;
     }
     .btn-p {
-      background: linear-gradient(135deg, var(--neon), var(--neon2));
+      background: var(--accent);
       color: white;
       border: none;
     }
     .btn-p:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 0 20px rgba(0,245,255,0.3);
+      background: #357abd;
     }
     .btn-s {
       background: transparent;
-      border: 1px solid var(--border);
-      color: var(--text);
+      border: 1px solid var(--border-color);
+      color: var(--text-primary);
     }
     .btn-s:hover {
-      border-color: var(--neon);
-      color: var(--neon);
+      border-color: var(--accent);
+      color: var(--accent);
     }
 
     /* Footer */
@@ -744,9 +572,6 @@
       color: var(--footer-text);
       padding: 3rem 0 1rem;
       margin-top: 2rem;
-      border-top: 1px solid var(--border);
-      position: relative;
-      z-index: 2;
     }
     .footer-content {
       max-width: 1200px;
@@ -758,8 +583,6 @@
     }
     .footer-section h3 {
       margin-bottom: 1rem;
-      color: var(--neon);
-      font-family: 'Orbitron', monospace;
     }
     .footer-section ul {
       list-style: none;
@@ -768,12 +591,8 @@
       margin-bottom: 0.5rem;
     }
     .footer-section a {
-      color: var(--muted);
+      color: var(--footer-text);
       text-decoration: none;
-      transition: color 0.3s;
-    }
-    .footer-section a:hover {
-      color: var(--neon);
     }
     .social-links {
       display: flex;
@@ -782,19 +601,13 @@
     }
     .social-links a {
       font-size: 1.2rem;
-      transition: all 0.3s;
-    }
-    .social-links a:hover {
-      color: var(--neon);
-      transform: translateY(-3px);
     }
     .copyright {
       text-align: center;
       margin-top: 2rem;
       padding-top: 1.5rem;
-      border-top: 1px solid var(--border);
+      border-top: 1px solid rgba(255,255,255,0.1);
       font-size: 0.8rem;
-      color: var(--muted);
     }
 
     /* Theme Toggle Button */
@@ -805,9 +618,9 @@
       width: 50px;
       height: 50px;
       border-radius: 50%;
-      background: var(--card-bg-solid);
-      color: var(--neon);
-      border: 1px solid var(--neon);
+      background: var(--bg-card);
+      color: var(--text-primary);
+      border: 2px solid var(--border-color);
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -815,13 +628,12 @@
       font-size: 1.5rem;
       z-index: 1000;
       transition: all 0.3s ease;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+      box-shadow: var(--shadow);
     }
     .theme-toggle-btn:hover {
       transform: scale(1.1);
-      background: var(--neon);
+      background: var(--accent);
       color: white;
-      box-shadow: 0 0 20px var(--neon);
     }
 
     /* Responsive */
@@ -836,12 +648,11 @@
         left: 0;
         right: 0;
         background: var(--nav-bg);
-        backdrop-filter: blur(20px);
         flex-direction: column;
         padding: 1rem;
         text-align: center;
         gap: 1rem;
-        border-bottom: 1px solid var(--border);
+        box-shadow: var(--shadow);
       }
       .nav-menu.active {
         display: flex;
@@ -859,15 +670,6 @@
       .pg-grid {
         grid-template-columns: 1fr;
       }
-      .hero h1 {
-        font-size: 1.8rem;
-      }
-      .hero p {
-        font-size: 1rem;
-      }
-      .section-title {
-        font-size: 1.8rem;
-      }
       .theme-toggle-btn {
         bottom: 20px;
         right: 20px;
@@ -879,12 +681,6 @@
   </style>
 </head>
 <body>
-
-<!-- Background Elements (matching index.html) -->
-<div class="grid-bg"></div>
-<div class="orb orb1"></div>
-<div class="orb orb2"></div>
-<div class="orb orb3"></div>
 
 <!-- Navigation Bar -->
 <nav class="navbar">
@@ -933,9 +729,9 @@
   <!-- B.Tech Section -->
   <div id="btech-section" class="main-tab-content">
     <div class="sub-tab-headers">
-      <button class="sub-tab-btn active" onclick="switchSubTab(event, 'btech-cse')">💻 Computer Science</button>
-      <button class="sub-tab-btn" onclick="switchSubTab(event, 'btech-ece')">⚡ Electronics</button>
-      <button class="sub-tab-btn" onclick="switchSubTab(event, 'btech-mech')">🏗️ Mechanical Engineering</button>
+      <button class="sub-tab-btn active" onclick="switchSubTab('btech-cse')">💻 Computer Science</button>
+      <button class="sub-tab-btn" onclick="switchSubTab('btech-ece')">⚡ Electronics</button>
+      <button class="sub-tab-btn" onclick="switchSubTab('btech-mech')">🏗️ Mechanical Engineering</button>
     </div>
 
     <div id="btech-cse" class="sub-tab-content active"><div class="pg-grid" id="btechCseGrid"></div></div>
@@ -946,8 +742,8 @@
   <!-- M.Tech Section -->
   <div id="mtech-section" class="main-tab-content" style="display:none;">
     <div class="sub-tab-headers">
-      <button class="sub-tab-btn active" onclick="switchSubTab(event, 'mtech-cse')">💻 Computer Science</button>
-      <button class="sub-tab-btn" onclick="switchSubTab(event, 'mtech-ece')">⚡ Electronics</button>
+      <button class="sub-tab-btn active" onclick="switchSubTab('mtech-cse')">💻 Computer Science</button>
+      <button class="sub-tab-btn" onclick="switchSubTab('mtech-ece')">⚡ Electronics</button>
     </div>
 
     <div id="mtech-cse" class="sub-tab-content active"><div class="pg-grid" id="mtechCseGrid"></div></div>
@@ -962,10 +758,10 @@
       <h3>Bangalore Institute of Technology</h3>
       <p>Excellence in education since 1979</p>
       <div class="social-links">
-        <a href="#"><i class="fab fa-facebook"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-linkedin"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
+        <a href="#">📘</a>
+        <a href="#">🐦</a>
+        <a href="#">🔗</a>
+        <a href="#">📷</a>
       </div>
     </div>
     <div class="footer-section">
@@ -1117,7 +913,7 @@ function renderGrid(gridId, programList) {
       <div class="pc-body"><div class="pc-name">${p.name}</div><div class="pc-meta">${p.duration} · ${p.seats} Seats</div>
       <div class="pc-tags">${p.specs.slice(0,3).map(s=>`<span class="pc-tag">${s}</span>`).join('')}</div>
       <div class="pc-foot"><span class="pc-seats">⬡ ${p.seats} Seats</span><div class="pc-arr">→</div></div></div>`;
-    card.addEventListener('click', () => openModal(p));
+    card.addEventListener('click', () => openProgramPage(p));  // ← CHANGED THIS LINE
     grid.appendChild(card);
     ro.observe(card);
   });
@@ -1147,7 +943,7 @@ function switchMainTab(tab) {
   }
 }
 
-function switchSubTab(event, tabId) {
+function switchSubTab(tabId) {
   const parent = event.target.closest('.main-tab-content');
   if (!parent) return;
   const contents = parent.querySelectorAll('.sub-tab-content');
@@ -1158,37 +954,35 @@ function switchSubTab(event, tabId) {
   event.target.classList.add('active');
 }
 
-function openModal(program) {
-  document.getElementById('mImg').src = program.img;
-  document.getElementById('mDeg').textContent = program.degree;
-  document.getElementById('mTitle').textContent = program.name;
-  document.getElementById('mDept').textContent = program.dept;
-  document.getElementById('mDur').textContent = program.duration;
-  document.getElementById('mSeats').textContent = program.seats;
-  document.getElementById('mSpec').textContent = program.specs.length;
-  document.getElementById('mSpecGrid').innerHTML = program.specs.map(s => `<span class="m-spec">${s}</span>`).join('');
-  document.getElementById('mDesc').textContent = program.desc;
-  document.getElementById('mOuts').innerHTML = program.outcomes.map(o => `<div class="m-out"><div class="m-dot"></div><span>${o}</span></div>`).join('');
-  document.getElementById('backdrop').classList.add('open');
-  document.body.style.overflow = 'hidden';
+// Replace the openModal function with this redirect function
+function openProgramPage(program) {
+    // Map program names to their respective HTML files
+    const programPages = {
+        "Computer Science Engineering": "dept-cse.html",
+        "Internet of Things (IoT)": "dept-iot.html",
+        "Cyber Security": "dept-cybersecurity.html",
+        "Artificial Intelligence & ML": "dept-aiml.html",
+        "Data Science": "dept-datascience.html",
+        "Electronics & Communication Engg": "dept-ece.html",
+        "Electrical & Electronics Engg": "dept-eee.html",
+        "Electronics & Instrumentation Engg": "dept-eie.html",
+        "Electronics & Telecommunication Engg": "dept-ete.html",
+        "VLSI Design": "dept-vlsi.html",
+        "Mechanical Engineering": "dept-me.html",
+        "Robotics & Automation": "dept-robotics.html"
+    };
+    
+    const page = programPages[program.name];
+    if (page) {
+        window.location.href = page;
+    } else {
+        alert('Department page coming soon!');
+    }
 }
-
-function closeModal() { 
-  document.getElementById('backdrop').classList.remove('open'); 
-  document.body.style.overflow = ''; 
-}
-
-function closeBd(e) { 
-  if (e.target === document.getElementById('backdrop')) closeModal(); 
-}
-
-function toggleMenu() { 
-  document.getElementById('navMenu').classList.toggle('active'); 
-}
-
-document.addEventListener('keydown', e => { 
-  if (e.key === 'Escape') closeModal(); 
-});
+function closeModal() { document.getElementById('backdrop').classList.remove('open'); document.body.style.overflow = ''; }
+function closeBd(e) { if (e.target === document.getElementById('backdrop')) closeModal(); }
+function toggleMenu() { document.getElementById('navMenu').classList.toggle('active'); }
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
 // Initialize
 renderAll();
