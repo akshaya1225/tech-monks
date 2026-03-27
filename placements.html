@@ -4,26 +4,137 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Placements - Bangalore Institute of Technology</title>
+    <!-- Google Fonts (Same as Index) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Syne:wght@400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        /* ===== FULL THEME FROM INDEX - CYBERPUNK/TECH STYLE ===== */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
 
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #f4f7fc;
-            color: #333;
+        :root {
+            --neon: #0066cc;
+            --neon2: #5a2d8c;
+            --neon3: #cc2a6b;
+            --gold: #d4af37;
+            --bg: #f0f4f8;
+            --bg2: #ffffff;
+            --text: #1a2a3a;
+            --muted: #4a5b6e;
+            --border: rgba(0,102,204,0.2);
+            --accent: #0066cc;
+            --card-bg: rgba(255,255,255,0.8);
+            --card-bg-solid: #ffffff;
+            --hero-overlay: linear-gradient(135deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.3) 100%);
         }
 
-        /* Navigation Bar */
+        [data-theme="dark"] {
+            --neon: #00f5ff;
+            --neon2: #7b2fff;
+            --neon3: #ff2d78;
+            --gold: #ffd700;
+            --bg: #03050f;
+            --bg2: #070a1a;
+            --text: #e8eaf6;
+            --muted: #8892b0;
+            --border: rgba(0,245,255,0.15);
+            --accent: #00f5ff;
+            --card-bg: rgba(7,10,26,0.7);
+            --card-bg-solid: #0f0f1a;
+            --hero-overlay: linear-gradient(135deg, rgba(3,5,15,0.85) 0%, rgba(7,10,26,0.7) 100%);
+        }
+
+        body {
+            font-family: 'Syne', 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            transition: background 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        /* Grid Background - Dark mode only */
+        .grid-bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background-image: 
+                linear-gradient(rgba(0,245,255,0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,245,255,0.025) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: gridShift 20s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        [data-theme="dark"] .grid-bg {
+            opacity: 1;
+        }
+
+        @keyframes gridShift {
+            to { background-position: 60px 60px; }
+        }
+
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        [data-theme="dark"] .orb {
+            opacity: 1;
+        }
+
+        .orb1 {
+            width: 600px;
+            height: 600px;
+            background: rgba(0,245,255,0.05);
+            top: -150px;
+            right: -150px;
+            animation: orbFloat 20s ease-in-out infinite;
+        }
+
+        .orb2 {
+            width: 400px;
+            height: 400px;
+            background: rgba(123,47,255,0.06);
+            bottom: 10%;
+            left: -100px;
+            animation: orbFloat 15s ease-in-out infinite reverse;
+        }
+
+        .orb3 {
+            width: 300px;
+            height: 300px;
+            background: rgba(255,45,120,0.04);
+            top: 50%;
+            right: 20%;
+            animation: orbFloat 25s ease-in-out infinite;
+        }
+
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, 20px) scale(1.1); }
+        }
+
+        /* Navigation */
         .navbar {
-            background: white;
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
             z-index: 1000;
+            border-bottom: 1px solid var(--border);
+            transition: background 0.3s;
         }
 
         .nav-container {
@@ -35,13 +146,6 @@
             align-items: center;
         }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #1e3c72;
-            text-decoration: none;
-        }
-
         .nav-menu {
             display: flex;
             list-style: none;
@@ -50,39 +154,116 @@
 
         .nav-menu a {
             text-decoration: none;
-            color: #333;
+            color: var(--muted);
             font-weight: 500;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--neon);
+            transition: width 0.3s;
         }
 
         .nav-menu a:hover {
-            color: #4a90e2;
+            color: var(--neon);
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
         }
 
         .menu-toggle {
             display: none;
             font-size: 1.5rem;
             cursor: pointer;
+            color: var(--text);
+            background: none;
+            border: 1px solid var(--border);
+            padding: 0.4rem 0.7rem;
+            border-radius: 3px;
         }
 
-        /* Container */
+        /* Page Header - Cyberpunk Style */
+        .page-header {
+            background: var(--hero-overlay);
+            position: relative;
+            padding: 80px 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--border);
+            overflow: hidden;
+        }
+
+        .page-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=1920&h=400&fit=crop');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.25;
+            z-index: 0;
+        }
+
+        .page-header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            font-family: 'Orbitron', monospace;
+            background: linear-gradient(135deg, #fff, var(--neon), var(--neon2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header .breadcrumb {
+            font-size: 0.9rem;
+            color: var(--muted);
+            position: relative;
+            z-index: 1;
+        }
+
+        .page-header .breadcrumb a {
+            color: var(--neon);
+            text-decoration: none;
+        }
+
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 60px 20px;
+            position: relative;
+            z-index: 2;
         }
 
         .section-title {
             text-align: center;
             font-size: 2.5rem;
             margin-bottom: 1rem;
-            color: #1e3c72;
+            font-family: 'Orbitron', monospace;
+            background: linear-gradient(135deg, var(--text), var(--neon));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .section-subtitle {
             text-align: center;
-            color: #666;
+            color: var(--muted);
             margin-bottom: 3rem;
+            font-size: 1.1rem;
         }
 
         /* Statistics Cards */
@@ -94,29 +275,40 @@
         }
 
         .stat-card {
-            background: white;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
             text-align: center;
             padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            border: 1px solid var(--border);
             transition: all 0.3s;
+        }
+
+        [data-theme="light"] .stat-card {
+            background: var(--card-bg-solid);
+            backdrop-filter: none;
         }
 
         .stat-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+            border-color: var(--neon);
+            box-shadow: 0 5px 25px rgba(0,245,255,0.1);
         }
 
         .stat-number {
             font-size: 3rem;
             font-weight: bold;
-            color: #4a90e2;
+            background: linear-gradient(135deg, var(--neon), var(--neon2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
             margin-bottom: 0.5rem;
+            font-family: 'Orbitron', monospace;
         }
 
         .stat-label {
             font-size: 1.1rem;
-            color: #666;
+            color: var(--muted);
         }
 
         .stat-trend {
@@ -138,17 +330,24 @@
         }
 
         .company-card {
-            background: white;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
             text-align: center;
             padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            border: 1px solid var(--border);
             transition: all 0.3s;
+        }
+
+        [data-theme="light"] .company-card {
+            background: var(--card-bg-solid);
+            backdrop-filter: none;
         }
 
         .company-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+            border-color: var(--neon);
+            box-shadow: 0 5px 25px rgba(0,245,255,0.1);
         }
 
         .company-icon {
@@ -157,12 +356,13 @@
         }
 
         .company-card h3 {
-            color: #1e3c72;
+            color: var(--neon);
             margin-bottom: 0.5rem;
+            font-family: 'Space Mono', monospace;
         }
 
         .company-package {
-            color: #4a90e2;
+            color: var(--neon);
             font-weight: bold;
             margin-top: 0.5rem;
         }
@@ -176,21 +376,28 @@
         }
 
         .story-card {
-            background: white;
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
             padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 15px;
+            border: 1px solid var(--border);
             transition: all 0.3s;
+        }
+
+        [data-theme="light"] .story-card {
+            background: var(--card-bg-solid);
+            backdrop-filter: none;
         }
 
         .story-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 5px 25px rgba(0,0,0,0.2);
+            border-color: var(--neon);
+            box-shadow: 0 5px 25px rgba(0,245,255,0.1);
         }
 
         .quote-icon {
             font-size: 2rem;
-            color: #4a90e2;
+            color: var(--neon);
             margin-bottom: 1rem;
         }
 
@@ -199,35 +406,40 @@
             line-height: 1.6;
             margin-bottom: 1rem;
             font-style: italic;
+            color: var(--muted);
         }
 
         .student-name {
             font-weight: bold;
-            color: #1e3c72;
+            color: var(--neon);
             margin-bottom: 0.25rem;
+            font-family: 'Space Mono', monospace;
         }
 
         .student-details {
-            color: #666;
+            color: var(--muted);
             font-size: 0.9rem;
         }
 
         .company-offer {
             display: inline-block;
-            background: #28a745;
+            background: linear-gradient(135deg, var(--neon), var(--neon2));
             color: white;
             padding: 4px 12px;
-            border-radius: 15px;
+            border-radius: 20px;
             font-size: 0.8rem;
             margin-top: 0.5rem;
         }
 
         /* Footer */
         footer {
-            background: #1e3c72;
-            color: white;
+            background: var(--bg2);
+            color: var(--text);
             padding: 3rem 0 1rem;
             margin-top: 2rem;
+            border-top: 1px solid var(--border);
+            position: relative;
+            z-index: 2;
         }
 
         .footer-content {
@@ -241,6 +453,8 @@
 
         .footer-section h3 {
             margin-bottom: 1rem;
+            color: var(--neon);
+            font-family: 'Orbitron', monospace;
         }
 
         .footer-section ul {
@@ -252,8 +466,13 @@
         }
 
         .footer-section a {
-            color: white;
+            color: var(--muted);
             text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--neon);
         }
 
         .social-links {
@@ -264,13 +483,49 @@
 
         .social-links a {
             font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--neon);
+            transform: translateY(-3px);
         }
 
         .copyright {
             text-align: center;
             margin-top: 2rem;
             padding-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 0.8rem;
+        }
+
+        /* Theme Toggle Button */
+        .theme-toggle-btn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--card-bg-solid);
+            color: var(--neon);
+            border: 1px solid var(--neon);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            z-index: 1000;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .theme-toggle-btn:hover {
+            transform: scale(1.1);
+            background: var(--neon);
+            color: white;
+            box-shadow: 0 0 20px var(--neon);
         }
 
         /* Responsive */
@@ -285,12 +540,13 @@
                 top: 100%;
                 left: 0;
                 right: 0;
-                background: white;
+                background: var(--card-bg-solid);
                 flex-direction: column;
                 padding: 1rem;
                 text-align: center;
                 gap: 1rem;
-                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                border-bottom: 1px solid var(--border);
+                backdrop-filter: blur(10px);
             }
             
             .nav-menu.active {
@@ -312,277 +568,348 @@
             .stories-grid {
                 grid-template-columns: 1fr;
             }
+
+            .theme-toggle-btn {
+                bottom: 20px;
+                right: 20px;
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-           
-            <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-           <ul class="nav-menu" id="navMenu">
-                      <li><a href="index.html">Home</a></li>
-                      <li><a href="academics.html">Academics</a></li>
-                      <li><a href="programs.html">Programs</a></li>
-                      <li><a href="gallery.html">Gallery</a></li>
-                      <li><a href="placements.html">Placements</a></li>
-                      <li><a href="facilities.html">Facilities</a></li>
-                 </ul>
-        </div>
-    </nav>
 
-    <!-- Placements Section -->
-    <div class="container">
-        <h2 class="section-title">📊 Placement Statistics 2024</h2>
-        <p class="section-subtitle">Outstanding placement records with top multinational companies</p>
-        
-        <!-- Statistics Cards -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-number">95%</div>
-                <div class="stat-label">Placement Rate</div>
-                <div class="stat-trend">↑ 5% from last year</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">₹12.5 LPA</div>
-                <div class="stat-label">Average Package</div>
-                <div class="stat-trend">Highest: ₹45 LPA</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">200+</div>
-                <div class="stat-label">Recruiters</div>
-                <div class="stat-trend">Including Fortune 500</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-number">500+</div>
-                <div class="stat-label">Offers Made</div>
-                <div class="stat-trend">Multiple offers per student</div>
-            </div>
-        </div>
+<!-- Background Elements (visible only in dark mode) -->
+<div class="grid-bg"></div>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
 
-        <!-- Top Recruiters -->
-        <div class="companies-section">
-            <h2 class="section-title" style="font-size: 2rem;">🏢 Top Recruiters</h2>
-            <p class="section-subtitle">Our students are placed in world's leading companies</p>
-            <div class="companies-grid">
-                <div class="company-card">
-                    <div class="company-icon">🔵</div>
-                    <h3>Google</h3>
-                    <div class="company-package">₹42 LPA</div>
-                </div>
-                <div class="company-card">
-                    <div class="company-icon">🟢</div>
-                    <h3>Microsoft</h3>
-                    <div class="company-package">₹38 LPA</div>
-                </div>
-                <div class="company-card">
-                    <div class="company-icon">🟠</div>
-                    <h3>Amazon</h3>
-                    <div class="company-package">₹35 LPA</div>
-                </div>
-                <div class="company-card">
-                    <div class="company-icon">⚪</div>
-                    <h3>Apple</h3>
-                    <div class="company-package">₹40 LPA</div>
-                </div>
-                <div class="company-card">
-                    <div class="company-icon">🔷</div>
-                    <h3>Meta</h3>
-                    <div class="company-package">₹44 LPA</div>
-                </div>
-                <div class="company-card">
-                    <div class="company-icon">💼</div>
-                    <h3>Goldman Sachs</h3>
-                    <div class="company-package">₹32 LPA</div>
-                </div>
-                <div class="company-card">
-                    <div class="company-icon">🏦</div>
-                    <h3>JP Morgan</h3>
-                    <div class="company-package">₹30 LPA</div>
-                </div>
-                <div class="company-card">
-                    <div class="company-icon">🔴</div>
-                    <h3>Adobe</h3>
-                    <div class="company-package">₹36 LPA</div>
-                </div>
-            </div>
-        </div>
+<!-- Navigation -->
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="academics.html">Academics</a></li>
+            <li><a href="programs.html">Programs</a></li>
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="placements.html">Placements</a></li>
+            <li><a href="facilities.html">Facilities</a></li>
+        </ul>
+    </div>
+</nav>
 
-        <!-- Success Stories -->
-        <div>
-            <h2 class="section-title" style="font-size: 2rem;">🌟 Student Success Stories</h2>
-            <p class="section-subtitle">Real stories of our students who made it big</p>
-            <div class="stories-grid">
-                <div class="story-card">
-                    <div class="quote-icon">"</div>
-                    <div class="story-text">
-                        The placement training and faculty support at BIT were instrumental in helping me crack Google. The coding culture here is exceptional, and the mentors guided me throughout my preparation journey.
-                    </div>
-                    <div class="student-name">Rahul Sharma</div>
-                    <div class="student-details">Computer Science, 2024</div>
-                    <div class="company-offer">Placed at Google | ₹42 LPA</div>
-                </div>
-                
-                <div class="story-card">
-                    <div class="quote-icon">"</div>
-                    <div class="story-text">
-                        Secured a position at Microsoft with a dream package. The placement cell's mock interviews and resume building workshops were incredibly helpful. Grateful for the amazing opportunities provided.
-                    </div>
-                    <div class="student-name">Priya Patel</div>
-                    <div class="student-details">Computer Science, 2024</div>
-                    <div class="company-offer">Placed at Microsoft | ₹38 LPA</div>
-                </div>
-                
-                <div class="story-card">
-                    <div class="quote-icon">"</div>
-                    <div class="story-text">
-                        Got placed at Amazon as SDE. The industry connections and alumni network helped me get referrals. The practical exposure through internships made me industry-ready.
-                    </div>
-                    <div class="student-name">Aditya Kumar</div>
-                    <div class="student-details">Information Technology, 2024</div>
-                    <div class="company-offer">Placed at Amazon | ₹35 LPA</div>
-                </div>
-                
-                <div class="story-card">
-                    <div class="quote-icon">"</div>
-                    <div class="story-text">
-                        As a non-CS student, I never thought I'd get into Goldman Sachs. The placement team's guidance and the holistic curriculum prepared me for the rigorous interview process.
-                    </div>
-                    <div class="student-name">Neha Gupta</div>
-                    <div class="student-details">Finance, 2024</div>
-                    <div class="company-offer">Placed at Goldman Sachs | ₹32 LPA</div>
-                </div>
-                
-                <div class="story-card">
-                    <div class="quote-icon">"</div>
-                    <div class="story-text">
-                        The research opportunities and projects at BIT gave me an edge during interviews. I'm thrilled to join Adobe's R&D team!
-                    </div>
-                    <div class="student-name">Vikram Singh</div>
-                    <div class="student-details">Electronics Engineering, 2024</div>
-                    <div class="company-offer">Placed at Adobe | ₹36 LPA</div>
-                </div>
-                
-                <div class="story-card">
-                    <div class="quote-icon">"</div>
-                    <div class="story-text">
-                        The soft skills training and personality development sessions were game-changers. From being nervous to confidently cracking JP Morgan interviews - what a journey!
-                    </div>
-                    <div class="student-name">Anjali Mehta</div>
-                    <div class="student-details">Business Analytics, 2024</div>
-                    <div class="company-offer">Placed at JP Morgan | ₹30 LPA</div>
-                </div>
+<!-- Page Header -->
+<div class="page-header">
+    <h1><i class="fas fa-chart-line"></i> Placement Statistics 2024</h1>
+    <div class="breadcrumb"><a href="index.html">Home</a> / Placements</div>
+</div>
+
+<!-- Placements Section -->
+<div class="container">
+    <h2 class="section-title">📊 Outstanding Placement Records</h2>
+    <p class="section-subtitle">Our students are placed in world's leading companies with exceptional packages</p>
+    
+    <!-- Statistics Cards -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-number">95%</div>
+            <div class="stat-label">Placement Rate</div>
+            <div class="stat-trend">↑ 5% from last year</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">₹12.5 LPA</div>
+            <div class="stat-label">Average Package</div>
+            <div class="stat-trend">Highest: ₹45 LPA</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">200+</div>
+            <div class="stat-label">Recruiters</div>
+            <div class="stat-trend">Including Fortune 500</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-number">500+</div>
+            <div class="stat-label">Offers Made</div>
+            <div class="stat-trend">Multiple offers per student</div>
+        </div>
+    </div>
+
+    <!-- Top Recruiters -->
+    <div class="companies-section">
+        <h2 class="section-title">🏢 Top Recruiters</h2>
+        <p class="section-subtitle">Our students are placed in world's leading companies</p>
+        <div class="companies-grid">
+            <div class="company-card">
+                <div class="company-icon"><i class="fab fa-google"></i></div>
+                <h3>Google</h3>
+                <div class="company-package">₹42 LPA</div>
+            </div>
+            <div class="company-card">
+                <div class="company-icon"><i class="fab fa-microsoft"></i></div>
+                <h3>Microsoft</h3>
+                <div class="company-package">₹38 LPA</div>
+            </div>
+            <div class="company-card">
+                <div class="company-icon"><i class="fab fa-amazon"></i></div>
+                <h3>Amazon</h3>
+                <div class="company-package">₹35 LPA</div>
+            </div>
+            <div class="company-card">
+                <div class="company-icon"><i class="fab fa-apple"></i></div>
+                <h3>Apple</h3>
+                <div class="company-package">₹40 LPA</div>
+            </div>
+            <div class="company-card">
+                <div class="company-icon"><i class="fab fa-meta"></i></div>
+                <h3>Meta</h3>
+                <div class="company-package">₹44 LPA</div>
+            </div>
+            <div class="company-card">
+                <div class="company-icon"><i class="fas fa-chart-line"></i></div>
+                <h3>Goldman Sachs</h3>
+                <div class="company-package">₹32 LPA</div>
+            </div>
+            <div class="company-card">
+                <div class="company-icon"><i class="fas fa-university"></i></div>
+                <h3>JP Morgan</h3>
+                <div class="company-package">₹30 LPA</div>
+            </div>
+            <div class="company-card">
+                <div class="company-icon"><i class="fab fa-adobe"></i></div>
+                <h3>Adobe</h3>
+                <div class="company-package">₹36 LPA</div>
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3> Bangalore Institute of Technology</h3>
-                <p>Excellence in education since 1995</p>
-                <div class="social-links">
-                    <a href="#">📘</a>
-                    <a href="#">🐦</a>
-                    <a href="#">🔗</a>
-                    <a href="#">📷</a>
+    <!-- Success Stories -->
+    <div>
+        <h2 class="section-title">🌟 Student Success Stories</h2>
+        <p class="section-subtitle">Real stories of our students who made it big</p>
+        <div class="stories-grid">
+            <div class="story-card">
+                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                <div class="story-text">
+                    The placement training and faculty support at BIT were instrumental in helping me crack Google. The coding culture here is exceptional, and the mentors guided me throughout my preparation journey.
                 </div>
+                <div class="student-name">Rahul Sharma</div>
+                <div class="student-details">Computer Science, 2024</div>
+                <div class="company-offer">Placed at Google | ₹42 LPA</div>
             </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="gallery.html">Gallery</a></li>
-                    <li><a href="placements.html">Placements</a></li>
-                    <li><a href="facilities.html">Facilities</a></li>
-                    <li><a href="login-student.html">Student Login</a></li>
-                    <li><a href="login-teacher.html">Teacher Login</a></li>
-                </ul>
+            
+            <div class="story-card">
+                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                <div class="story-text">
+                    Secured a position at Microsoft with a dream package. The placement cell's mock interviews and resume building workshops were incredibly helpful. Grateful for the amazing opportunities provided.
+                </div>
+                <div class="student-name">Priya Patel</div>
+                <div class="student-details">Computer Science, 2024</div>
+                <div class="company-offer">Placed at Microsoft | ₹38 LPA</div>
             </div>
-            <div class="footer-section">
-                <h3>Contact Info</h3>
-                <p>📍 123 University Avenue, City, State 12345</p>
-                <p>📞 +1 (234) 567-8900</p>
-                <p>✉️ info@ Bangalore Institute of Technology.edu</p>
-                <p>🌐 www. Bangalore Institute of Technology.edu</p>
+            
+            <div class="story-card">
+                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                <div class="story-text">
+                    Got placed at Amazon as SDE. The industry connections and alumni network helped me get referrals. The practical exposure through internships made me industry-ready.
+                </div>
+                <div class="student-name">Aditya Kumar</div>
+                <div class="student-details">Information Technology, 2024</div>
+                <div class="company-offer">Placed at Amazon | ₹35 LPA</div>
+            </div>
+            
+            <div class="story-card">
+                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                <div class="story-text">
+                    As a non-CS student, I never thought I'd get into Goldman Sachs. The placement team's guidance and the holistic curriculum prepared me for the rigorous interview process.
+                </div>
+                <div class="student-name">Neha Gupta</div>
+                <div class="student-details">Finance, 2024</div>
+                <div class="company-offer">Placed at Goldman Sachs | ₹32 LPA</div>
+            </div>
+            
+            <div class="story-card">
+                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                <div class="story-text">
+                    The research opportunities and projects at BIT gave me an edge during interviews. I'm thrilled to join Adobe's R&D team!
+                </div>
+                <div class="student-name">Vikram Singh</div>
+                <div class="student-details">Electronics Engineering, 2024</div>
+                <div class="company-offer">Placed at Adobe | ₹36 LPA</div>
+            </div>
+            
+            <div class="story-card">
+                <div class="quote-icon"><i class="fas fa-quote-left"></i></div>
+                <div class="story-text">
+                    The soft skills training and personality development sessions were game-changers. From being nervous to confidently cracking JP Morgan interviews - what a journey!
+                </div>
+                <div class="student-name">Anjali Mehta</div>
+                <div class="student-details">Business Analytics, 2024</div>
+                <div class="company-offer">Placed at JP Morgan | ₹30 LPA</div>
             </div>
         </div>
-        <div class="copyright">
-            <p>&copy; 2024  Bangalore Institute of Technology. All rights reserved. | Placement Success Rate 95%</p>
-        </div>
-    </footer>
+    </div>
+</div>
 
-    <script>
-        // Mobile menu toggle
-        function toggleMenu() {
-            const menu = document.getElementById('navMenu');
-            if (menu) {
-                menu.classList.toggle('active');
-            }
+<!-- Footer -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>Bangalore Institute of Technology</h3>
+            <p>Excellence in education since 1979</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="placements.html">Placements</a></li>
+                <li><a href="facilities.html">Facilities</a></li>
+                <li><a href="login-student.html">Student Login</a></li>
+                <li><a href="login-teacher.html">Teacher Login</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Contact Info</h3>
+            <p>📍 KR Road, VV Puram, Bangalore - 560004</p>
+            <p>📞 +91 80 2660 1234</p>
+            <p>✉️ info@bit-bangalore.edu.in</p>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>&copy; 2024 Bangalore Institute of Technology. All rights reserved. | Placement Success Rate 95%</p>
+    </div>
+</footer>
+
+<!-- Theme Toggle -->
+<button class="theme-toggle-btn" id="themeToggle">🌙</button>
+
+<script>
+    // Theme Toggle Functionality
+    function initTheme() {
+        const themeToggle = document.getElementById('themeToggle');
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            if (themeToggle) themeToggle.textContent = '☀️';
+        } else {
+            document.documentElement.setAttribute('data-theme', 'light');
+            if (themeToggle) themeToggle.textContent = '🌙';
         }
         
-        // Close menu when clicking outside
-        document.addEventListener('click', function(event) {
-            const menu = document.getElementById('navMenu');
-            const toggle = document.querySelector('.menu-toggle');
-            if (menu && toggle && !menu.contains(event.target) && !toggle.contains(event.target)) {
-                menu.classList.remove('active');
-            }
-        });
-        
-        // Animate numbers on scroll
-        function animateNumbers() {
-            const statNumbers = document.querySelectorAll('.stat-number');
-            statNumbers.forEach(stat => {
-                const text = stat.innerText;
-                if (text.includes('%')) {
-                    const value = parseInt(text);
-                    if (!stat.hasAttribute('data-animated')) {
-                        let current = 0;
-                        const increment = value / 50;
-                        const timer = setInterval(() => {
-                            current += increment;
-                            if (current >= value) {
-                                stat.innerText = value + '%';
-                                clearInterval(timer);
-                            } else {
-                                stat.innerText = Math.floor(current) + '%';
-                            }
-                        }, 20);
-                        stat.setAttribute('data-animated', 'true');
-                    }
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                if (currentTheme === 'dark') {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                    localStorage.setItem('theme', 'light');
+                    themeToggle.textContent = '🌙';
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                    themeToggle.textContent = '☀️';
                 }
             });
         }
-        
-        // Trigger animation on scroll
-        window.addEventListener('scroll', () => {
-            const statsSection = document.querySelector('.stats-grid');
-            if (statsSection) {
-                const position = statsSection.getBoundingClientRect().top;
-                const screenPosition = window.innerHeight / 1.2;
-                if (position < screenPosition) {
-                    animateNumbers();
+    }
+
+    // Mobile menu toggle
+    function toggleMenu() {
+        const menu = document.getElementById('navMenu');
+        if (menu) {
+            menu.classList.toggle('active');
+        }
+    }
+    
+    // Close menu when clicking outside
+    document.addEventListener('click', function(event) {
+        const menu = document.getElementById('navMenu');
+        const toggle = document.querySelector('.menu-toggle');
+        if (menu && toggle && !menu.contains(event.target) && !toggle.contains(event.target)) {
+            menu.classList.remove('active');
+        }
+    });
+    
+    // Animate numbers on scroll
+    function animateNumbers() {
+        const statNumbers = document.querySelectorAll('.stat-number');
+        statNumbers.forEach(stat => {
+            const text = stat.innerText;
+            if (text.includes('%')) {
+                const value = parseInt(text);
+                if (!stat.hasAttribute('data-animated')) {
+                    let current = 0;
+                    const increment = value / 50;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= value) {
+                            stat.innerText = value + '%';
+                            clearInterval(timer);
+                        } else {
+                            stat.innerText = Math.floor(current) + '%';
+                        }
+                    }, 20);
+                    stat.setAttribute('data-animated', 'true');
+                }
+            } else if (text.includes('LPA')) {
+                const value = parseFloat(text);
+                if (!stat.hasAttribute('data-animated')) {
+                    let current = 0;
+                    const increment = value / 50;
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= value) {
+                            stat.innerText = '₹' + value + ' LPA';
+                            clearInterval(timer);
+                        } else {
+                            stat.innerText = '₹' + current.toFixed(1) + ' LPA';
+                        }
+                    }, 20);
+                    stat.setAttribute('data-animated', 'true');
                 }
             }
         });
-        
-        // Add animation on page load
-        window.addEventListener('load', () => {
-            // Animate cards on load
-            const cards = document.querySelectorAll('.stat-card, .company-card, .story-card');
-            cards.forEach((card, index) => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                card.style.transition = 'all 0.6s ease';
-                setTimeout(() => {
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, index * 100);
-            });
+    }
+    
+    // Trigger animation on scroll
+    window.addEventListener('scroll', () => {
+        const statsSection = document.querySelector('.stats-grid');
+        if (statsSection) {
+            const position = statsSection.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight / 1.2;
+            if (position < screenPosition) {
+                animateNumbers();
+            }
+        }
+    });
+    
+    // Add animation on page load
+    window.addEventListener('load', () => {
+        // Animate cards on load
+        const cards = document.querySelectorAll('.stat-card, .company-card, .story-card');
+        cards.forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.6s ease';
+            setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, index * 100);
         });
-    </script>
+        initTheme();
+    });
+</script>
 </body>
 </html>
