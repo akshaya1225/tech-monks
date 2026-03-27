@@ -71,7 +71,8 @@ const openLightbox = (imageUrl) => {
     }
 };
 
-const closeLightbox = () => {
+const closeLightbox = (event) => {  // ← Pass 'event' parameter
+    event.stopPropagation();         // ← THIS LINE FIXES IT
     const lightbox = document.querySelector('.lightbox');
     if (lightbox) {
         lightbox.classList.remove('active');
