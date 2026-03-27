@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- AOS Library for scroll animations -->
+<link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bangalore Institute of Technology - Excellence in Education</title>
@@ -770,6 +773,23 @@
     </style>
 </head>
 <body>
+    <!-- Hero slider -->
+<div class="hero-slider" id="heroSlider" data-aos="fade-down">
+
+<!-- Cards in About section -->
+<div class="card" data-aos="fade-up" data-aos-delay="100">...</div>
+<div class="card" data-aos="fade-up" data-aos-delay="200">...</div>
+<div class="card" data-aos="fade-up" data-aos-delay="300">...</div>
+
+<!-- Tabs section -->
+<div class="tabs-container" data-aos="zoom-in">
+
+<!-- Tab cards example -->
+<div class="tab-card" data-aos="flip-left" data-aos-delay="0">...</div>
+<div class="tab-card" data-aos="flip-left" data-aos-delay="100">...</div>
+
+<!-- Testimonials -->
+<div class="testimonial-card" data-aos="fade-up-right" data-aos-delay="100">...</div>
     <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="nav-container">
@@ -1266,19 +1286,57 @@
             initTheme();
         });
         
-        // Animation for cards
+        /* New scroll-triggered animations with AOS classes */
+[data-aos] { transition: all 0.6s ease; }
+
+/* Enhanced hero content stagger */
+.hero-content h1 { animation: fadeInUp 1s ease 0.2s both; }
+.hero-content .tagline { animation: fadeInUp 1s ease 0.4s both; }
+.hero-content .achievement { animation: fadeInUp 1s ease 0.6s both; }
+.hero-content p { animation: fadeInUp 1s ease 0.8s both; }
+.cta-button { animation: bounceIn 1s ease 1s both; }
+
+/* Hover animations for cards/tabs (enhanced) */
+.tab-card:hover, .card:hover, .testimonial-card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: var(--shadow-hover), 0 0 20px rgba(74, 144, 226, 0.3);
+}
+
+/* Pulse for stats and buttons */
+@keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+.stat-number { animation: pulse 2s infinite; }
+.cta-button:hover { animation: pulse 0.5s infinite; }
+
+/* Existing keyframes (keep these) */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translate(-50%, -40px); }
+  to { opacity: 1; transform: translate(-50%, -50%); }
+}
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+@keyframes bounceIn {
+  0% { transform: scale(0.3) translate(-50%, -50%); opacity: 0; }
+  50% { transform: scale(1.05) translate(-50%, -50%); }
+  70% { transform: scale(0.9) translate(-50%, -50%); }
+  100% { transform: scale(1) translate(-50%, -50%); opacity: 1; }
+}
         window.addEventListener('load', () => {
-            const cards = document.querySelectorAll('.card, .testimonial-card, .tab-card');
-            cards.forEach((card, index) => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                card.style.transition = 'all 0.6s ease';
-                setTimeout(() => {
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, index * 100);
-            });
-        });
+  AOS.init({
+    duration: 800,
+    once: true,  // Animate only once
+    offset: 100  // Trigger 100px before element enters view
+  });
+  
+  // Enhanced staggered animation for cards (your existing load animation + AOS)
+  const cards = document.querySelectorAll('.card, .testimonial-card, .tab-card');
+  cards.forEach((card, index) => {
+    card.style.opacity = '0';
+    card.style.transform = 'translateY(20px)';
+    setTimeout(() => {
+      card.style.opacity = '1';
+      card.style.transform = 'translateY(0)';
+    }, index * 150);
+  });
+});
     </script>
 </body>
 </html>
