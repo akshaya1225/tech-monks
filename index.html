@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bangalore Institute of Technology - Excellence in Education</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Syne:wght@400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -11,59 +14,126 @@
             box-sizing: border-box;
         }
 
-        /* Theme Variables - Light/Dark Mode */
+        /* Theme Variables - Cyberpunk Theme */
         :root {
-            /* Light Theme (Default) */
-            --bg-primary: #f4f7fc;
-            --bg-secondary: #ffffff;
-            --bg-card: #ffffff;
-            --bg-tab: #f8f9fa;
-            --bg-testimonial: #f4f7fc;
-            --text-primary: #333333;
-            --text-secondary: #666666;
-            --border-color: #e0e0e0;
-            --shadow: 0 2px 10px rgba(0,0,0,0.1);
-            --shadow-hover: 0 5px 25px rgba(0,0,0,0.15);
-            --nav-bg: #ffffff;
-            --footer-bg: #1e3c72;
-            --footer-text: #ffffff;
-            --hero-gradient: linear-gradient(135deg, #1e3c72, #2a5298);
-            --slider-overlay: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 100%);
+            --neon: #0066cc;
+            --neon2: #5a2d8c;
+            --neon3: #cc2a6b;
+            --gold: #d4af37;
+            --bg: #f0f4f8;
+            --bg2: #ffffff;
+            --text: #1a2a3a;
+            --muted: #4a5b6e;
+            --border: rgba(0,102,204,0.2);
+            --accent: #0066cc;
+            --card-bg: rgba(255,255,255,0.8);
+            --card-bg-solid: #ffffff;
+            --hero-overlay: linear-gradient(135deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.3) 100%);
         }
 
         [data-theme="dark"] {
-            /* Dark Theme */
-            --bg-primary: #1a1a2e;
-            --bg-secondary: #16213e;
-            --bg-card: #0f0f1a;
-            --bg-tab: #1e1e2a;
-            --bg-testimonial: #0f0f1a;
-            --text-primary: #e0e0e0;
-            --text-secondary: #a0a0a0;
-            --border-color: #2a2a3a;
-            --shadow: 0 2px 10px rgba(0,0,0,0.3);
-            --shadow-hover: 0 5px 25px rgba(0,0,0,0.4);
-            --nav-bg: #0a0a1a;
-            --footer-bg: #0a0a1a;
-            --footer-text: #e0e0e0;
-            --hero-gradient: linear-gradient(135deg, #0a0a1a, #1a1a2e);
-            --slider-overlay: linear-gradient(135deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.7) 100%);
+            --neon: #00f5ff;
+            --neon2: #7b2fff;
+            --neon3: #ff2d78;
+            --gold: #ffd700;
+            --bg: #03050f;
+            --bg2: #070a1a;
+            --text: #e8eaf6;
+            --muted: #8892b0;
+            --border: rgba(0,245,255,0.15);
+            --accent: #00f5ff;
+            --card-bg: rgba(7,10,26,0.7);
+            --card-bg-solid: #0f0f1a;
+            --hero-overlay: linear-gradient(135deg, rgba(3,5,15,0.85) 0%, rgba(7,10,26,0.7) 100%);
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: var(--bg-primary);
-            color: var(--text-primary);
+            font-family: 'Syne', 'Segoe UI', sans-serif;
+            background: var(--bg);
+            color: var(--text);
             transition: background 0.3s ease, color 0.3s ease;
+            overflow-x: hidden;
+        }
+
+        /* Grid Background - Only visible in dark mode */
+        .grid-bg {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background-image: 
+                linear-gradient(rgba(0,245,255,0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0,245,255,0.025) 1px, transparent 1px);
+            background-size: 60px 60px;
+            animation: gridShift 20s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        [data-theme="dark"] .grid-bg {
+            opacity: 1;
+        }
+
+        @keyframes gridShift {
+            to { background-position: 60px 60px; }
+        }
+
+        .orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(120px);
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        [data-theme="dark"] .orb {
+            opacity: 1;
+        }
+
+        .orb1 {
+            width: 600px;
+            height: 600px;
+            background: rgba(0,245,255,0.05);
+            top: -150px;
+            right: -150px;
+            animation: orbFloat 20s ease-in-out infinite;
+        }
+
+        .orb2 {
+            width: 400px;
+            height: 400px;
+            background: rgba(123,47,255,0.06);
+            bottom: 10%;
+            left: -100px;
+            animation: orbFloat 15s ease-in-out infinite reverse;
+        }
+
+        .orb3 {
+            width: 300px;
+            height: 300px;
+            background: rgba(255,45,120,0.04);
+            top: 50%;
+            right: 20%;
+            animation: orbFloat 25s ease-in-out infinite;
+        }
+
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            50% { transform: translate(30px, 20px) scale(1.1); }
         }
 
         /* Navigation */
         .navbar {
-            background: var(--nav-bg);
-            box-shadow: var(--shadow);
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
             z-index: 1000;
+            border-bottom: 1px solid var(--border);
+            transition: background 0.3s;
         }
 
         .nav-container {
@@ -83,20 +153,42 @@
 
         .nav-menu a {
             text-decoration: none;
-            color: var(--text-primary);
+            color: var(--muted);
             font-weight: 500;
-            transition: color 0.3s;
+            transition: all 0.3s;
+            font-size: 0.85rem;
+            letter-spacing: 0.5px;
+            position: relative;
+        }
+
+        .nav-menu a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--neon);
+            transition: width 0.3s;
         }
 
         .nav-menu a:hover {
-            color: #4a90e2;
+            color: var(--neon);
+        }
+
+        .nav-menu a:hover::after {
+            width: 100%;
         }
 
         .menu-toggle {
             display: none;
             font-size: 1.5rem;
             cursor: pointer;
-            color: var(--text-primary);
+            color: var(--text);
+            background: none;
+            border: 1px solid var(--border);
+            padding: 0.4rem 0.7rem;
+            border-radius: 3px;
         }
 
         /* Hero Slider Section */
@@ -131,7 +223,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: var(--slider-overlay);
+            background: var(--hero-overlay);
         }
 
         .hero-content {
@@ -161,49 +253,60 @@
         .hero-content h1 {
             font-size: 3rem;
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            font-family: 'Orbitron', monospace;
+            background: linear-gradient(135deg, #fff, var(--neon), var(--neon2));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 30px rgba(0,245,255,0.3);
         }
 
         .hero-content .tagline {
             font-size: 1.3rem;
             margin-bottom: 1rem;
             font-weight: 500;
+            color: var(--text);
         }
 
         .hero-content .achievement {
             font-size: 1.2rem;
             margin-bottom: 1.5rem;
-            background: rgba(74, 144, 226, 0.9);
+            background: rgba(0,245,255,0.15);
             display: inline-block;
             padding: 0.5rem 1.5rem;
             border-radius: 50px;
             backdrop-filter: blur(5px);
+            border: 1px solid var(--neon);
+            color: var(--neon);
         }
 
         .hero-content p {
             font-size: 1.1rem;
             margin-bottom: 2rem;
             line-height: 1.6;
+            color: rgba(255,255,255,0.8);
         }
 
         .cta-button {
             display: inline-block;
             padding: 12px 30px;
-            background: #4a90e2;
-            color: white;
+            background: transparent;
+            color: var(--neon);
             text-decoration: none;
             border-radius: 5px;
             transition: all 0.3s;
-            border: none;
+            border: 1px solid var(--neon);
             cursor: pointer;
             font-size: 1rem;
             font-weight: 600;
+            font-family: 'Space Mono', monospace;
         }
 
         .cta-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-            background: #357abd;
+            box-shadow: 0 5px 20px rgba(0,245,255,0.3);
+            background: rgba(0,245,255,0.1);
+            border-color: var(--neon);
         }
 
         /* Slider Indicators */
@@ -227,9 +330,10 @@
         }
 
         .indicator.active {
-            background: #4a90e2;
+            background: var(--neon);
             width: 30px;
             border-radius: 10px;
+            box-shadow: 0 0 10px var(--neon);
         }
 
         .slider-arrow {
@@ -248,11 +352,13 @@
             z-index: 3;
             transition: all 0.3s;
             font-size: 1.2rem;
+            border: 1px solid var(--border);
         }
 
         .slider-arrow:hover {
-            background: #4a90e2;
+            background: var(--neon);
             transform: translateY(-50%) scale(1.1);
+            border-color: var(--neon);
         }
 
         .prev {
@@ -267,137 +373,121 @@
             max-width: 1200px;
             margin: 0 auto;
             padding: 60px 20px;
+            position: relative;
+            z-index: 2;
         }
 
         .section-title {
             text-align: center;
             font-size: 2.5rem;
             margin-bottom: 1rem;
-            color: #1e3c72;
-        }
-
-        [data-theme="dark"] .section-title {
-            color: #4a90e2;
+            font-family: 'Orbitron', monospace;
+            background: linear-gradient(135deg, var(--text), var(--neon));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .section-subtitle {
             text-align: center;
-            color: var(--text-secondary);
+            color: var(--muted);
             margin-bottom: 3rem;
             font-size: 1.1rem;
         }
 
-        /* Tabs Styles */
-        .tabs-container {
-            background: var(--bg-secondary);
-            border-radius: 10px;
-            box-shadow: var(--shadow);
+        /* Infinite Auto-Sliding Carousel */
+        .carousel-container {
+            position: relative;
             overflow: hidden;
             margin: 2rem 0;
+            border-radius: 20px;
         }
 
-        .tabs-header {
+        .carousel-track {
             display: flex;
-            background: var(--bg-tab);
-            border-bottom: 2px solid var(--border-color);
+            width: fit-content;
+            animation: scrollLeft 30s linear infinite;
         }
 
-        .tab-btn {
-            flex: 1;
-            padding: 1rem 2rem;
-            background: none;
-            border: none;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            color: var(--text-secondary);
-            position: relative;
+        .carousel-track:hover {
+            animation-play-state: paused;
         }
 
-        .tab-btn:hover {
-            background: #e3f2fd;
-            color: #1e3c72;
-        }
-
-        [data-theme="dark"] .tab-btn:hover {
-            background: #2a2a3a;
-            color: #4a90e2;
-        }
-
-        .tab-btn.active {
-            color: var(--text-primary);
-            background: var(--bg-secondary);
-        }
-
-        .tab-btn.active::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: #4a90e2;
-        }
-
-        .tab-content {
-            padding: 2rem;
-            display: none;
-            animation: fadeIn 0.5s ease;
-        }
-
-        .tab-content.active {
-            display: block;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(10px);
+        @keyframes scrollLeft {
+            0% {
+                transform: translateX(0);
             }
-            to {
-                opacity: 1;
-                transform: translateY(0);
+            100% {
+                transform: translateX(-50%);
             }
         }
 
+        .carousel-slide {
+            flex: 0 0 calc(100% / 3);
+            min-width: 0;
+            padding: 1rem;
+            box-sizing: border-box;
+        }
+
+        /* Responsive: 2 slides on tablet */
+        @media (max-width: 1024px) {
+            .carousel-slide {
+                flex: 0 0 50%;
+            }
+        }
+
+        /* Responsive: 1 slide on mobile */
+        @media (max-width: 768px) {
+            .carousel-slide {
+                flex: 0 0 100%;
+            }
+        }
+
+        /* Tab Cards Grid inside carousel */
         .tab-cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 1rem;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        @media (max-width: 768px) {
+            .tab-cards-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .tab-card {
-            background: var(--bg-card);
+            background: var(--card-bg);
             padding: 1.5rem;
             border-radius: 10px;
             transition: all 0.3s;
             text-align: center;
-            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+        }
+
+        [data-theme="light"] .tab-card {
+            background: var(--card-bg-solid);
         }
 
         .tab-card:hover {
             transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
+            border-color: var(--neon);
+            box-shadow: 0 5px 20px rgba(0,245,255,0.1);
         }
 
         .tab-card-icon {
             font-size: 2.5rem;
             margin-bottom: 1rem;
+            filter: drop-shadow(0 0 5px rgba(0,245,255,0.5));
         }
 
         .tab-card h3 {
-            color: #1e3c72;
+            color: var(--neon);
             margin-bottom: 0.5rem;
         }
 
-        [data-theme="dark"] .tab-card h3 {
-            color: #4a90e2;
-        }
-
         .tab-card p {
-            color: var(--text-secondary);
+            color: var(--muted);
             line-height: 1.6;
         }
 
@@ -408,11 +498,11 @@
 
         .stat-list li {
             padding: 0.5rem 0;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border);
             display: flex;
             align-items: center;
             gap: 0.5rem;
-            color: var(--text-primary);
+            color: var(--text);
         }
 
         .stat-list li:last-child {
@@ -421,17 +511,83 @@
 
         .stat-number {
             font-weight: bold;
-            color: #4a90e2;
+            color: var(--neon);
             font-size: 1.1rem;
+        }
+
+        /* Cards Grid */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 10px;
+            text-align: center;
+            border: 1px solid var(--border);
+            transition: all 0.4s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        [data-theme="light"] .card {
+            background: var(--card-bg-solid);
+            backdrop-filter: none;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon), transparent);
+            transition: left 0.5s;
+        }
+
+        .card:hover::before {
+            left: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--neon);
+            box-shadow: 0 10px 40px rgba(0,245,255,0.1);
+        }
+
+        .card h3 {
+            color: var(--neon);
+            margin-bottom: 0.5rem;
+        }
+
+        .card p {
+            color: var(--muted);
+        }
+
+        .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 10px rgba(0,245,255,0.5));
         }
 
         /* Technical News Section */
         .tech-news-section {
-            background: var(--bg-secondary);
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
             border-radius: 20px;
+            border: 1px solid var(--border);
             overflow: hidden;
-            box-shadow: var(--shadow);
             margin: 4rem 0;
+        }
+
+        [data-theme="light"] .tech-news-section {
+            background: var(--card-bg-solid);
+            backdrop-filter: none;
         }
 
         .news-container {
@@ -441,7 +597,7 @@
         }
 
         .image-collage {
-            background: var(--hero-gradient);
+            background: linear-gradient(135deg, rgba(0,245,255,0.1), rgba(123,47,255,0.1));
             padding: 2rem;
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -451,18 +607,20 @@
         .collage-item {
             overflow: hidden;
             border-radius: 15px;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
         }
 
         .collage-item:hover {
             transform: scale(1.05);
+            border-color: var(--neon);
         }
 
         .collage-item img {
             width: 100%;
             height: 180px;
             object-fit: cover;
+            transition: transform 0.3s;
         }
 
         .collage-item.large {
@@ -475,15 +633,20 @@
 
         .news-content {
             padding: 2.5rem;
-            background: var(--bg-secondary);
+            background: var(--card-bg);
+        }
+
+        [data-theme="light"] .news-content {
+            background: var(--card-bg-solid);
         }
 
         .news-content h3 {
             font-size: 1.8rem;
-            color: var(--text-primary);
+            color: var(--neon);
             margin-bottom: 1rem;
             position: relative;
             display: inline-block;
+            font-family: 'Orbitron', monospace;
         }
 
         .news-content h3::after {
@@ -492,12 +655,13 @@
             bottom: -8px;
             left: 0;
             width: 50px;
-            height: 3px;
-            background: #4a90e2;
+            height: 2px;
+            background: var(--neon);
+            box-shadow: 0 0 10px var(--neon);
         }
 
         .news-description {
-            color: var(--text-secondary);
+            color: var(--muted);
             line-height: 1.8;
             margin: 1.5rem 0;
             font-size: 1rem;
@@ -510,77 +674,46 @@
 
         .news-highlights li {
             padding: 0.8rem 0;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border);
             display: flex;
             align-items: center;
             gap: 0.8rem;
-            color: var(--text-primary);
+            color: var(--text);
         }
 
         .news-highlights li::before {
             content: "📰";
             font-size: 1.1rem;
+            filter: drop-shadow(0 0 5px var(--neon));
         }
 
         .explore-btn {
             display: inline-block;
             padding: 12px 30px;
-            background: #4a90e2;
-            color: white;
+            background: transparent;
+            color: var(--neon);
             text-decoration: none;
             border-radius: 50px;
             font-weight: 600;
             transition: all 0.3s;
             margin-top: 1rem;
+            border: 1px solid var(--neon);
+            font-family: 'Space Mono', monospace;
         }
 
         .explore-btn:hover {
-            background: #1e3c72;
+            background: rgba(0,245,255,0.1);
             transform: translateX(5px);
-        }
-
-        /* Cards Grid */
-        .cards-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .card {
-            background: var(--bg-card);
-            padding: 2rem;
-            border-radius: 10px;
-            text-align: center;
-            box-shadow: var(--shadow);
-            transition: all 0.3s;
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-hover);
-        }
-
-        .card h3 {
-            color: #1e3c72;
-            margin-bottom: 0.5rem;
-        }
-
-        [data-theme="dark"] .card h3 {
-            color: #4a90e2;
-        }
-
-        .card p {
-            color: var(--text-secondary);
-        }
-
-        .icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
+            box-shadow: 0 0 20px rgba(0,245,255,0.3);
         }
 
         /* Testimonials */
         .testimonials {
-            background: var(--bg-secondary);
+            background: var(--card-bg);
+        }
+
+        [data-theme="light"] .testimonials {
+            background: #f8f9fa;
         }
 
         .testimonial-grid {
@@ -590,33 +723,47 @@
         }
 
         .testimonial-card {
-            background: var(--bg-testimonial);
+            background: var(--card-bg);
             padding: 2rem;
             border-radius: 10px;
             text-align: center;
-            box-shadow: var(--shadow);
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        [data-theme="light"] .testimonial-card {
+            background: white;
+        }
+
+        .testimonial-card:hover {
+            border-color: var(--neon);
+            transform: translateY(-5px);
         }
 
         .testimonial-card p {
-            color: var(--text-secondary);
+            color: var(--muted);
         }
 
         .testimonial-card h4 {
-            color: var(--text-primary);
+            color: var(--neon);
             margin-top: 1rem;
         }
 
         .stars {
-            color: #ffc107;
+            color: var(--gold);
             margin-top: 0.5rem;
+            text-shadow: 0 0 10px rgba(255,215,0,0.5);
         }
 
         /* Footer */
         footer {
-            background: var(--footer-bg);
-            color: var(--footer-text);
+            background: var(--bg2);
+            color: var(--text);
             padding: 3rem 0 1rem;
             margin-top: 2rem;
+            border-top: 1px solid var(--border);
+            position: relative;
+            z-index: 2;
         }
 
         .footer-content {
@@ -630,6 +777,8 @@
 
         .footer-section h3 {
             margin-bottom: 1rem;
+            color: var(--neon);
+            font-family: 'Orbitron', monospace;
         }
 
         .footer-section ul {
@@ -641,8 +790,13 @@
         }
 
         .footer-section a {
-            color: var(--footer-text);
+            color: var(--muted);
             text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--neon);
         }
 
         .social-links {
@@ -653,13 +807,21 @@
 
         .social-links a {
             font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .social-links a:hover {
+            color: var(--neon);
+            transform: translateY(-3px);
         }
 
         .copyright {
             text-align: center;
             margin-top: 2rem;
             padding-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            font-size: 0.8rem;
         }
 
         /* Theme Toggle Button */
@@ -670,9 +832,9 @@
             width: 50px;
             height: 50px;
             border-radius: 50%;
-            background: var(--bg-card);
-            color: var(--text-primary);
-            border: 2px solid var(--border-color);
+            background: var(--card-bg-solid);
+            color: var(--neon);
+            border: 1px solid var(--neon);
             cursor: pointer;
             display: flex;
             align-items: center;
@@ -680,13 +842,14 @@
             font-size: 1.5rem;
             z-index: 1000;
             transition: all 0.3s ease;
-            box-shadow: var(--shadow);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
         }
 
         .theme-toggle-btn:hover {
             transform: scale(1.1);
-            background: #4a90e2;
+            background: var(--neon);
             color: white;
+            box-shadow: 0 0 20px var(--neon);
         }
 
         /* Responsive */
@@ -701,12 +864,12 @@
                 top: 100%;
                 left: 0;
                 right: 0;
-                background: var(--nav-bg);
+                background: var(--card-bg-solid);
                 flex-direction: column;
                 padding: 1rem;
                 text-align: center;
                 gap: 1rem;
-                box-shadow: var(--shadow);
+                border-bottom: 1px solid var(--border);
             }
             
             .nav-menu.active {
@@ -727,18 +890,6 @@
             
             .section-title {
                 font-size: 1.8rem;
-            }
-            
-            .tabs-header {
-                flex-direction: column;
-            }
-            
-            .tab-btn {
-                padding: 0.8rem;
-            }
-            
-            .tab-btn.active::after {
-                display: none;
             }
             
             .slider-arrow {
@@ -770,78 +921,75 @@
     </style>
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="programs.html">Programs</a></li> 
-                <li><a href="gallery.html">Gallery</a></li>
-                <li><a href="placements.html">Placements</a></li>
-                <li><a href="facilities.html">Facilities</a></li>
-                <li><a href="login-student.html">Student Login</a></li>
-                <li><a href="login-teacher.html">Teacher Login</a></li>
-            </ul>
-        </div>
-    </nav>
 
-    <!-- Hero Slider Section -->
-    <div class="hero-slider" id="heroSlider">
-        <div class="hero-content">
-            <h1>Bangalore Institute of Technology</h1>
-            <div class="tagline">Shaping Future Leaders Through Excellence in Education</div>
-            <div class="achievement">⭐ One Among the Top 5 Engineering Colleges in Bangalore ⭐</div>
-            <p>Excellence in Education, Research, and Innovation since 1979</p>
-            <button class="cta-button" onclick="window.location.href='about.html'">Explore More</button>
-        </div>
-        
-        <div class="slider-arrow prev" onclick="changeSlide(-1)">‹</div>
-        <div class="slider-arrow next" onclick="changeSlide(1)">›</div>
-        <div class="slider-indicators" id="sliderIndicators"></div>
+<!-- Background Elements (visible only in dark mode) -->
+<div class="grid-bg"></div>
+<div class="orb orb1"></div>
+<div class="orb orb2"></div>
+<div class="orb orb3"></div>
+
+<!-- Navigation Bar -->
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        <ul class="nav-menu" id="navMenu">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="programs.html">Programs</a></li> 
+            <li><a href="gallery.html">Gallery</a></li>
+            <li><a href="placements.html">Placements</a></li>
+            <li><a href="facilities.html">Facilities</a></li>
+            <li><a href="login-student.html">Student Login</a></li>
+            <li><a href="login-teacher.html">Teacher Login</a></li>
+        </ul>
     </div>
+</nav>
 
-    <!-- About Section -->
-    <div class="container">
-        <h2 class="section-title">About Us</h2>
-        <div class="cards-grid">
-            <div class="card">
-                <div class="icon">🎓</div>
-                <h3>World-Class Education</h3>
-                <p>Offering 100+ programs with internationally recognized curriculum and expert faculty.</p>
-            </div>
-            <div class="card">
-                <div class="icon">🔬</div>
-                <h3>Research Excellence</h3>
-                <p>500+ research publications annually with state-of-the-art facilities.</p>
-            </div>
-            <div class="card">
-                <div class="icon">🌍</div>
-                <h3>Global Network</h3>
-                <p>Partnerships with 200+ universities worldwide and international collaborations.</p>
-            </div>
+<!-- Hero Slider Section -->
+<div class="hero-slider" id="heroSlider">
+    <div class="hero-content">
+        <h1>Bangalore Institute of Technology</h1>
+        <div class="tagline">Shaping Future Leaders Through Excellence in Education</div>
+        <div class="achievement">⭐ One Among the Top 5 Engineering Colleges in Bangalore ⭐</div>
+        <p>Excellence in Education, Research, and Innovation since 1979</p>
+        <button class="cta-button" onclick="window.location.href='about.html'">Explore More</button>
+    </div>
+    
+    <div class="slider-arrow prev" onclick="changeSlide(-1)">‹</div>
+    <div class="slider-arrow next" onclick="changeSlide(1)">›</div>
+    <div class="slider-indicators" id="sliderIndicators"></div>
+</div>
+
+<!-- About Section -->
+<div class="container">
+    <h2 class="section-title">About Us</h2>
+    <div class="cards-grid">
+        <div class="card">
+            <div class="icon">🎓</div>
+            <h3>World-Class Education</h3>
+            <p>Offering 100+ programs with internationally recognized curriculum and expert faculty.</p>
+        </div>
+        <div class="card">
+            <div class="icon">🔬</div>
+            <h3>Research Excellence</h3>
+            <p>500+ research publications annually with state-of-the-art facilities.</p>
+        </div>
+        <div class="card">
+            <div class="icon">🌍</div>
+            <h3>Global Network</h3>
+            <p>Partnerships with 200+ universities worldwide and international collaborations.</p>
         </div>
     </div>
+</div>
 
-    <!-- Tabs Section: Campus Life, Research, Innovation -->
-    <div class="container">
-        <h2 class="section-title">Discover BIT Bangalore</h2>
-        <p class="section-subtitle">Explore what makes our institute a center of excellence</p>
-        
-        <div class="tabs-container">
-            <div class="tabs-header">
-                <button class="tab-btn active" onclick="switchTab('campus')">
-                    🏘️ Campus Life
-                </button>
-                <button class="tab-btn" onclick="switchTab('research')">
-                    🔬 Research & Innovation
-                </button>
-                <button class="tab-btn" onclick="switchTab('innovation')">
-                    💡 Innovation Hub
-                </button>
-            </div>
-            
-            <div id="campus" class="tab-content active">
+<!-- Infinite Auto-Sliding Carousel Section -->
+<div class="container">
+    <h2 class="section-title">Discover BIT Bangalore</h2>
+    <p class="section-subtitle">Explore what makes our institute a center of excellence</p>
+    
+    <div class="carousel-container">
+        <div class="carousel-track" id="carouselTrack">
+            <!-- Slide 1: Campus Life -->
+            <div class="carousel-slide">
                 <div class="tab-cards-grid">
                     <div class="tab-card">
                         <div class="tab-card-icon">🏘️</div>
@@ -863,6 +1011,12 @@
                             <li>🏀 <span class="stat-number">10+</span> Sports Clubs</li>
                         </ul>
                     </div>
+                </div>
+            </div>
+            
+            <!-- Slide 2: Campus Life (continued) -->
+            <div class="carousel-slide">
+                <div class="tab-cards-grid">
                     <div class="tab-card">
                         <div class="tab-card-icon">🎭</div>
                         <h3>Cultural Activities</h3>
@@ -886,7 +1040,8 @@
                 </div>
             </div>
             
-            <div id="research" class="tab-content">
+            <!-- Slide 3: Research & Innovation -->
+            <div class="carousel-slide">
                 <div class="tab-cards-grid">
                     <div class="tab-card">
                         <div class="tab-card-icon">🔬</div>
@@ -908,6 +1063,12 @@
                             <li>📖 <span class="stat-number">50+</span> Books Published</li>
                         </ul>
                     </div>
+                </div>
+            </div>
+            
+            <!-- Slide 4: Research & Innovation (continued) -->
+            <div class="carousel-slide">
+                <div class="tab-cards-grid">
                     <div class="tab-card">
                         <div class="tab-card-icon">🤝</div>
                         <h3>Collaborations</h3>
@@ -931,7 +1092,8 @@
                 </div>
             </div>
             
-            <div id="innovation" class="tab-content">
+            <!-- Slide 5: Innovation Hub -->
+            <div class="carousel-slide">
                 <div class="tab-cards-grid">
                     <div class="tab-card">
                         <div class="tab-card-icon">💻</div>
@@ -953,6 +1115,12 @@
                             <li>👥 <span class="stat-number">200+</span> Student Founders</li>
                         </ul>
                     </div>
+                </div>
+            </div>
+            
+            <!-- Slide 6: Innovation Hub (continued) -->
+            <div class="carousel-slide">
+                <div class="tab-cards-grid">
                     <div class="tab-card">
                         <div class="tab-card-icon">🏆</div>
                         <h3>Patent & IP</h3>
@@ -977,623 +1145,268 @@
             </div>
         </div>
     </div>
+</div>
 
-    <!-- Technical News Section with Image Collage -->
-    <div class="container">
-        <div class="tech-news-section">
-            <div class="news-container">
-                <div class="image-collage">
-                    <div class="collage-item large">
-                        <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&h=400&fit=crop" alt="Tech Event">
-                    </div>
-                    <div class="collage-item">
-                        <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=400&h=300&fit=crop" alt="Robotics Lab">
-                    </div>
-                    <div class="collage-item">
-                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=300&fit=crop" alt="AI Research">
-                    </div>
-                    <div class="collage-item">
-                        <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=300&fit=crop" alt="Student Innovation">
-                    </div>
-                    <div class="collage-item">
-                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=300&fit=crop" alt="Tech Conference">
-                    </div>
+<!-- Technical News Section with Image Collage -->
+<div class="container">
+    <div class="tech-news-section">
+        <div class="news-container">
+            <div class="image-collage">
+                <div class="collage-item large">
+                    <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&h=400&fit=crop" alt="Tech Event">
                 </div>
-                
-                <div class="news-content">
-                    <h3>📡 Technical News</h3>
-                    <div class="news-description">
-                        Stay updated with the latest breakthroughs in technology, research innovations, and industry trends. Our students and faculty are at the forefront of cutting-edge developments in AI, Robotics, Sustainable Energy, and more.
-                    </div>
-                    <ul class="news-highlights">
-                        <li>BIT students win National Robotics Championship 2024</li>
-                        <li>New AI Research Lab inaugurated with NVIDIA partnership</li>
-                        <li>5 patents filed for sustainable energy solutions</li>
-                        <li>Collaboration with ISRO for space technology research</li>
-                    </ul>
-                    <a href="technical-news.html" class="explore-btn">Explore More News →</a>
+                <div class="collage-item">
+                    <img src="https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=400&h=300&fit=crop" alt="Robotics Lab">
+                </div>
+                <div class="collage-item">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=300&fit=crop" alt="AI Research">
+                </div>
+                <div class="collage-item">
+                    <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=400&h=300&fit=crop" alt="Student Innovation">
+                </div>
+                <div class="collage-item">
+                    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=400&h=300&fit=crop" alt="Tech Conference">
                 </div>
             </div>
-        </div>
-    </div>
-
-    <!-- Testimonials Section -->
-    <div class="testimonials">
-        <div class="container">
-            <h2 class="section-title">What Our Students Say</h2>
-            <div class="testimonial-grid">
-                <div class="testimonial-card">
-                    <div class="icon" style="font-size: 2rem;">"</div>
-                    <p>The faculty and infrastructure are outstanding. The placement cell helped me secure a great job at Google.</p>
-                    <h4>— Sarah Johnson, CSE 2024</h4>
-                    <div class="stars">★★★★★</div>
+            
+            <div class="news-content">
+                <h3>📡 Technical News</h3>
+                <div class="news-description">
+                    Stay updated with the latest breakthroughs in technology, research innovations, and industry trends. Our students and faculty are at the forefront of cutting-edge developments in AI, Robotics, Sustainable Energy, and more.
                 </div>
-                <div class="testimonial-card">
-                    <div class="icon" style="font-size: 2rem;">"</div>
-                    <p>Amazing campus life and research opportunities. I've published 3 papers during my time here.</p>
-                    <h4>— Dr. Amit Patel, PhD Scholar</h4>
-                    <div class="stars">★★★★★</div>
-                </div>
-                <div class="testimonial-card">
-                    <div class="icon" style="font-size: 2rem;">"</div>
-                    <p>The global exposure and industry connections are unmatched. Truly a world-class institution.</p>
-                    <h4>— Maria Garcia, MBA 2023</h4>
-                    <div class="stars">★★★★★</div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Bangalore Institute of Technology</h3>
-                <p>Excellence in education since 1979</p>
-                <div class="social-links">
-                    <a href="#">📘</a>
-                    <a href="#">🐦</a>
-                    <a href="#">🔗</a>
-                    <a href="#">📷</a>
-                </div>
-            </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="programs.html">Programs</a></li>
-                    <li><a href="gallery.html">Gallery</a></li>
-                    <li><a href="placements.html">Placements</a></li>
-                    <li><a href="facilities.html">Facilities</a></li>
-                    <li><a href="login-student.html">Student Login</a></li>
-                    <li><a href="login-teacher.html">Teacher Login</a></li>
+                <ul class="news-highlights">
+                    <li>BIT students win National Robotics Championship 2024</li>
+                    <li>New AI Research Lab inaugurated with NVIDIA partnership</li>
+                    <li>5 patents filed for sustainable energy solutions</li>
+                    <li>Collaboration with ISRO for space technology research</li>
                 </ul>
+                <a href="technical-news.html" class="explore-btn">Explore More News →</a>
             </div>
-            <div class="footer-section">
-                <h3>Contact Info</h3>
-                <p>📍 KR Road, VV Puram, Bangalore - 560004</p>
-                <p>📞 +91 80 2660 1234</p>
-                <p>✉️ info@bit-bangalore.edu.in</p>
-            </div>
-        </div>
-        <div class="copyright">
-            <p>&copy; 2024 Bangalore Institute of Technology. All rights reserved.</p>
-        </div>
-    </footer>
-
-    <!-- Dark/Light Theme Toggle Button -->
-    <button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle dark/light mode">🌙</button>
-
-    <script>
-        // Theme Toggle Functionality
-        function initTheme() {
-            const themeToggle = document.getElementById('themeToggle');
-            
-            // Check for saved theme preference
-            const savedTheme = localStorage.getItem('theme');
-            if (savedTheme === 'dark') {
-                document.documentElement.setAttribute('data-theme', 'dark');
-                if (themeToggle) themeToggle.textContent = '☀️';
-            } else {
-                document.documentElement.setAttribute('data-theme', 'light');
-                if (themeToggle) themeToggle.textContent = '🌙';
-            }
-            
-            // Toggle theme on button click
-            if (themeToggle) {
-                themeToggle.addEventListener('click', () => {
-                    const currentTheme = document.documentElement.getAttribute('data-theme');
-                    if (currentTheme === 'dark') {
-                        document.documentElement.setAttribute('data-theme', 'light');
-                        localStorage.setItem('theme', 'light');
-                        themeToggle.textContent = '🌙';
-                    } else {
-                        document.documentElement.setAttribute('data-theme', 'dark');
-                        localStorage.setItem('theme', 'dark');
-                        themeToggle.textContent = '☀️';
-                    }
-                });
-            }
-        }
-
-        // Image slides data - ALL WORKING IMAGES
-        const slides = [
-            {
-                url: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1920&h=1080&fit=crop",
-                alt: "Campus Event"
-            },
-            {
-                url: "https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=1920&h=1080&fit=crop",
-                alt: "Robotics Lab"
-            },
-            {
-                url: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1920&h=1080&fit=crop",
-                alt: "AI Research"
-            },
-            {
-                url: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1920&h=1080&fit=crop",
-                alt: "Student Innovation"
-            },
-            {
-                url: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&h=1080&fit=crop",
-                alt: "Tech Conference"
-            }
-        ];
-
-        let currentSlide = 0;
-        let slideInterval;
-        let isInitialized = false;
-
-        function createSlides() {
-            if (isInitialized) return;
-            
-            const heroSlider = document.getElementById('heroSlider');
-            const indicatorsContainer = document.getElementById('sliderIndicators');
-            
-            if (!heroSlider || !indicatorsContainer) return;
-            
-            // Clear any existing slides
-            const existingSlides = heroSlider.querySelectorAll('.slide');
-            existingSlides.forEach(slide => slide.remove());
-            
-            const existingIndicators = indicatorsContainer.querySelectorAll('.indicator');
-            existingIndicators.forEach(indicator => indicator.remove());
-            
-            // Create new slides
-            slides.forEach((slide, index) => {
-                const slideDiv = document.createElement('div');
-                slideDiv.className = `slide ${index === 0 ? 'active' : ''}`;
-                slideDiv.style.backgroundImage = `url('${slide.url}')`;
-                slideDiv.style.backgroundSize = 'cover';
-                slideDiv.style.backgroundPosition = 'center';
-                heroSlider.appendChild(slideDiv);
-                
-                const indicator = document.createElement('div');
-                indicator.className = `indicator ${index === 0 ? 'active' : ''}`;
-                indicator.onclick = () => goToSlide(index);
-                indicatorsContainer.appendChild(indicator);
-            });
-            
-            isInitialized = true;
-        }
-
-        function changeSlide(direction) {
-            const slidesElements = document.querySelectorAll('.slide');
-            const indicators = document.querySelectorAll('.indicator');
-            
-            if (slidesElements.length === 0) return;
-            
-            slidesElements[currentSlide].classList.remove('active');
-            indicators[currentSlide].classList.remove('active');
-            
-            currentSlide = (currentSlide + direction + slides.length) % slides.length;
-            
-            slidesElements[currentSlide].classList.add('active');
-            indicators[currentSlide].classList.add('active');
-            
-            resetInterval();
-        }
-
-        function goToSlide(index) {
-            const slidesElements = document.querySelectorAll('.slide');
-            const indicators = document.querySelectorAll('.indicator');
-            
-            if (slidesElements.length === 0) return;
-            
-            slidesElements[currentSlide].classList.remove('active');
-            indicators[currentSlide].classList.remove('active');
-            
-            currentSlide = index;
-            
-            slidesElements[currentSlide].classList.add('active');
-            indicators[currentSlide].classList.add('active');
-            
-            resetInterval();
-        }
-
-        function startAutoSlide() {
-            if (slideInterval) clearInterval(slideInterval);
-            slideInterval = setInterval(() => {
-                changeSlide(1);
-            }, 5000);
-        }
-
-        function resetInterval() {
-            clearInterval(slideInterval);
-            startAutoSlide();
-        }
-
-        // Tab switching function
-        function switchTab(tabId) {
-            const tabContents = document.querySelectorAll('.tab-content');
-            tabContents.forEach(content => {
-                content.classList.remove('active');
-            });
-            
-            const tabBtns = document.querySelectorAll('.tab-btn');
-            tabBtns.forEach(btn => {
-                btn.classList.remove('active');
-            });
-            
-            const selectedTab = document.getElementById(tabId);
-            if (selectedTab) {
-                selectedTab.classList.add('active');
-            }
-            
-            const activeBtn = Array.from(tabBtns).find(btn => 
-                btn.textContent.toLowerCase().includes(tabId.toLowerCase())
-            );
-            if (activeBtn) {
-                activeBtn.classList.add('active');
-            }
-        }
-        
-        function toggleMenu() {
-            const menu = document.getElementById('navMenu');
-            if (menu) menu.classList.toggle('active');
-        }
-        
-        document.addEventListener('click', function(event) {
-            const menu = document.getElementById('navMenu');
-            const toggle = document.querySelector('.menu-toggle');
-            if (menu && toggle && !menu.contains(event.target) && !toggle.contains(event.target)) {
-                menu.classList.remove('active');
-            }
-        });
-        
-        // Initialize everything when page loads
-        window.addEventListener('DOMContentLoaded', () => {
-            createSlides();
-            startAutoSlide();
-            initTheme();
-        });
-        
-        // Animation for cards
-        window.addEventListener('load', () => {
-            const cards = document.querySelectorAll('.card, .testimonial-card, .tab-card');
-            cards.forEach((card, index) => {
-                card.style.opacity = '0';
-                card.style.transform = 'translateY(20px)';
-                card.style.transition = 'all 0.6s ease';
-                setTimeout(() => {
-                    card.style.opacity = '1';
-                    card.style.transform = 'translateY(0)';
-                }, index * 100);
-            });
-        });
-    </script>
-    <!-- AI Chatbot Widget -->
-<style>
-    /* Chatbot Styles */
-    .chatbot-container {
-        position: fixed;
-        bottom: 100px;
-        right: 30px;
-        z-index: 10000;
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    .chatbot-toggle {
-        width: 60px;
-        height: 60px;
-        background: linear-gradient(135deg, #4a90e2, #1e3c72);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
-        transition: all 0.3s ease;
-        animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-        0% { transform: scale(1); box-shadow: 0 5px 20px rgba(74,144,226,0.4); }
-        50% { transform: scale(1.05); box-shadow: 0 5px 30px rgba(74,144,226,0.6); }
-        100% { transform: scale(1); box-shadow: 0 5px 20px rgba(74,144,226,0.4); }
-    }
-
-    .chatbot-toggle:hover {
-        transform: scale(1.1);
-    }
-
-    .chatbot-toggle i {
-        font-size: 28px;
-        color: white;
-    }
-
-    .chatbot-window {
-        position: fixed;
-        bottom: 180px;
-        right: 30px;
-        width: 380px;
-        height: 500px;
-        background: var(--bg-card);
-        border-radius: 20px;
-        box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-        display: none;
-        flex-direction: column;
-        overflow: hidden;
-        animation: slideUp 0.3s ease;
-        border: 1px solid var(--border-color);
-    }
-
-    @keyframes slideUp {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .chatbot-window.active {
-        display: flex;
-    }
-
-    .chatbot-header {
-        background: linear-gradient(135deg, #4a90e2, #1e3c72);
-        color: white;
-        padding: 15px 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    .chatbot-header h3 {
-        margin: 0;
-        font-size: 1.1rem;
-        display: flex;
-        align-items: center;
-        gap: 8px;
-    }
-
-    .chatbot-header h3 i {
-        font-size: 1.2rem;
-    }
-
-    .close-chat {
-        background: none;
-        border: none;
-        color: white;
-        font-size: 1.2rem;
-        cursor: pointer;
-        transition: transform 0.3s;
-    }
-
-    .close-chat:hover {
-        transform: rotate(90deg);
-    }
-
-    .chatbot-messages {
-        flex: 1;
-        padding: 20px;
-        overflow-y: auto;
-        background: var(--bg-primary);
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-    }
-
-    .message {
-        max-width: 85%;
-        padding: 10px 14px;
-        border-radius: 15px;
-        animation: messageSlide 0.3s ease;
-    }
-
-    @keyframes messageSlide {
-        from {
-            opacity: 0;
-            transform: translateY(10px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
-    }
-
-    .user-message {
-        background: linear-gradient(135deg, #4a90e2, #1e3c72);
-        color: white;
-        align-self: flex-end;
-        border-bottom-right-radius: 5px;
-    }
-
-    .bot-message {
-        background: var(--bg-card);
-        color: var(--text-primary);
-        align-self: flex-start;
-        border-bottom-left-radius: 5px;
-        box-shadow: var(--shadow);
-    }
-
-    .chatbot-input {
-        padding: 15px;
-        background: var(--bg-card);
-        border-top: 1px solid var(--border-color);
-        display: flex;
-        gap: 10px;
-    }
-
-    .chatbot-input input {
-        flex: 1;
-        padding: 10px 15px;
-        border: 1px solid var(--border-color);
-        border-radius: 25px;
-        background: var(--bg-primary);
-        color: var(--text-primary);
-        font-family: inherit;
-        outline: none;
-        transition: border-color 0.3s;
-    }
-
-    .chatbot-input input:focus {
-        border-color: #4a90e2;
-    }
-
-    .chatbot-input button {
-        width: 40px;
-        height: 40px;
-        background: linear-gradient(135deg, #4a90e2, #1e3c72);
-        border: none;
-        border-radius: 50%;
-        color: white;
-        cursor: pointer;
-        transition: transform 0.3s;
-    }
-
-    .chatbot-input button:hover {
-        transform: scale(1.05);
-    }
-
-    .quick-questions {
-        padding: 10px 15px;
-        background: var(--bg-card);
-        border-top: 1px solid var(--border-color);
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-    }
-
-    .quick-btn {
-        background: var(--bg-primary);
-        border: 1px solid var(--border-color);
-        padding: 6px 12px;
-        border-radius: 20px;
-        font-size: 0.75rem;
-        cursor: pointer;
-        transition: all 0.3s;
-        color: var(--text-primary);
-    }
-
-    .quick-btn:hover {
-        background: #4a90e2;
-        color: white;
-        border-color: #4a90e2;
-    }
-
-    .typing-indicator {
-        display: flex;
-        gap: 4px;
-        padding: 10px 14px;
-        background: var(--bg-card);
-        border-radius: 15px;
-        width: fit-content;
-    }
-
-    .typing-indicator span {
-        width: 8px;
-        height: 8px;
-        background: var(--accent);
-        border-radius: 50%;
-        animation: typing 1.4s infinite;
-    }
-
-    .typing-indicator span:nth-child(2) {
-        animation-delay: 0.2s;
-    }
-
-    .typing-indicator span:nth-child(3) {
-        animation-delay: 0.4s;
-    }
-
-    @keyframes typing {
-        0%, 60%, 100% {
-            transform: translateY(0);
-            opacity: 0.5;
-        }
-        30% {
-            transform: translateY(-10px);
-            opacity: 1;
-        }
-    }
-
-    @media (max-width: 768px) {
-        .chatbot-window {
-            width: 320px;
-            height: 450px;
-            bottom: 160px;
-            right: 15px;
-        }
-        
-        .chatbot-container {
-            bottom: 80px;
-            right: 15px;
-        }
-        
-        .chatbot-toggle {
-            width: 50px;
-            height: 50px;
-        }
-        
-        .chatbot-toggle i {
-            font-size: 24px;
-        }
-    }
-</style>
-
-<div class="chatbot-container">
-    <div class="chatbot-toggle" onclick="toggleChatbot()">
-        <i class="fas fa-robot"></i>
-    </div>
-    
-    <div class="chatbot-window" id="chatbotWindow">
-        <div class="chatbot-header">
-            <h3><i class="fas fa-robot"></i> BIT Assistant</h3>
-            <button class="close-chat" onclick="toggleChatbot()">✕</button>
-        </div>
-        
-        <div class="chatbot-messages" id="chatMessages">
-            <div class="message bot-message">
-                👋 Hello! I'm BIT Assistant. I can help you with:<br>
-                • 📝 Admission procedures and entrance exams<br>
-                • 💰 Highest placement packages<br>
-                • 🎓 Fee structure and scholarships<br>
-                • 📅 Important dates and deadlines<br>
-                • 📞 Contact information<br><br>
-                How can I help you today?
-            </div>
-        </div>
-        
-        <div class="quick-questions">
-            <button class="quick-btn" onclick="askQuickQuestion('admission')">📝 Admission Process</button>
-            <button class="quick-btn" onclick="askQuickQuestion('package')">💰 Highest Package</button>
-            <button class="quick-btn" onclick="askQuickQuestion('fee')">🎓 Fee Structure</button>
-        </div>
-        
-        <div class="chatbot-input">
-            <input type="text" id="chatInput" placeholder="Type your question..." onkeypress="handleKeyPress(event)">
-            <button onclick="sendMessage()">
-                <i class="fas fa-paper-plane"></i>
-            </button>
         </div>
     </div>
 </div>
 
-<style>
+<!-- Testimonials Section -->
+<div class="testimonials">
+    <div class="container">
+        <h2 class="section-title">What Our Students Say</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial-card">
+                <div class="icon" style="font-size: 2rem;">"</div>
+                <p>The faculty and infrastructure are outstanding. The placement cell helped me secure a great job at Google.</p>
+                <h4>— Sarah Johnson, CSE 2024</h4>
+                <div class="stars">★★★★★</div>
+            </div>
+            <div class="testimonial-card">
+                <div class="icon" style="font-size: 2rem;">"</div>
+                <p>Amazing campus life and research opportunities. I've published 3 papers during my time here.</p>
+                <h4>— Dr. Amit Patel, PhD Scholar</h4>
+                <div class="stars">★★★★★</div>
+            </div>
+            <div class="testimonial-card">
+                <div class="icon" style="font-size: 2rem;">"</div>
+                <p>The global exposure and industry connections are unmatched. Truly a world-class institution.</p>
+                <h4>— Maria Garcia, MBA 2023</h4>
+                <div class="stars">★★★★★</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-content">
+        <div class="footer-section">
+            <h3>Bangalore Institute of Technology</h3>
+            <p>Excellence in education since 1979</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-linkedin"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+        <div class="footer-section">
+            <h3>Quick Links</h3>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="programs.html">Programs</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="placements.html">Placements</a></li>
+                <li><a href="facilities.html">Facilities</a></li>
+                <li><a href="login-student.html">Student Login</a></li>
+                <li><a href="login-teacher.html">Teacher Login</a></li>
+            </ul>
+        </div>
+        <div class="footer-section">
+            <h3>Contact Info</h3>
+            <p>📍 KR Road, VV Puram, Bangalore - 560004</p>
+            <p>📞 +91 80 2660 1234</p>
+            <p>✉️ info@bit-bangalore.edu.in</p>
+        </div>
+    </div>
+    <div class="copyright">
+        <p>&copy; 2024 Bangalore Institute of Technology. All rights reserved.</p>
+    </div>
+</footer>
+
+<!-- Dark/Light Theme Toggle Button -->
+<button class="theme-toggle-btn" id="themeToggle" aria-label="Toggle dark/light mode">🌙</button>
+
+<script>
+    // Theme Toggle Functionality
+    function initTheme() {
+        const themeToggle = document.getElementById('themeToggle');
+        
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            if (themeToggle) themeToggle.textContent = '☀️';
+        } else {
+            document.documentElement.setAttribute('data-theme', 'light');
+            if (themeToggle) themeToggle.textContent = '🌙';
+        }
+        
+        if (themeToggle) {
+            themeToggle.addEventListener('click', () => {
+                const currentTheme = document.documentElement.getAttribute('data-theme');
+                if (currentTheme === 'dark') {
+                    document.documentElement.setAttribute('data-theme', 'light');
+                    localStorage.setItem('theme', 'light');
+                    themeToggle.textContent = '🌙';
+                } else {
+                    document.documentElement.setAttribute('data-theme', 'dark');
+                    localStorage.setItem('theme', 'dark');
+                    themeToggle.textContent = '☀️';
+                }
+            });
+        }
+    }
+
+    // Image slides data
+    const slides = [
+        { url: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=1920&h=1080&fit=crop", alt: "Campus Event" },
+        { url: "https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=1920&h=1080&fit=crop", alt: "Robotics Lab" },
+        { url: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=1920&h=1080&fit=crop", alt: "AI Research" },
+        { url: "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1920&h=1080&fit=crop", alt: "Student Innovation" },
+        { url: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920&h=1080&fit=crop", alt: "Tech Conference" }
+    ];
+
+    let heroCurrentSlide = 0;
+    let heroSlideInterval;
+    let isInitialized = false;
+
+    function createSlides() {
+        if (isInitialized) return;
+        
+        const heroSlider = document.getElementById('heroSlider');
+        const indicatorsContainer = document.getElementById('sliderIndicators');
+        
+        if (!heroSlider || !indicatorsContainer) return;
+        
+        const existingSlides = heroSlider.querySelectorAll('.slide');
+        existingSlides.forEach(slide => slide.remove());
+        
+        const existingIndicators = indicatorsContainer.querySelectorAll('.indicator');
+        existingIndicators.forEach(indicator => indicator.remove());
+        
+        slides.forEach((slide, index) => {
+            const slideDiv = document.createElement('div');
+            slideDiv.className = `slide ${index === 0 ? 'active' : ''}`;
+            slideDiv.style.backgroundImage = `url('${slide.url}')`;
+            slideDiv.style.backgroundSize = 'cover';
+            slideDiv.style.backgroundPosition = 'center';
+            heroSlider.appendChild(slideDiv);
+            
+            const indicator = document.createElement('div');
+            indicator.className = `indicator ${index === 0 ? 'active' : ''}`;
+            indicator.onclick = () => goToHeroSlide(index);
+            indicatorsContainer.appendChild(indicator);
+        });
+        
+        isInitialized = true;
+    }
+
+    function changeHeroSlide(direction) {
+        const slidesElements = document.querySelectorAll('.slide');
+        const indicators = document.querySelectorAll('.indicator');
+        
+        if (slidesElements.length === 0) return;
+        
+        slidesElements[heroCurrentSlide].classList.remove('active');
+        indicators[heroCurrentSlide].classList.remove('active');
+        
+        heroCurrentSlide = (heroCurrentSlide + direction + slides.length) % slides.length;
+        
+        slidesElements[heroCurrentSlide].classList.add('active');
+        indicators[heroCurrentSlide].classList.add('active');
+        
+        resetHeroInterval();
+    }
+
+    function goToHeroSlide(index) {
+        const slidesElements = document.querySelectorAll('.slide');
+        const indicators = document.querySelectorAll('.indicator');
+        
+        if (slidesElements.length === 0) return;
+        
+        slidesElements[heroCurrentSlide].classList.remove('active');
+        indicators[heroCurrentSlide].classList.remove('active');
+        
+        heroCurrentSlide = index;
+        
+        slidesElements[heroCurrentSlide].classList.add('active');
+        indicators[heroCurrentSlide].classList.add('active');
+        
+        resetHeroInterval();
+    }
+
+    function startHeroAutoSlide() {
+        if (heroSlideInterval) clearInterval(heroSlideInterval);
+        heroSlideInterval = setInterval(() => {
+            changeHeroSlide(1);
+        }, 5000);
+    }
+
+    function resetHeroInterval() {
+        clearInterval(heroSlideInterval);
+        startHeroAutoSlide();
+    }
+    
+    function toggleMenu() {
+        const menu = document.getElementById('navMenu');
+        if (menu) menu.classList.toggle('active');
+    }
+    
+    document.addEventListener('click', function(event) {
+        const menu = document.getElementById('navMenu');
+        const toggle = document.querySelector('.menu-toggle');
+        if (menu && toggle && !menu.contains(event.target) && !toggle.contains(event.target)) {
+            menu.classList.remove('active');
+        }
+    });
+    
+    window.addEventListener('DOMContentLoaded', () => {
+        createSlides();
+        startHeroAutoSlide();
+        initTheme();
+    });
+    
+    window.addEventListener('load', () => {
+        const cards = document.querySelectorAll('.card, .testimonial-card, .tab-card');
+        cards.forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'all 0.6s ease';
+            setTimeout(() => {
+                card.style.opacity = '1';
+                card.style.transform = 'translateY(0)';
+            }, index * 100);
+        });
+    });
+</script>
+
+
     <!-- ========== AI CHATBOT WIDGET ========== -->
 <style>
     /* Chatbot Styles */
@@ -2090,6 +1903,1108 @@
         }
     }
 </script>
-<!-- ========== END AI CHATBOT WIDGET ========== -->
+<!-- AI Chatbot Widget -->
+<style>
+    /* Chatbot Styles */
+    .chatbot-container {
+        position: fixed;
+        bottom: 100px;
+        right: 30px;
+        z-index: 10000;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
 
+    .chatbot-toggle {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #4a90e2, #1e3c72);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        transition: all 0.3s ease;
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); box-shadow: 0 5px 20px rgba(74,144,226,0.4); }
+        50% { transform: scale(1.05); box-shadow: 0 5px 30px rgba(74,144,226,0.6); }
+        100% { transform: scale(1); box-shadow: 0 5px 20px rgba(74,144,226,0.4); }
+    }
+
+    .chatbot-toggle:hover {
+        transform: scale(1.1);
+    }
+
+    .chatbot-toggle i {
+        font-size: 28px;
+        color: white;
+    }
+
+    .chatbot-window {
+        position: fixed;
+        bottom: 180px;
+        right: 30px;
+        width: 380px;
+        height: 500px;
+        background: var(--bg-card);
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        display: none;
+        flex-direction: column;
+        overflow: hidden;
+        animation: slideUp 0.3s ease;
+        border: 1px solid var(--border-color);
+    }
+
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .chatbot-window.active {
+        display: flex;
+    }
+
+    .chatbot-header {
+        background: linear-gradient(135deg, #4a90e2, #1e3c72);
+        color: white;
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .chatbot-header h3 {
+        margin: 0;
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .chatbot-header h3 i {
+        font-size: 1.2rem;
+    }
+
+    .close-chat {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: transform 0.3s;
+    }
+
+    .close-chat:hover {
+        transform: rotate(90deg);
+    }
+
+    .chatbot-messages {
+        flex: 1;
+        padding: 20px;
+        overflow-y: auto;
+        background: var(--bg-primary);
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .message {
+        max-width: 85%;
+        padding: 10px 14px;
+        border-radius: 15px;
+        animation: messageSlide 0.3s ease;
+    }
+
+    @keyframes messageSlide {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .user-message {
+        background: linear-gradient(135deg, #4a90e2, #1e3c72);
+        color: white;
+        align-self: flex-end;
+        border-bottom-right-radius: 5px;
+    }
+
+    .bot-message {
+        background: var(--bg-card);
+        color: var(--text-primary);
+        align-self: flex-start;
+        border-bottom-left-radius: 5px;
+        box-shadow: var(--shadow);
+    }
+
+    .chatbot-input {
+        padding: 15px;
+        background: var(--bg-card);
+        border-top: 1px solid var(--border-color);
+        display: flex;
+        gap: 10px;
+    }
+
+    .chatbot-input input {
+        flex: 1;
+        padding: 10px 15px;
+        border: 1px solid var(--border-color);
+        border-radius: 25px;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        font-family: inherit;
+        outline: none;
+        transition: border-color 0.3s;
+    }
+
+    .chatbot-input input:focus {
+        border-color: #4a90e2;
+    }
+
+    .chatbot-input button {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, #4a90e2, #1e3c72);
+        border: none;
+        border-radius: 50%;
+        color: white;
+        cursor: pointer;
+        transition: transform 0.3s;
+    }
+
+    .chatbot-input button:hover {
+        transform: scale(1.05);
+    }
+
+    .quick-questions {
+        padding: 10px 15px;
+        background: var(--bg-card);
+        border-top: 1px solid var(--border-color);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .quick-btn {
+        background: var(--bg-primary);
+        border: 1px solid var(--border-color);
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        cursor: pointer;
+        transition: all 0.3s;
+        color: var(--text-primary);
+    }
+
+    .quick-btn:hover {
+        background: #4a90e2;
+        color: white;
+        border-color: #4a90e2;
+    }
+
+    .typing-indicator {
+        display: flex;
+        gap: 4px;
+        padding: 10px 14px;
+        background: var(--bg-card);
+        border-radius: 15px;
+        width: fit-content;
+    }
+
+    .typing-indicator span {
+        width: 8px;
+        height: 8px;
+        background: var(--accent);
+        border-radius: 50%;
+        animation: typing 1.4s infinite;
+    }
+
+    .typing-indicator span:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
+    .typing-indicator span:nth-child(3) {
+        animation-delay: 0.4s;
+    }
+
+    @keyframes typing {
+        0%, 60%, 100% {
+            transform: translateY(0);
+            opacity: 0.5;
+        }
+        30% {
+            transform: translateY(-10px);
+            opacity: 1;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .chatbot-window {
+            width: 320px;
+            height: 450px;
+            bottom: 160px;
+            right: 15px;
+        }
+        
+        .chatbot-container {
+            bottom: 80px;
+            right: 15px;
+        }
+        
+        .chatbot-toggle {
+            width: 50px;
+            height: 50px;
+        }
+        
+        .chatbot-toggle i {
+            font-size: 24px;
+        }
+    }
+</style>
+
+<div class="chatbot-container">
+    <div class="chatbot-toggle" onclick="toggleChatbot()">
+        <i class="fas fa-robot"></i>
+    </div>
+    
+    <div class="chatbot-window" id="chatbotWindow">
+        <div class="chatbot-header">
+            <h3><i class="fas fa-robot"></i> BIT Assistant</h3>
+            <button class="close-chat" onclick="toggleChatbot()">✕</button>
+        </div>
+        
+        <div class="chatbot-messages" id="chatMessages">
+            <div class="message bot-message">
+                👋 Hello! I'm BIT Assistant. I can help you with:<br>
+                • 📝 Admission procedures and entrance exams<br>
+                • 💰 Highest placement packages<br>
+                • 🎓 Fee structure and scholarships<br>
+                • 📅 Important dates and deadlines<br>
+                • 📞 Contact information<br><br>
+                How can I help you today?
+            </div>
+        </div>
+        
+        <div class="quick-questions">
+            <button class="quick-btn" onclick="askQuickQuestion('admission')">📝 Admission Process</button>
+            <button class="quick-btn" onclick="askQuickQuestion('package')">💰 Highest Package</button>
+            <button class="quick-btn" onclick="askQuickQuestion('fee')">🎓 Fee Structure</button>
+        </div>
+        
+        <div class="chatbot-input">
+            <input type="text" id="chatInput" placeholder="Type your question..." onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<style>
+   <!-- AI Chatbot Widget -->
+<style>
+    /* Chatbot Styles */
+    .chatbot-container {
+        position: fixed;
+        bottom: 100px;
+        right: 30px;
+        z-index: 10000;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .chatbot-toggle {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, #4a90e2, #1e3c72);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        transition: all 0.3s ease;
+        animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+        0% { transform: scale(1); box-shadow: 0 5px 20px rgba(74,144,226,0.4); }
+        50% { transform: scale(1.05); box-shadow: 0 5px 30px rgba(74,144,226,0.6); }
+        100% { transform: scale(1); box-shadow: 0 5px 20px rgba(74,144,226,0.4); }
+    }
+
+    .chatbot-toggle:hover {
+        transform: scale(1.1);
+    }
+
+    .chatbot-toggle i {
+        font-size: 28px;
+        color: white;
+    }
+
+    .chatbot-window {
+        position: fixed;
+        bottom: 180px;
+        right: 30px;
+        width: 380px;
+        height: 500px;
+        background: var(--bg-card);
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        display: none;
+        flex-direction: column;
+        overflow: hidden;
+        animation: slideUp 0.3s ease;
+        border: 1px solid var(--border-color);
+    }
+
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .chatbot-window.active {
+        display: flex;
+    }
+
+    .chatbot-header {
+        background: linear-gradient(135deg, #4a90e2, #1e3c72);
+        color: white;
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .chatbot-header h3 {
+        margin: 0;
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .chatbot-header h3 i {
+        font-size: 1.2rem;
+    }
+
+    .close-chat {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: transform 0.3s;
+    }
+
+    .close-chat:hover {
+        transform: rotate(90deg);
+    }
+
+    .chatbot-messages {
+        flex: 1;
+        padding: 20px;
+        overflow-y: auto;
+        background: var(--bg-primary);
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .message {
+        max-width: 85%;
+        padding: 10px 14px;
+        border-radius: 15px;
+        animation: messageSlide 0.3s ease;
+    }
+
+    @keyframes messageSlide {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .user-message {
+        background: linear-gradient(135deg, #4a90e2, #1e3c72);
+        color: white;
+        align-self: flex-end;
+        border-bottom-right-radius: 5px;
+    }
+
+    .bot-message {
+        background: var(--bg-card);
+        color: var(--text-primary);
+        align-self: flex-start;
+        border-bottom-left-radius: 5px;
+        box-shadow: var(--shadow);
+    }
+
+    .chatbot-input {
+        padding: 15px;
+        background: var(--bg-card);
+        border-top: 1px solid var(--border-color);
+        display: flex;
+        gap: 10px;
+    }
+
+    .chatbot-input input {
+        flex: 1;
+        padding: 10px 15px;
+        border: 1px solid var(--border-color);
+        border-radius: 25px;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        font-family: inherit;
+        outline: none;
+        transition: border-color 0.3s;
+    }
+
+    .chatbot-input input:focus {
+        border-color: #4a90e2;
+    }
+
+    .chatbot-input button {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, #4a90e2, #1e3c72);
+        border: none;
+        border-radius: 50%;
+        color: white;
+        cursor: pointer;
+        transition: transform 0.3s;
+    }
+
+    .chatbot-input button:hover {
+        transform: scale(1.05);
+    }
+
+    .quick-questions {
+        padding: 10px 15px;
+        background: var(--bg-card);
+        border-top: 1px solid var(--border-color);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .quick-btn {
+        background: var(--bg-primary);
+        border: 1px solid var(--border-color);
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        cursor: pointer;
+        transition: all 0.3s;
+        color: var(--text-primary);
+    }
+
+    .quick-btn:hover {
+        background: #4a90e2;
+        color: white;
+        border-color: #4a90e2;
+    }
+
+    .typing-indicator {
+        display: flex;
+        gap: 4px;
+        padding: 10px 14px;
+        background: var(--bg-card);
+        border-radius: 15px;
+        width: fit-content;
+    }
+
+    .typing-indicator span {
+        width: 8px;
+        height: 8px;
+        background: var(--accent);
+        border-radius: 50%;
+        animation: typing 1.4s infinite;
+    }
+
+    .typing-indicator span:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
+    .typing-indicator span:nth-child(3) {
+        animation-delay: 0.4s;
+    }
+
+    @keyframes typing {
+        0%, 60%, 100% {
+            transform: translateY(0);
+            opacity: 0.5;
+        }
+        30% {
+            transform: translateY(-10px);
+            opacity: 1;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .chatbot-window {
+            width: 320px;
+            height: 450px;
+            bottom: 160px;
+            right: 15px;
+        }
+        
+        .chatbot-container {
+            bottom: 80px;
+            right: 15px;
+        }
+        
+        .chatbot-toggle {
+            width: 50px;
+            height: 50px;
+        }
+        
+        .chatbot-toggle i {
+            font-size: 24px;
+        }
+    }
+</style>
+
+<div class="chatbot-container">
+    <div class="chatbot-toggle" onclick="toggleChatbot()">
+        <i class="fas fa-robot"></i>
+    </div>
+    
+    <div class="chatbot-window" id="chatbotWindow">
+        <div class="chatbot-header">
+            <h3><i class="fas fa-robot"></i> BIT Assistant</h3>
+            <button class="close-chat" onclick="toggleChatbot()">✕</button>
+        </div>
+        
+        <div class="chatbot-messages" id="chatMessages">
+            <div class="message bot-message">
+                👋 Hello! I'm BIT Assistant. I can help you with:<br>
+                • 📝 Admission procedures and entrance exams<br>
+                • 💰 Highest placement packages<br>
+                • 🎓 Fee structure and scholarships<br>
+                • 📅 Important dates and deadlines<br>
+                • 📞 Contact information<br><br>
+                How can I help you today?
+            </div>
+        </div>
+        
+        <div class="quick-questions">
+            <button class="quick-btn" onclick="askQuickQuestion('admission')">📝 Admission Process</button>
+            <button class="quick-btn" onclick="askQuickQuestion('package')">💰 Highest Package</button>
+            <button class="quick-btn" onclick="askQuickQuestion('fee')">🎓 Fee Structure</button>
+        </div>
+        
+        <div class="chatbot-input">
+            <input type="text" id="chatInput" placeholder="Type your question..." onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<style>
+    <!-- AI Chatbot Widget -->
+<style>
+    /* Chatbot Styles */
+    .chatbot-container {
+        position: fixed;
+        bottom: 100px;
+        right: 30px;
+        z-index: 10000;
+        font-family: 'Syne', 'Segoe UI', sans-serif;
+    }
+
+    .chatbot-toggle {
+        width: 60px;
+        height: 60px;
+        background: linear-gradient(135deg, var(--neon), var(--neon2));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        box-shadow: 0 5px 20px rgba(0,245,255,0.3);
+        transition: all 0.3s ease;
+        animation: chatbotPulse 2s infinite;
+    }
+
+    @keyframes chatbotPulse {
+        0% { transform: scale(1); box-shadow: 0 5px 20px rgba(0,245,255,0.4); }
+        50% { transform: scale(1.05); box-shadow: 0 5px 30px rgba(0,245,255,0.6); }
+        100% { transform: scale(1); box-shadow: 0 5px 20px rgba(0,245,255,0.4); }
+    }
+
+    .chatbot-toggle:hover {
+        transform: scale(1.1);
+    }
+
+    .chatbot-toggle i {
+        font-size: 28px;
+        color: white;
+    }
+
+    .chatbot-window {
+        position: fixed;
+        bottom: 180px;
+        right: 30px;
+        width: 380px;
+        height: 550px;
+        background: var(--card-bg-solid);
+        backdrop-filter: blur(10px);
+        border-radius: 20px;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        display: none;
+        flex-direction: column;
+        overflow: hidden;
+        animation: slideUp 0.3s ease;
+        border: 1px solid var(--border);
+    }
+
+    [data-theme="dark"] .chatbot-window {
+        background: rgba(7,10,26,0.95);
+        backdrop-filter: blur(20px);
+    }
+
+    @keyframes slideUp {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .chatbot-window.active {
+        display: flex;
+    }
+
+    .chatbot-header {
+        background: linear-gradient(135deg, var(--neon), var(--neon2));
+        color: white;
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .chatbot-header h3 {
+        margin: 0;
+        font-size: 1.1rem;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-family: 'Orbitron', monospace;
+    }
+
+    .close-chat {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: transform 0.3s;
+    }
+
+    .close-chat:hover {
+        transform: rotate(90deg);
+    }
+
+    .chatbot-messages {
+        flex: 1;
+        padding: 20px;
+        overflow-y: auto;
+        background: var(--bg);
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    [data-theme="dark"] .chatbot-messages {
+        background: rgba(3,5,15,0.5);
+    }
+
+    .message {
+        max-width: 85%;
+        padding: 12px 16px;
+        border-radius: 15px;
+        animation: messageSlide 0.3s ease;
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+
+    @keyframes messageSlide {
+        from {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .user-message {
+        background: linear-gradient(135deg, var(--neon), var(--neon2));
+        color: white;
+        align-self: flex-end;
+        border-bottom-right-radius: 5px;
+    }
+
+    .bot-message {
+        background: var(--card-bg-solid);
+        color: var(--text);
+        align-self: flex-start;
+        border-bottom-left-radius: 5px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        border: 1px solid var(--border);
+    }
+
+    [data-theme="dark"] .bot-message {
+        background: rgba(7,10,26,0.8);
+    }
+
+    .chatbot-input {
+        padding: 15px;
+        background: var(--card-bg-solid);
+        border-top: 1px solid var(--border);
+        display: flex;
+        gap: 10px;
+    }
+
+    [data-theme="dark"] .chatbot-input {
+        background: rgba(3,5,15,0.8);
+    }
+
+    .chatbot-input input {
+        flex: 1;
+        padding: 12px 15px;
+        border: 1px solid var(--border);
+        border-radius: 25px;
+        background: var(--bg);
+        color: var(--text);
+        font-family: inherit;
+        outline: none;
+        transition: border-color 0.3s;
+    }
+
+    .chatbot-input input:focus {
+        border-color: var(--neon);
+    }
+
+    .chatbot-input button {
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, var(--neon), var(--neon2));
+        border: none;
+        border-radius: 50%;
+        color: white;
+        cursor: pointer;
+        transition: transform 0.3s;
+    }
+
+    .chatbot-input button:hover {
+        transform: scale(1.05);
+    }
+
+    .quick-questions {
+        padding: 12px 15px;
+        background: var(--card-bg-solid);
+        border-top: 1px solid var(--border);
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    [data-theme="dark"] .quick-questions {
+        background: rgba(3,5,15,0.8);
+    }
+
+    .quick-btn {
+        background: var(--bg);
+        border: 1px solid var(--border);
+        padding: 6px 12px;
+        border-radius: 20px;
+        font-size: 0.7rem;
+        cursor: pointer;
+        transition: all 0.3s;
+        color: var(--text);
+    }
+
+    .quick-btn:hover {
+        background: var(--neon);
+        color: white;
+        border-color: var(--neon);
+    }
+
+    .typing-indicator {
+        display: flex;
+        gap: 4px;
+        padding: 10px 14px;
+        background: var(--card-bg-solid);
+        border-radius: 15px;
+        width: fit-content;
+        border: 1px solid var(--border);
+    }
+
+    [data-theme="dark"] .typing-indicator {
+        background: rgba(7,10,26,0.8);
+    }
+
+    .typing-indicator span {
+        width: 8px;
+        height: 8px;
+        background: var(--neon);
+        border-radius: 50%;
+        animation: typing 1.4s infinite;
+    }
+
+    .typing-indicator span:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
+    .typing-indicator span:nth-child(3) {
+        animation-delay: 0.4s;
+    }
+
+    @keyframes typing {
+        0%, 60%, 100% {
+            transform: translateY(0);
+            opacity: 0.5;
+        }
+        30% {
+            transform: translateY(-10px);
+            opacity: 1;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .chatbot-window {
+            width: 320px;
+            height: 500px;
+            bottom: 160px;
+            right: 15px;
+        }
+        
+        .chatbot-container {
+            bottom: 80px;
+            right: 15px;
+        }
+        
+        .chatbot-toggle {
+            width: 50px;
+            height: 50px;
+        }
+        
+        .chatbot-toggle i {
+            font-size: 24px;
+        }
+    }
+</style>
+
+<div class="chatbot-container">
+    <div class="chatbot-toggle" onclick="toggleChatbot()">
+        <i class="fas fa-robot"></i>
+    </div>
+    
+    <div class="chatbot-window" id="chatbotWindow">
+        <div class="chatbot-header">
+            <h3><i class="fas fa-robot"></i> BIT Assistant</h3>
+            <button class="close-chat" onclick="toggleChatbot()">✕</button>
+        </div>
+        
+        <div class="chatbot-messages" id="chatMessages">
+            <div class="message bot-message">
+                <strong>👋 Hello! I'm BIT Assistant</strong><br><br>
+                I can help you with:<br>
+                • 📝 Admission - Process, exams, eligibility<br>
+                • 💰 Placements - Packages, recruiters, statistics<br>
+                • 🎓 Fee Structure - Tuition fees, scholarships<br>
+                • 🏠 Hostel - Accommodation, facilities, fees<br>
+                • 🎯 Scholarships - Merit-based, government schemes<br>
+                • 🏛️ Campus Facilities - Library, labs, sports<br>
+                • 📚 Programs - Courses, specializations<br>
+                • 📅 Important Dates - Admission timeline<br>
+                • 📞 Contact Info - Phone, email, address<br><br>
+                <strong>How can I help you today?</strong>
+            </div>
+        </div>
+        
+        <div class="quick-questions">
+            <button class="quick-btn" onclick="askQuickQuestion('admission')">📝 Admission</button>
+            <button class="quick-btn" onclick="askQuickQuestion('package')">💰 Placement</button>
+            <button class="quick-btn" onclick="askQuickQuestion('fee')">🎓 Fees</button>
+            <button class="quick-btn" onclick="askQuickQuestion('hostel')">🏠 Hostel</button>
+            <button class="quick-btn" onclick="askQuickQuestion('scholarship')">🎯 Scholarships</button>
+            <button class="quick-btn" onclick="askQuickQuestion('campus')">🏛️ Facilities</button>
+            <button class="quick-btn" onclick="askQuickQuestion('dates')">📅 Dates</button>
+        </div>
+        
+        <div class="chatbot-input">
+            <input type="text" id="chatInput" placeholder="Type your question..." onkeypress="handleKeyPress(event)">
+            <button onclick="sendMessage()">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Chatbot Responses
+    function getAdmissionResponse() {
+        return "📝 <strong>Admission Process at BIT Bangalore</strong><br><br><strong>🔹 Entrance Exams:</strong><br>• KCET - for Karnataka students<br>• COMEDK UGET - for outside Karnataka<br>• JEE Main - for all India quota<br><br><strong>🔹 Eligibility:</strong><br>• 10+2 with Physics, Chemistry, Mathematics<br>• Minimum 45% aggregate (40% for reserved)<br><br><strong>🔹 Process:</strong><br>1. Appear for entrance exam<br>2. Participate in counseling<br>3. Select BIT Bangalore<br>4. Document verification<br>5. Pay admission fees<br><br>📞 For details: +91 80 2660 1234";
+    }
+    
+    function getPlacementResponse() {
+        return "💰 <strong>Placement Statistics 2024</strong><br><br><strong>🏆 Highest Package:</strong> ₹45 LPA (Google)<br><br><strong>🎯 Top Recruiters:</strong><br>• Google - ₹42-45 LPA<br>• Microsoft - ₹38-42 LPA<br>• Amazon - ₹35-40 LPA<br>• Adobe - ₹36-42 LPA<br>• Goldman Sachs - ₹32-38 LPA<br><br><strong>📊 Key Stats:</strong><br>• Average Package: ₹12.5 LPA<br>• Placement Rate: 95%<br>• Companies: 200+<br>• Internships: 1000+";
+    }
+    
+    function getFeeResponse() {
+        return "🎓 <strong>Fee Structure (Per Year)</strong><br><br><strong>📘 B.Tech:</strong><br>• General: ₹1,50,000 - ₹2,00,000<br>• SC/ST: ₹75,000 - ₹1,00,000<br><br><strong>📗 M.Tech:</strong><br>• General: ₹1,20,000 - ₹1,50,000<br>• SC/ST: ₹60,000 - ₹80,000<br><br><strong>📊 MBA:</strong><br>• General: ₹2,00,000 - ₹2,50,000<br>• SC/ST: ₹1,00,000 - ₹1,25,000<br><br><strong>🏠 Hostel:</strong> ₹80,000 - ₹1,20,000<br><br>✨ Scholarships available for meritorious students.";
+    }
+    
+    function getHostelResponse() {
+        return "🏠 <strong>Hostel Facilities</strong><br><br><strong>🏘️ Accommodation:</strong><br>• Separate hostels for boys and girls<br>• Single, double, triple occupancy rooms<br>• 24/7 security and CCTV<br>• Wi-Fi throughout<br><br><strong>🍽️ Mess:</strong><br>• Veg and Non-veg options<br>• North Indian, South Indian cuisine<br>• 4 meals per day<br><br><strong>🎮 Amenities:</strong><br>• Common room with TV<br>• Indoor games<br>• Laundry services<br>• Medical assistance<br><br>💰 Fees: ₹80,000 - ₹1,20,000/year<br>📞 Hostel Office: +91 80 2660 8900";
+    }
+    
+    function getScholarshipResponse() {
+        return "🎓 <strong>Scholarships & Financial Aid</strong><br><br><strong>🏆 Merit-Based:</strong><br>• Top 5% students: 50% tuition waiver<br>• Entrance rank holders: 25-100% waiver<br><br><strong>🏛️ Government:</strong><br>• SC/ST scholarship (full tuition + stipend)<br>• OBC/EBC fee concession<br>• Minority scholarship<br><br><strong>🤝 Private:</strong><br>• Infosys Foundation<br>• Tata Scholarship<br>• Aditya Birla Scholarship<br><br>📞 Financial Aid: +91 80 2660 7777";
+    }
+    
+    function getCampusResponse() {
+        return "🏛️ <strong>Campus Facilities</strong><br><br><strong>📚 Academic:</strong><br>• Central Library: 50,000+ books<br>• 50+ Advanced Labs<br>• Smart classrooms<br>• 24/7 Wi-Fi<br><br><strong>⚽ Sports:</strong><br>• Cricket, Football ground<br>• Basketball, Tennis courts<br>• Indoor games<br>• Gymnasium<br>• Swimming pool<br><br><strong>🏥 Other:</strong><br>• Multi-cuisine cafeteria<br>• Medical center<br>• ATM, Stationery store<br>• Student activity center";
+    }
+    
+    function getDatesResponse() {
+        return "📅 <strong>Important Dates 2024-25</strong><br><br><strong>📝 Admission:</strong><br>• KCET Application: February 2024<br>• KCET Exam: April 2024<br>• COMEDK Exam: May 2024<br>• Counseling: June-July 2024<br>• Classes Start: August 2024<br><br><strong>📚 Academic Calendar:</strong><br>• Odd Semester: Aug - Dec<br>• Even Semester: Jan - May<br><br>*Dates are tentative. Check website for updates.*";
+    }
+    
+    function getCoursesResponse() {
+        return "📚 <strong>Programs Offered</strong><br><br><strong>📘 B.Tech (4 Years):</strong><br>• Computer Science & Engineering<br>• Artificial Intelligence & ML<br>• Data Science<br>• Cyber Security<br>• Internet of Things (IoT)<br>• Electronics & Communication<br>• Electrical & Electronics<br>• Mechanical Engineering<br>• Robotics & Automation<br>• VLSI Design<br><br><strong>📗 M.Tech (2 Years):</strong><br>• Computer Science<br>• Cyber Security<br>• VLSI Design<br>• Data Science<br><br><strong>📊 MBA (2 Years)</strong><br><strong>🎓 Ph.D Programs</strong><br><br>Visit Programs page for detailed curriculum.";
+    }
+    
+    function getContactResponse() {
+        return "📞 <strong>Contact Information</strong><br><br><strong>🏛️ Main Campus:</strong><br>📍 KR Road, VV Puram, Bangalore - 560004<br><br><strong>📝 Admissions:</strong><br>📞 +91 80 2660 1234<br>📧 admissions@bit-bangalore.edu.in<br><br><strong>💼 Placements:</strong><br>📞 +91 80 2660 5678<br>📧 placement@bit-bangalore.edu.in<br><br><strong>📚 Academics:</strong><br>📞 +91 80 2660 8910<br>📧 academics@bit-bangalore.edu.in<br><br><strong>🌐 Website:</strong> www.bit-bangalore.edu.in";
+    }
+    
+    function getDefaultResponse() {
+        return "I'm sorry, I couldn't understand your question. I can help you with:<br><br>• 📝 Admission Process<br>• 💰 Placement Packages<br>• 🎓 Fee Structure<br>• 🏠 Hostel Facilities<br>• 🎯 Scholarships<br>• 🏛️ Campus Facilities<br>• 📚 Programs Offered<br>• 📅 Important Dates<br>• 📞 Contact Info<br><br><strong>Please ask about any of these topics!</strong>";
+    }
+    
+    function getBotResponse(userInput) {
+        const input = userInput.toLowerCase().trim();
+        
+        if (input === 'help' || input === 'hi' || input === 'hello' || input === 'hey') {
+            return "👋 <strong>Hello! I'm BIT Assistant</strong><br><br>I can help you with:<br>• 📝 Admission Process<br>• 💰 Placement Packages<br>• 🎓 Fee Structure<br>• 🏠 Hostel Facilities<br>• 🎯 Scholarships<br>• 🏛️ Campus Facilities<br>• 📚 Programs Offered<br>• 📅 Important Dates<br>• 📞 Contact Info<br><br><strong>What would you like to know?</strong>";
+        }
+        
+        if (input.includes('admission') || input.includes('apply') || input.includes('entrance') || input.includes('kcet') || input.includes('comedk')) return getAdmissionResponse();
+        if (input.includes('package') || input.includes('placement') || input.includes('salary') || input.includes('recruiter')) return getPlacementResponse();
+        if (input.includes('fee') || input.includes('cost') || input.includes('tuition')) return getFeeResponse();
+        if (input.includes('hostel') || input.includes('room') || input.includes('accommodation') || input.includes('mess')) return getHostelResponse();
+        if (input.includes('scholarship') || input.includes('financial') || input.includes('loan')) return getScholarshipResponse();
+        if (input.includes('campus') || input.includes('library') || input.includes('lab') || input.includes('sports')) return getCampusResponse();
+        if (input.includes('course') || input.includes('program') || input.includes('btech') || input.includes('mtech')) return getCoursesResponse();
+        if (input.includes('date') || input.includes('deadline') || input.includes('schedule')) return getDatesResponse();
+        if (input.includes('contact') || input.includes('phone') || input.includes('email') || input.includes('address')) return getContactResponse();
+        
+        return getDefaultResponse();
+    }
+    
+    function sendMessage() {
+        const input = document.getElementById('chatInput');
+        const message = input.value.trim();
+        if (message === '') return;
+        
+        addMessage(message, 'user');
+        input.value = '';
+        showTypingIndicator();
+        
+        setTimeout(function() {
+            removeTypingIndicator();
+            const response = getBotResponse(message);
+            addMessage(response, 'bot');
+            const messagesContainer = document.getElementById('chatMessages');
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }, 600);
+    }
+    
+    function addMessage(text, sender) {
+        const messagesContainer = document.getElementById('chatMessages');
+        const messageDiv = document.createElement('div');
+        messageDiv.className = 'message ' + (sender === 'user' ? 'user-message' : 'bot-message');
+        messageDiv.innerHTML = text;
+        messagesContainer.appendChild(messageDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+    
+    function showTypingIndicator() {
+        const messagesContainer = document.getElementById('chatMessages');
+        const typingDiv = document.createElement('div');
+        typingDiv.className = 'typing-indicator';
+        typingDiv.id = 'typingIndicator';
+        typingDiv.innerHTML = '<span></span><span></span><span></span>';
+        messagesContainer.appendChild(typingDiv);
+        messagesContainer.scrollTop = messagesContainer.scrollHeight;
+    }
+    
+    function removeTypingIndicator() {
+        const typingIndicator = document.getElementById('typingIndicator');
+        if (typingIndicator) typingIndicator.remove();
+    }
+    
+    function handleKeyPress(event) {
+        if (event.key === 'Enter') sendMessage();
+    }
+    
+    function askQuickQuestion(type) {
+        let question = '';
+        if (type === 'admission') question = 'What is the admission process?';
+        else if (type === 'package') question = 'What is the highest placement package?';
+        else if (type === 'fee') question = 'What is the fee structure?';
+        else if (type === 'hostel') question = 'Tell me about hostel facilities';
+        else if (type === 'scholarship') question = 'What scholarships are available?';
+        else if (type === 'campus') question = 'What campus facilities are available?';
+        else if (type === 'dates') question = 'What are the important dates?';
+        else question = 'Help me with college information';
+        
+        document.getElementById('chatInput').value = question;
+        sendMessage();
+    }
+    
+    function toggleChatbot() {
+        const chatbotWindow = document.getElementById('chatbotWindow');
+        chatbotWindow.classList.toggle('active');
+        if (chatbotWindow.classList.contains('active')) {
+            const messagesContainer = document.getElementById('chatMessages');
+            setTimeout(() => messagesContainer.scrollTop = messagesContainer.scrollHeight, 100);
+        }
+    }
+</script>
+<!-- ========== END AI CHATBOT WIDGET ========== -->
 </html>
